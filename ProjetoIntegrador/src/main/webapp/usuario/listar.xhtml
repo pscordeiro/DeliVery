@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"> 
+
+<h:head></h:head> 
+<body> 
+	<a href="../index.xhtml">Voltar</a>
+	<h2>Usuarios</h2>
+	#{usuarioController.mensagem}
+	<h:form id="formUsuario">
+		<h:commandButton action="#{usuarioController.inserir()}" value="Cadastror Novo"/>
+		
+		<h:dataTable value="#{usuarioController.listar()}" var = "usuario">
+			
+			<h:column>
+				<f:facet name="header">Nome</f:facet>
+				#{usuario.nme_Pessoa}
+			</h:column>	
+			
+			<h:column>
+				<f:facet name="header">CPF</f:facet>
+				#{usuario.num_CPF}
+			</h:column>			
+				
+			<h:column>
+				<f:facet name="header">Ação</f:facet>
+				<h:commandButton 
+					action="#{usuarioController.excluir(usuario)}" 
+					value="Deletar"/>
+				<h:commandButton 
+					action="#{usuarioController.atualizar(usuario)}" 
+					value="Alterar"/>
+			</h:column>
+			
+		</h:dataTable>
+	</h:form>
+</body> 
+</html>

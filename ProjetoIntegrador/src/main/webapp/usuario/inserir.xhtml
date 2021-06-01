@@ -1,0 +1,90 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"> 
+
+<h:head></h:head> 
+<body> 
+	<a href="../usuario/listar.xhtml">Voltar</a>
+	<h2>Cadastro de Novo Usuario</h2>
+		#{usuarioController.mensagem}
+
+		<h:form id="formInserirUsuario">
+			<h:inputHidden id="idf_usuario" value="#{usuario.idf_Usuario}"/>
+					
+			Nome Completo:<br/>
+			<h:inputText id="Nome" value="#{usuario.nme_Pessoa}" />
+			<br/>
+			CPF:<br/>
+			<h:inputText id="Cpf" value="#{usuario.num_CPF}" />
+			<br/>
+			Gênero:<br/>
+			<h:selectOneMenu  id="Idf_Sexo" value="#{usuario.idf_Sexo}">
+				<f:selectItem itemValue="1" itemLabel="Feminino"/>
+				<f:selectItem itemValue="2" itemLabel="Masculino"/>		
+				<f:selectItem itemValue="3" itemLabel="Não Binario"/>		
+				<f:selectItem itemValue="4" itemLabel="Outros"/>		
+			</h:selectOneMenu>
+			<br/>	
+			
+			Cidade:<br/>
+			<h:selectOneMenu  id="Idf_Cidade" value="#{endereco.idf_Cidade}">
+				<f:selectItem itemValue="3272" itemLabel="Colombo"/>
+				<f:selectItem itemValue="3287" itemLabel="Curitiba"/>		
+			</h:selectOneMenu>
+			<br/>
+			
+			CEP:<br/>
+			<h:inputText id="NumCEP" value="#{endereco.num_CEP}"/>
+			<br/>	
+			
+			Endereço:<br/>
+			<h:inputText id="DesLogradouro" value="#{endereco.desc_Logradouro}"/>
+			<br/>
+
+			Num_Casa:<br/>
+			<h:inputText id="NumEndereco" value="#{endereco.num_Endereco}"/>
+			<br/>
+			
+			Bairro:<br/>
+			<h:inputText id="Bairro" value="#{endereco.des_Bairro}"/>
+			<br/>
+									
+			Complemento:<br/>
+			<h:inputText id="Complemento" value="#{endereco.desc_Complemento}"/>
+			<br/>
+			
+			Data Nascimento (dd/mm/aaaa):<br/>
+			<h:inputText id="DtaNasc" value="#{usuario.dta_Nascimento}"/>
+			<br/>
+			DDD:<br/>
+			<h:inputText id="DDD" value="#{usuario.num_DDD_Celular}"/>
+			<br/>
+			Celular:<br/>
+			<h:inputText id="Celular" value="#{usuario.num_Celular}"/>
+			<br/>
+			Email:<br/>
+			<h:inputText id="Email" value="#{usuario.eml_Pessoa}"/>	
+			<br/>
+			
+			Estado Civil:<br/>
+			<h:selectOneMenu  id="Idf_Estado_Civil" value="#{usuario.idf_Estado_Civil}">
+				<f:selectItem itemValue="1" itemLabel="Solteiro(a)"/>
+				<f:selectItem itemValue="2" itemLabel="Casado(a)"/>		
+				<f:selectItem itemValue="3" itemLabel="Divorciado(a)"/>		
+				<f:selectItem itemValue="4" itemLabel="Viúvo(a)"/>	
+				<f:selectItem itemValue="5" itemLabel="Outros"/>
+				<f:selectItem itemValue="6" itemLabel="Amansiado(a)"/>						
+			</h:selectOneMenu>
+			<br/>	
+			
+			
+			<br/>	
+			<h:commandButton action="#{usuarioController.salvar(usuario, endereco)}" value="Salvar"/>		
+		</h:form>
+		
+		
+		
+</body> 
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"> 
+
+<h:head></h:head> 
+<body> 
+<h1>Lista de pedidos</h1>
+
+		<h:dataTable value="#{salaAdmController.listar()}" var = "pedido">
+			
+			<h:column>
+			
+			<div style="margin: 10px;background-color: orange;padding: 20px;">
+			
+				Idf_Pedido: #{pedido.idf_Pedido}
+				<br/>
+				#{pedido.endereco.desc_Logradouro} #{pedido.endereco.num_Endereco} - #{pedido.endereco.nme_Cidade}/#{pedido.endereco.sig_Estado}
+				<br/>
+				
+						
+				<h:dataTable value="#{salaAdmController.listarItens(pedido.idf_Pedido)}" var = "itemPedido">
+					<h:column>
+						ITENS:
+						<br/>
+						 #{itemPedido.quantidade} x #{itemPedido.produto.desc_Produto}
+						<br/>
+						VALOR:
+ 						 #{itemPedido.valor_Total}
+					</h:column>			
+				</h:dataTable>
+				
+			</div>
+				
+			</h:column>				
+			
+		</h:dataTable>
+						
+</body> 
+</html>

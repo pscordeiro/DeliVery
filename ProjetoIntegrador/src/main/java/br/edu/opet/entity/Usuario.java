@@ -19,7 +19,7 @@ public class Usuario extends UsuarioDAO{
 	private int Idf_Sexo;
 	private int Idf_Cidade;
 	private Date Dta_Nascimento = new Date();
-	private Endereco Endereco;
+	private Endereco Endereco = new Endereco();
 	private int Idf_Endereco;
 	private String Num_DDD_Celular;
 	private String Num_Celular;
@@ -180,8 +180,8 @@ public class Usuario extends UsuarioDAO{
 		Idf_Tipo_Usuario = idf_Tipo_Usuario;
 	}
 	
-	public boolean inserir(Endereco end) {
-		return super.inserir(this, end);
+	public boolean inserir() {
+		return super.inserir(this);
 	}
 	
 	public ArrayList<Usuario> listar() {

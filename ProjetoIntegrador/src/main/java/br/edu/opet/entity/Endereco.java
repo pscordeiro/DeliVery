@@ -1,14 +1,15 @@
 package br.edu.opet.entity;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 
 import br.edu.opet.model.entity.dao.EnderecoDAO;
 
 @ManagedBean
-@RequestScoped
+@SessionScoped
 public class Endereco extends EnderecoDAO {
 	
 	
@@ -19,7 +20,8 @@ public class Endereco extends EnderecoDAO {
 	private String Desc_Complemento;
 	private String Des_Bairro;
 	private int Idf_Cidade;
-	
+	private String Nme_Cidade;
+	private String Sig_Estado;
 	
 	public int getIdf_Endereco() {
 		return Idf_Endereco;
@@ -64,12 +66,30 @@ public class Endereco extends EnderecoDAO {
 		Idf_Cidade = idf_Cidade;
 	}
 	
-	public boolean inserirEndereco(Endereco end, Connection conn) {
-		return super.inserir(this, conn);
+	public String getNme_Cidade() {
+		return Nme_Cidade;
+	}
+	public void setNme_Cidade(String nme_Cidade) {
+		Nme_Cidade = nme_Cidade;
+	}
+		
+	public String getSig_Estado() {
+		return Sig_Estado;
+	}
+	public void setSig_Estado(String sig_Estado) {
+		Sig_Estado = sig_Estado;
 	}
 	
-	public boolean atualizarEndereco(Connection conn) {
-		return super.atualizar(conn, this);
+	public boolean inserirEndereco(Endereco end, Connection conn) {
+		return super.inserir(end, conn);
+	}
+	
+	public boolean atualizarEndereco(Connection conn, Endereco end) {
+		return super.atualizar(end, conn);
+	}
+	
+	public ArrayList<Endereco> listar() {
+		return super.listar();
 	}
 	
 }

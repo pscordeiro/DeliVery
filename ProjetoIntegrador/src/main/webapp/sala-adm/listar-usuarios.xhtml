@@ -9,9 +9,11 @@
 	<a href="../index.xhtml">Voltar</a>
 	<h2>Usuarios</h2>
 	#{usuarioController.mensagem}
+	
+	
 	<h:form id="formUsuario">
 		<h:commandButton action="#{usuarioController.inserir()}" value="Cadastror Novo"/>
-		
+			
 		<h:dataTable value="#{usuarioController.listar()}" var = "usuario">
 			
 			<h:column>
@@ -22,7 +24,12 @@
 			<h:column>
 				<f:facet name="header">CPF</f:facet>
 				#{usuario.num_CPF}
-			</h:column>			
+			</h:column>		
+			
+			<h:column>
+				<f:facet name="header">CEP:</f:facet>
+				#{usuario.endereco.num_CEP}
+			</h:column>		
 				
 			<h:column>
 				<f:facet name="header">Ação</f:facet>
@@ -35,6 +42,7 @@
 			</h:column>
 			
 		</h:dataTable>
+		
 	</h:form>
 </body> 
 </html>

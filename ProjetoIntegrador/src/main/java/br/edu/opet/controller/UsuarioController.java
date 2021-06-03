@@ -7,15 +7,12 @@ import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
-import br.edu.opet.entity.Endereco;
 import br.edu.opet.entity.Usuario;
 
 @ManagedBean
 @RequestScoped
 public class UsuarioController {
-	
-	public UsuarioController() {}
-	
+			
 	private String mensagem = "";
 	
 	public String getMensagem() {
@@ -30,49 +27,51 @@ public class UsuarioController {
 		Usuario us = new Usuario();
 		return us.listar();	
 	}
-
-	public String salvar(Usuario us, Endereco end) {
+	
+	public String salvar(Usuario us) {
 		boolean retorno = false;
 		
 		if(us.getIdf_Usuario() == 0)
-			retorno = us.inserir(end);
+			retorno = us.inserir();
 		else
 			retorno = us.atualizar();
 		
-		if(retorno)
-			mensagem = "Salvo com sucesso !";
-			
-		else
+		if(retorno) {
+			mensagem = "Salvo com sucesso !";	
+			return "/usuario/cadusuario-sucesso.xhtml";
+		}	
+		else {
 			mensagem = "Erro ao salvar";	
-					
-		return "/usuario/listar.xhtml"; 						
+			return "/usuario/cadusuario-falha.xhtml";
+		}
+		
 	}
 	
 	public String inserir() {
 		HttpSession session = (HttpSession)FacesContext.getCurrentInstance()
 				.getExternalContext().getSession(false);
 		session.setAttribute("usuario", new Usuario());
-		return "/usuario/inserir.xhtml"; 
+		return "/usuario/cad-perfil-usuario.xhtml"; 
 	}
 	
 	public String atualizar(Usuario usuario) {
 		HttpSession session = (HttpSession)FacesContext.getCurrentInstance()
 				.getExternalContext().getSession(false);
 		session.setAttribute("usuario", usuario);
-		return "/usuario/inserir.xhtml"; 
+		return "/usuario/cad-perfil-usuario.xhtml"; 
 	}
 	
 	public String excluir(Usuario us) {		
 		if(us.deletar()) {
-			mensagem = "Deletado com sucesso !";
-			//Criar um return/boasvindas
-			return "/usuario/listar.xhtml"; 
+			//mensagem = "Deletado com sucesso !";
+			return "index.xhtml"; 
 		}
 		else {
 			mensagem = "Falha ao deletar !";
-			//Criar uma tela com erro ao criar usuario
-			return "/usuario/listar.xhtml";
+			//Criar uma tela com erro ao deletar usuario
+			return "index.xhtml";
 		}
 	}
+
 		
 }

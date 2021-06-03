@@ -1,7 +1,6 @@
 package br.edu.opet.model.entity.dao;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -30,10 +29,13 @@ public class UsuarioDAO{
 					+ ",Num_CPF"
 					+ ",Nme_Pessoa"
 					+ ",PIS.Desc_Sexo"
-					+ ",PIC.Nme_Cidade"
+					+ ",PIC.Nme_Cidade "
+					+ ",PIE.Idf_Endereco"
 					+ ",PIE.Des_Logradouro"
 					+ ",PIE.Num_Endereco"
 					+ ",PIE.Num_CEP"
+					+ ",PIE.Des_Bairro"
+					+ ",PIE.Des_Complemento"
 					+ ",PIU.Dta_Nascimento"
 					+ ",Num_DDD_Celular"
 					+ ",Num_Celular"
@@ -43,9 +45,9 @@ public class UsuarioDAO{
 					+ ",PIU.Flg_Inativo"
 					+ ",Idf_Tipo_Usuario"
 					+ " FROM PI_Usuarios PIU "
-					+ " JOIN PI_Cidade PIC ON PIC.Idf_Cidade = PIU.Idf_Cidade "
 					+ " JOIN PI_Sexo PIS ON PIS.Idf_Sexo = PIU.Idf_Sexo "
 					+ " JOIN PI_Endereco PIE ON PIE.Idf_Endereco = PIU.Idf_Endereco "
+					+ " JOIN PI_Cidade PIC ON PIC.Idf_Cidade = PIE.Idf_Cidade "
 					+ " WHERE PIU.Flg_Inativo = 0");
 		
 			ResultSet rs = stmt.executeQuery();
@@ -53,6 +55,7 @@ public class UsuarioDAO{
 			while(rs.next()) {
 				
 				Usuario us = new Usuario();	
+				Endereco end = new Endereco();
 				
 				us.setIdf_Usuario(rs.getInt("Idf_Usuario"));
 				us.setNum_CPF(rs.getString("Num_CPF"));
@@ -60,7 +63,14 @@ public class UsuarioDAO{
 				us.setDta_NascimentoDate(rs.getDate("Dta_Nascimento"));
 				us.setNum_DDD_Celular(rs.getString("Num_DDD_Celular"));
 				us.setNum_Celular(rs.getString("Num_Celular"));
-				us.setEml_Pessoa(rs.getString("Email_Pessoa"));
+				us.setEml_Pessoa(rs.getString("Email_Pessoa"));		
+				end.setIdf_Endereco(rs.getInt("Idf_Endereco"));
+				end.setDesc_Logradouro(rs.getString("Des_Logradouro"));
+				end.setNum_Endereco(rs.getString("Num_Endereco"));
+				end.setNum_CEP(rs.getString("Num_CEP"));
+				end.setDes_Bairro(rs.getString("Des_Bairro"));
+				end.setDesc_Complemento(rs.getString("Des_Complemento"));			
+				us.setEndereco(end);
 				
 				alUsuario.add(us);
 			}
@@ -75,6 +85,7 @@ public class UsuarioDAO{
 			System.err.println(e);
 			try {
 				conn.rollback();
+				stmt.close();
 				conn.close();
 			} catch (SQLException e1) {
 				System.err.println(e1);
@@ -85,9 +96,11 @@ public class UsuarioDAO{
 		return alUsuario;	
 	}
 	
-	protected boolean inserir(Usuario us, Endereco end) {
+	protected boolean inserir(Usuario us) {
 		Connection conn = null;
 		PreparedStatement stmt = null;
+		
+		Endereco end = us.getEndereco();
 		
 		try {
 			conn = conexao.getConnection(false);
@@ -99,7 +112,6 @@ public class UsuarioDAO{
 						+ "(Num_CPF"
 						+ ",Nme_Pessoa"
 						+ ",Idf_Sexo"
-						+ ",Idf_Cidade"
 						+ ",Dta_Nascimento"
 						+ ",Idf_Endereco"
 						+ ",Num_DDD_Celular"
@@ -110,19 +122,18 @@ public class UsuarioDAO{
 						+ ",Flg_Inativo"
 						+ ",Idf_Tipo_Usuario)"
 						+ " VALUES"
-						+ " (?,?,?,?,?,?,?,?,?,CURRENT_TIMESTAMP,?,0,1)");
+						+ " (?,?,?,?,?,?,?,?,CURRENT_TIMESTAMP,?,0,1)");
 						
 				stmt.setString(1,us.getNum_CPF());
 				stmt.setString(2,us.getNme_Pessoa());
 				stmt.setInt(3,us.getIdf_Sexo());
-				stmt.setInt(4,end.getIdf_Cidade());
 				java.sql.Date sqlDate = new java.sql.Date(us.getDta_NascimentoDate().getTime());
-				stmt.setDate(5, sqlDate);	
-				stmt.setInt(6,end.getIdf_Endereco());
-				stmt.setString(7,us.getNum_DDD_Celular());
-				stmt.setString(8,us.getNum_Celular());
-				stmt.setString(9,us.getEml_Pessoa());
-				stmt.setInt(10,us.getIdf_Estado_Civil());
+				stmt.setDate(4, sqlDate);	
+				stmt.setInt(5,end.getIdf_Endereco());
+				stmt.setString(6,us.getNum_DDD_Celular());
+				stmt.setString(7,us.getNum_Celular());
+				stmt.setString(8,us.getEml_Pessoa());
+				stmt.setInt(9,us.getIdf_Estado_Civil());
 
 				int rowAffected = stmt.executeUpdate();
 					
@@ -138,9 +149,11 @@ public class UsuarioDAO{
 					conn.close();
 					return false;
 				}
+			}	
+			else {
+				conn.rollback();
+				conn.close();
 			}
-
-					
 		} catch (SQLException e) {
 			System.err.println(e);
 			try {
@@ -163,22 +176,29 @@ public class UsuarioDAO{
 		try {
 			conn = conexao.getConnection(false);
 			
-			Endereco end = new Endereco();
-			if(end.atualizarEndereco(conn)) {
+			Endereco end = us.getEndereco();
+			if(end.atualizarEndereco(conn, end)) {
 				
 				stmt = conn. prepareStatement(
-						"UPDATE PIU.Nme_Pessoa, PIU.Idf_Sexo, PIU.Idf_Cidade, PIU.Dta_Nascimento, "
-					  + "FROM PI_Usuarios PIU WHERE PIU.Idf_Usuario = ?");
+						"UPDATE PI_Usuarios SET "
+					  + " Nme_Pessoa = ?"
+					  + ",Idf_Sexo = ?"
+					  + ",Dta_Nascimento = ?"
+				      + ",Num_DDD_Celular = ?"
+				      + ",Num_Celular = ?"
+				      + ",Email_Pessoa = ?"
+				      + ",Idf_Estado_Civil = ?"
+					  + " WHERE Idf_Usuario = ?");
 										
-				stmt.setString(2,us.getNme_Pessoa());
-				stmt.setInt(3,us.getIdf_Sexo());
-				stmt.setInt(4,us.getIdf_Cidade());
-				stmt.setDate(5, (Date) us.getDta_NascimentoDate());
-				stmt.setInt(6,us.getIdf_Endereco());
-				stmt.setString(7,us.getNum_DDD_Celular());
-				stmt.setString(8,us.getNum_Celular());
-				stmt.setString(9,us.getEml_Pessoa());
-				stmt.setInt(10,us.getIdf_Estado_Civil());
+				stmt.setString(1,us.getNme_Pessoa());
+				stmt.setInt(2,us.getIdf_Sexo());
+				java.sql.Date sqlDate = new java.sql.Date(us.getDta_NascimentoDate().getTime());
+				stmt.setDate(3, sqlDate);	
+				stmt.setString(4,us.getNum_DDD_Celular());
+				stmt.setString(5,us.getNum_Celular());
+				stmt.setString(6,us.getEml_Pessoa());
+				stmt.setInt(7,us.getIdf_Estado_Civil());
+				stmt.setInt(8,us.getIdf_Usuario());
 
 				int rowAffected = stmt.executeUpdate();
 					
@@ -191,6 +211,7 @@ public class UsuarioDAO{
 				else {
 					conn.rollback();
 					stmt.close();
+					conn.close();
 					conn.close();
 					return false;
 				}				

@@ -6,8 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import br.edu.opet.entity.Endereco;
-import br.edu.opet.entity.Usuario;
+import br.edu.opet.entity.model.Endereco;
+import br.edu.opet.entity.model.Usuario;
 import br.edu.opet.util.conexao;
 
 public class UsuarioDAO{
@@ -16,7 +16,7 @@ public class UsuarioDAO{
 		
 	}
 		
-	protected ArrayList<Usuario> listar() {
+	protected ArrayList<Usuario> listarUsuarios() {
 		
 		ArrayList<Usuario> alUsuario = new ArrayList<Usuario>();
 		Connection conn = null;
@@ -96,7 +96,7 @@ public class UsuarioDAO{
 		return alUsuario;	
 	}
 	
-	protected boolean inserir(Usuario us) {
+	protected boolean inserirUsuarios(Usuario us) {
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		
@@ -169,7 +169,7 @@ public class UsuarioDAO{
 		return false;	
 	}
 	
-	protected boolean atualizar(Usuario us) {
+	protected boolean atualizarUsuario(Usuario us) {
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		
@@ -235,7 +235,7 @@ public class UsuarioDAO{
 		return false;	
 	}
 	
-	protected boolean deletar(Usuario us) {
+	protected boolean deletarUsuario(Usuario us) {
 		
 		Connection conn = null;
 		PreparedStatement stmt = null;

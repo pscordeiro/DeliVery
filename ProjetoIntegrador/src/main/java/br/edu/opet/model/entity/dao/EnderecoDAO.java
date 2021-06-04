@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import br.edu.opet.entity.Endereco;
+import br.edu.opet.entity.model.Endereco;
 import br.edu.opet.util.conexao;
 
 public class EnderecoDAO  {

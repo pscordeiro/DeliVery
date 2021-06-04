@@ -1,4 +1,4 @@
-package br.edu.opet.entity;
+package br.edu.opet.entity.model;
 
 import java.sql.Connection;
 import java.util.ArrayList;

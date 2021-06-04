@@ -6,13 +6,31 @@
 
 <h:head></h:head> 
 <body> 
+<h1>HEADER AQUI</h1><br/>
+
 <h2>Faça seu pedido</h2>
 
-<p>Lista de produtos</p>
-<p>Lista de produtos</p>
-<p>Lista de produtos</p>
-<p>Lista de produtos</p>
-<p>Lista de produtos</p>
+	<div>
+		<h:dataTable value="#{homeController.listarProdutos()}" var = "produto">		
+			<h:column>		
+				<div style="margin: 10px;background-color: orange;padding: 20px;">
+				
+						<h:inputHidden value="#{produto.idf_Produto}" />	
+						#{produto.desc_Produto}
+						<br/><br/><br/>
+						[Imagem]
+						<br/><br/><br/>
+						#{produto.valor_Produto}   
+						<br/><br/><br/>
+						<h:inputText id="Quantidade" value="#{produto.quantidade}" />
+						
+						<h:commandButton action="#{homeController.adicionarCarrinho(produto)}" value="Add Carrinho"/>		
+	
+													
+				</div>			
+			</h:column>						
+		</h:dataTable>
+	</div>
 
 
 </body> 

@@ -1,4 +1,4 @@
-package br.edu.opet.entity;
+package br.edu.opet.entity.model;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -180,19 +180,19 @@ public class Usuario extends UsuarioDAO{
 		Idf_Tipo_Usuario = idf_Tipo_Usuario;
 	}
 	
-	public boolean inserir() {
-		return super.inserir(this);
+	public boolean inserirUsuarios() {
+		return super.inserirUsuarios(this);
 	}
 	
-	public ArrayList<Usuario> listar() {
-		return super.listar();
+	public ArrayList<Usuario> listarUsuarios() {
+		return super.listarUsuarios();
 	}
 	
-	public boolean atualizar() {
-		return super.atualizar(this);
+	public boolean atualizarUsuario() {
+		return super.atualizarUsuario(this);
 	}
-	public boolean deletar() {
-		return super.deletar(this);
+	public boolean deletarUsuario() {
+		return super.deletarUsuario(this);
 	}
 
 }

@@ -4,13 +4,15 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
-import br.edu.opet.entity.Endereco;
-import br.edu.opet.entity.Pedido;
-import br.edu.opet.entity.PedidoItem;
-import br.edu.opet.entity.Produto;
-import br.edu.opet.entity.Usuario;
+import br.edu.opet.entity.model.Carrinho;
+import br.edu.opet.entity.model.Endereco;
+import br.edu.opet.entity.model.Pedido;
+import br.edu.opet.entity.model.PedidoItem;
+import br.edu.opet.entity.model.Produto;
+import br.edu.opet.entity.model.Usuario;
 import br.edu.opet.util.conexao;
 
 public class PedidoDAO {
@@ -136,7 +138,112 @@ public class PedidoDAO {
 		}
 		return alPedidoItem;	
 	}
-	
-	
+	protected boolean salvarPedido(Pedido ped, Carrinho car) {
+		Connection conn = null;
+		PreparedStatement stmt = null;	
+		
+		try {
+			conn = conexao.getConnection(false);
+			System.out.println(car);
+			System.out.println(car.getAlProdutosCarrinho().size());
+			if(inserirPedido(ped, conn)) {
+				
+				stmt = conn. prepareStatement(
+						"INSERT into PI_PedidoItem values (?,?,?,?)"
+				);
+						
+				stmt.setInt(1,ped.getIdf_Pedido());
+				
+				int tamanho = car.getAlProdutosCarrinho().size();
+				int i = 0;
+				
+				while(i < tamanho) {
+					
+				}
+				
+				stmt.setInt(2,car);
+
+				int rowAffected = stmt.executeUpdate();
+				
+				if(rowAffected == 1){
+					ResultSet rs = stmt.getGeneratedKeys();
+					rs.next();
+					int Idf_Pedido = rs.getInt(1);
+					ped.setIdf_Pedido(Idf_Pedido);
+					stmt.close();
+					return true;
+				}
+					
+				if(rowAffected == 1){
+					
+					conn.commit();
+					stmt.close();
+					conn.close();
+					return true;
+				}
+				else {
+					conn.rollback();
+					stmt.close();
+					conn.close();
+					return false;
+				}
+			}
+			else {
+				
+			}
+							
+
+		} catch (SQLException e) {
+			System.err.println(e);
+			try {
+				conn.rollback();
+				stmt.close();
+				conn.close();
+			} catch (SQLException e1) {
+				System.err.println(e1);
+				return false;
+			}
+
+		}
+		return false;	
+	}
+	protected boolean inserirPedido(Pedido ped, Connection conn) {
+		PreparedStatement stmt = null;	
+		
+		try {							
+			stmt = conn. prepareStatement(
+					"INSERT into PI_Pedido values (getdate(),1,1,?)",
+					Statement.RETURN_GENERATED_KEYS);
+					
+			stmt.setInt(1,ped.getIdf_Usuario());
+
+			int rowAffected = stmt.executeUpdate();
+			
+			if(rowAffected == 1){
+				ResultSet rs = stmt.getGeneratedKeys();
+				rs.next();
+				int Idf_Pedido = rs.getInt(1);
+				ped.setIdf_Pedido(Idf_Pedido);
+				stmt.close();
+				return true;
+			}
+			else {
+				conn.rollback();
+				stmt.close();
+				return false;
+			}
+		} catch (SQLException e) {
+			System.err.println(e);
+			try {
+				conn.rollback();
+				stmt.close();
+			} catch (SQLException e1) {
+				System.err.println(e1);
+				return false;
+			}
+
+		}
+		return false;	
+	}
 
 }

@@ -7,7 +7,7 @@ import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
-import br.edu.opet.entity.Usuario;
+import br.edu.opet.entity.model.Usuario;
 
 @ManagedBean
 @RequestScoped
@@ -25,16 +25,16 @@ public class UsuarioController {
 	
 	public List<Usuario> listar(){
 		Usuario us = new Usuario();
-		return us.listar();	
+		return us.listarUsuarios();	
 	}
 	
 	public String salvar(Usuario us) {
 		boolean retorno = false;
 		
 		if(us.getIdf_Usuario() == 0)
-			retorno = us.inserir();
+			retorno = us.inserirUsuarios();
 		else
-			retorno = us.atualizar();
+			retorno = us.atualizarUsuario();
 		
 		if(retorno) {
 			mensagem = "Salvo com sucesso !";	
@@ -62,7 +62,7 @@ public class UsuarioController {
 	}
 	
 	public String excluir(Usuario us) {		
-		if(us.deletar()) {
+		if(us.deletarUsuario()) {
 			//mensagem = "Deletado com sucesso !";
 			return "index.xhtml"; 
 		}

@@ -4,10 +4,11 @@ import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpSession;
 
 import br.edu.opet.entity.model.Carrinho;
 import br.edu.opet.entity.model.Produto;
-
 
 @ManagedBean
 @RequestScoped
@@ -27,14 +28,12 @@ public class HomeController {
 		Produto prod = new Produto();
 		return prod.listar();	
 	}
-	
-	Carrinho car = new Carrinho();
-	
+		
 	//adiciona produto no carrinho
-	public String adicionarCarrinho(Produto prod){
-		//se estiver logado
+	public String adicionarCarrinho(Produto prod, Carrinho car){
+		int Idf_Carrinho = car.getIdf_Carrinho();
 		if(car.getIdf_Carrinho() != 0) {
-			if(car.adicionarAoCarrinhoExistente(prod, car)) {
+			if(car.adicionarAoCarrinhoExistente(prod, Idf_Carrinho)) {
 				//toast de adicionado ao carrinho
 			}
 			else {
@@ -42,11 +41,15 @@ public class HomeController {
 			}
 		}
 		else {
-			if(car.adicionarAoCarrinho(prod)) {
+			Carrinho carrinho = new Carrinho();
+			if(car.adicionarAoCarrinho(prod, carrinho)) {
+				int idf_carrinho = carrinho.getIdf_Carrinho();
+				HttpSession session = (HttpSession)FacesContext.getCurrentInstance()
+						.getExternalContext().getSession(false);
+				session.setAttribute("idf_Carrinho", idf_carrinho);
 				//toast de adicionado ao carrinho
 			}
 		}
-		//else de logar o usuario pra poder adicionar ao carrinho
 		return null;
 	}
 	

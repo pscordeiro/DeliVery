@@ -2,7 +2,9 @@ package br.edu.opet.model.entity.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 import br.edu.opet.entity.model.Carrinho;
 import br.edu.opet.entity.model.Endereco;
@@ -11,7 +13,7 @@ import br.edu.opet.util.conexao;
 
 public class CarrinhoDAO {
 	
-	protected boolean adicionarAoCarrinho(Produto prod) {
+	protected boolean adicionarAoCarrinho(Produto prod, Carrinho car) {
 		
 		Connection conn = null;
 		PreparedStatement stmt = null;
@@ -19,15 +21,20 @@ public class CarrinhoDAO {
 		try {
 			conn = conexao.getConnection(false);
 				
-			stmt = conn. prepareStatement("INSERT INTO PI_Carrinho() VALUES(?,?,?,?)");
+			stmt = conn. prepareStatement("INSERT INTO PI_Carrinho(Idf_Produto, Quantidade,  Valor_Produto) "
+					+ "VALUES(?,?,?,?)",Statement.RETURN_GENERATED_KEYS);
 					
-			stmt.setString(1,us.getNum_CPF());
-			stmt.setString(2,us.getNme_Pessoa());
-			stmt.setInt(3,us.getIdf_Sexo());
+			stmt.setInt(1,prod.getIdf_Produto());
+			stmt.setInt(2,prod.getQuantidade());
+			stmt.setDouble(3,prod.getValor_Produto());
 
 			int rowAffected = stmt.executeUpdate();
 				
 			if(rowAffected == 1){
+				ResultSet rs = stmt.getGeneratedKeys();
+				rs.next();
+				int Idf_carrinho = rs.getInt(1);
+				car.setIdf_Carrinho(Idf_carrinho);
 				conn.commit();
 				stmt.close();
 				conn.close();
@@ -53,7 +60,7 @@ public class CarrinhoDAO {
 		}
 		return false;	
 	}
-	protected boolean adicionarAoCarrinhoExistente(Produto prod, Carrinho car) {
+	protected boolean adicionarAoCarrinhoExistente(Produto prod, int Idf_Carrinho) {
 		
 		Connection conn = null;
 		PreparedStatement stmt = null;
@@ -61,11 +68,10 @@ public class CarrinhoDAO {
 		try {
 			conn = conexao.getConnection(false);
 				
-			stmt = conn. prepareStatement("");
+			stmt = conn. prepareStatement("INSERT INTO PI_Carrinho");
 					
 			stmt.setString(1,us.getNum_CPF());
-			stmt.setString(2,us.getNme_Pessoa());
-			stmt.setInt(3,us.getIdf_Sexo());
+
 
 			int rowAffected = stmt.executeUpdate();
 				

@@ -6,6 +6,19 @@
 
 <h:head></h:head> 
 <body> 
+	<h2>Login</h2>
 
+		<h:form id="formLogin">
+					
+			Email:<br/>
+			<h:inputText id="Email" value="#{login.email}" />
+			<br/>
+			Senha:<br/>
+			<h:inputText id="Senha" value="#{login.senha}" />
+			<br/>	
+			
+			<h:commandButton action="#{loginController.logar(login)}" value="Logar"/>	
+				
+		</h:form>
 </body> 
 </html>

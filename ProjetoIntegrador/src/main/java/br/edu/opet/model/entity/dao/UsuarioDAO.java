@@ -120,9 +120,10 @@ public class UsuarioDAO{
 						+ ",Dta_Cadastro"
 						+ ",Idf_Estado_Civil"
 						+ ",Flg_Inativo"
-						+ ",Idf_Tipo_Usuario)"
+						+ ",Idf_Tipo_Usuario"
+						+ ",Senha)"
 						+ " VALUES"
-						+ " (?,?,?,?,?,?,?,?,CURRENT_TIMESTAMP,?,0,1)");
+						+ " (?,?,?,?,?,?,?,?,CURRENT_TIMESTAMP,?,0,1,?)");
 						
 				stmt.setString(1,us.getNum_CPF());
 				stmt.setString(2,us.getNme_Pessoa());
@@ -134,6 +135,7 @@ public class UsuarioDAO{
 				stmt.setString(7,us.getNum_Celular());
 				stmt.setString(8,us.getEml_Pessoa());
 				stmt.setInt(9,us.getIdf_Estado_Civil());
+				stmt.setString(10, us.getSenha());
 
 				int rowAffected = stmt.executeUpdate();
 					
@@ -188,6 +190,7 @@ public class UsuarioDAO{
 				      + ",Num_Celular = ?"
 				      + ",Email_Pessoa = ?"
 				      + ",Idf_Estado_Civil = ?"
+				      + ",Senha = ?"
 					  + " WHERE Idf_Usuario = ?");
 										
 				stmt.setString(1,us.getNme_Pessoa());
@@ -199,6 +202,7 @@ public class UsuarioDAO{
 				stmt.setString(6,us.getEml_Pessoa());
 				stmt.setInt(7,us.getIdf_Estado_Civil());
 				stmt.setInt(8,us.getIdf_Usuario());
+				stmt.setString(9, us.getSenha());
 
 				int rowAffected = stmt.executeUpdate();
 					

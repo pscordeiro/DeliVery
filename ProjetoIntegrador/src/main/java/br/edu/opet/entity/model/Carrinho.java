@@ -4,11 +4,12 @@ import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 
 import br.edu.opet.model.entity.dao.CarrinhoDAO;
 
 @ManagedBean
-@RequestScoped
+@SessionScoped
 public class Carrinho extends CarrinhoDAO{
 	
 	private int Idf_Carrinho;
@@ -57,11 +58,11 @@ public class Carrinho extends CarrinhoDAO{
 		this.alProdutosCarrinho = alProdutosCarrinho;
 	}
 
-	public boolean adicionarAoCarrinho(Produto prod) {
-		return super.adicionarAoCarrinho(prod);
+	public boolean adicionarAoCarrinho(Produto prod, Carrinho car) {
+		return super.adicionarAoCarrinho(prod, car);
 	}
 	
-	public boolean adicionarAoCarrinhoExistente(Produto prod, Carrinho car) {
-		return super.adicionarAoCarrinhoExistente(prod, car);
+	public boolean adicionarAoCarrinhoExistente(Produto prod, int Idf_Carrinho) {
+		return super.adicionarAoCarrinhoExistente(prod, Idf_Carrinho);
 	}
 }

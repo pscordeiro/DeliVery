@@ -14,8 +14,8 @@ public class Produto extends ProdutoDAO {
 	private int Idf_Produto;
 	private String Desc_Produto;
 	private double Valor_Produto;
-	private Estoque estoque;
 	private int quantidade;
+	private String Url_Produto;
 	
 	public int getIdf_Produto() {
 		return Idf_Produto;
@@ -41,11 +41,11 @@ public class Produto extends ProdutoDAO {
 	public void setQuantidade(int quantidade) {
 		this.quantidade = quantidade;
 	}
-	public Estoque getEstoque() {
-		return estoque;
+	public String getUrl_Produto() {
+		return Url_Produto;
 	}
-	public void setEstoque(Estoque estoque) {
-		this.estoque = estoque;
+	public void setUrl_Produto(String url_Produto) {
+		Url_Produto = url_Produto;
 	}
 	public ArrayList<Produto> listar() {
 		return super.listarProdutos();

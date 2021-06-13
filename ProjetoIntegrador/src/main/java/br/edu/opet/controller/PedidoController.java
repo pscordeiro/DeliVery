@@ -11,10 +11,10 @@ import br.edu.opet.entity.model.Pedido;
 public class PedidoController {
 	
 	//salva pedido
-	public String inserirPedido(Pedido ped, Carrinho car) {
-		
-		if(ped.salvarPedido(ped, car)) {
-			return "";
+	public String inserirPedido(Carrinho car) {
+		Pedido ped = new Pedido();
+		if(ped.salvarPedido(ped,car)) {
+			return "pedido-sucesso.xhtml";
 		}
 		else {
 			return "";

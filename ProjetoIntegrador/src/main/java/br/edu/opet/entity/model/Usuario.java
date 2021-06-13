@@ -28,6 +28,7 @@ public class Usuario extends UsuarioDAO{
 	private int Idf_Estado_Civil;
 	private int Flg_Inativo;
 	private int Idf_Tipo_Usuario;
+	private String Senha;
 	
 	public Usuario() {};
 	
@@ -180,6 +181,14 @@ public class Usuario extends UsuarioDAO{
 		Idf_Tipo_Usuario = idf_Tipo_Usuario;
 	}
 	
+	public String getSenha() {
+		return Senha;
+	}
+	
+	public void setSenha(String senha) {
+		Senha = senha;
+	}
+
 	public boolean inserirUsuarios() {
 		return super.inserirUsuarios(this);
 	}

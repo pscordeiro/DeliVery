@@ -6,6 +6,60 @@
 
 <h:head></h:head> 
 <body> 
+	<a href="http://localhost:8082/ProjetoIntegrador/index.xhtml">Voltar</a>
+	<h2>Carrinho </h2>
+	
+	<h:inputHidden value="#{carrinho.idf_Carrinho}" />	
+	
+	<h:form id="formCarrinho">
+			
+		<h:dataTable value="#{homeController.listarCarrinho(carrinho)}" var = "carrinho">
+			
+			<h:column>
+				<f:facet name="header">Quantidade</f:facet>
+				#{carrinho.prod_Carrinho.quantidade}
+			</h:column>	
+			
+			<h:column>
+				<f:facet name="header">Produto</f:facet>
+				#{carrinho.prod_Carrinho.desc_Produto}
+			</h:column>		
+			
+			<h:column>
+				<f:facet name="header">Valor Unitário</f:facet>
+				#{carrinho.prod_Carrinho.valor_Produto}
+			</h:column>		
+			
+			<h:column>
+				<f:facet name="header">Sub Total</f:facet>
+				#{carrinho.sub_Total}
+			</h:column>	
+				
+			<h:column>
+				<f:facet name="header">A</f:facet>
+				<h:commandButton 
+					action="#{homeController.apagarItemCarrinho(carrinho)}" 
+					value="Apagar"/>
+			</h:column>
+			
+		</h:dataTable>
+		
+		<h:dataTable value="#{homeController.listarCarrinhoTotal(carrinho)}" var = "carrinho">
+			
+			<h:column>
+				#{carrinho.total_Itens}  Itens              Total                   #{carrinho.total_Carrinho}    
+				<br/>
+				<h:commandButton 
+				action="#{pedidoController.inserirPedido(carrinho)}" 
+				value="Finalizar Compra"/>	      
+			</h:column>	
 
+
+		</h:dataTable>
+		
+
+		
+	</h:form>
+	
 </body> 
 </html>

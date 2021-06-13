@@ -6,7 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import br.edu.opet.entity.model.Estoque;
 import br.edu.opet.entity.model.Produto;
 import br.edu.opet.util.conexao;
 
@@ -21,7 +20,7 @@ public class ProdutoDAO {
 		try {
 			conn = conexao.getConnection(true);		
 			stmt = conn. prepareStatement
-			 ("SELECT PIP.Idf_Produto ,Desc_Produto, Valor_Produto, Quantidade "
+			 ("SELECT PIP.Idf_Produto ,Desc_Produto, Valor_Produto, Quantidade, Url_Produto "
 	 		+ "FROM PI_Produtos PIP "
 	 		+ "JOIN PI_Estoque PIE on PIE.Idf_Produto = PIP.Idf_Produto "
 	 		+ "WHERE Quantidade > 0");
@@ -31,13 +30,12 @@ public class ProdutoDAO {
 			while(rs.next()) {
 				
 				Produto prod = new Produto(); 
-				Estoque est = new Estoque();
 				prod.setIdf_Produto(rs.getInt("Idf_Produto"));
 				prod.setDesc_Produto(rs.getString("Desc_Produto"));
 				prod.setValor_Produto(rs.getDouble("Valor_Produto"));
-				est.setQuantidade(rs.getInt("Quantidade"));
-				prod.setEstoque(est);
-				
+				prod.setUrl_Produto(rs.getString("Url_Produto"));
+				prod.setQuantidade(rs.getInt("Quantidade"));
+
 				alProduto.add(prod);
 			}
 			
@@ -61,6 +59,5 @@ public class ProdutoDAO {
 		}
 		return alProduto;	
 	}
-
 
 }

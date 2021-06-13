@@ -7,7 +7,6 @@ import java.util.Date;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 
-import br.edu.opet.entity.model.Carrinho;
 import br.edu.opet.model.entity.dao.PedidoDAO;
 
 @ManagedBean
@@ -83,4 +82,5 @@ public class Pedido extends PedidoDAO {
 	public boolean inserirPedido(Pedido ped, Connection conn) {
 		return super.inserirPedido(ped, conn);
 	}
+	
 }

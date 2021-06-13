@@ -24,33 +24,90 @@ public class HomeController {
 	//Na tela de finalizar compra podera remover ou nao itens adicionados e finalizar redirecionando para tela de sucesso
 	//Na tela de pedido realizado podera voltar para home
 	
+	private String mensagem = "";
+	
+	public String getMensagem() {
+		return mensagem;
+	}
+	
 	public List<Produto> listarProdutos(){
 		Produto prod = new Produto();
 		return prod.listar();	
 	}
 		
 	//adiciona produto no carrinho
-	public String adicionarCarrinho(Produto prod, Carrinho car){
-		int Idf_Carrinho = car.getIdf_Carrinho();
-		if(car.getIdf_Carrinho() != 0) {
-			if(car.adicionarAoCarrinhoExistente(prod, Idf_Carrinho)) {
+	public String adicionarCarrinho(Produto prod, Carrinho car, int quantidade){
+		
+		//int Idf_Carrinho = car.getIdf_Carrinho();
+		prod.setQuantidade(quantidade);
+		if(car.getIdf_Carrinho() != 0 && car != null) {
+			if(car.verItensCarrinho(prod, car)) {
+				//produto já está no carrinho, quantidade aumentada
+				mensagem = "Produto já está no carrinho, quantidade incrementada";
+				return "http://localhost:8082/ProjetoIntegrador/";
+			}
+			else if(car.adicionarAoCarrinhoExistente(prod, car)) {
 				//toast de adicionado ao carrinho
+				mensagem = "Produto adicionado ao carrinho";
+				return "http://localhost:8082/ProjetoIntegrador/";
 			}
 			else {
 				//erro ao adicionar ao carrinho
+				mensagem = "Erro ao tentar adicionar produto no carrinho";
+				return "http://localhost:8082/ProjetoIntegrador/";
 			}
 		}
 		else {
 			Carrinho carrinho = new Carrinho();
 			if(car.adicionarAoCarrinho(prod, carrinho)) {
-				int idf_carrinho = carrinho.getIdf_Carrinho();
 				HttpSession session = (HttpSession)FacesContext.getCurrentInstance()
 						.getExternalContext().getSession(false);
-				session.setAttribute("idf_Carrinho", idf_carrinho);
+				session.setAttribute("carrinho", carrinho);
 				//toast de adicionado ao carrinho
+				mensagem = "Produto adicionado ao carrinho";
+				return "http://localhost:8082/ProjetoIntegrador/";
+			}
+			else {
+				//erro ao adicionar ao carrinho
+				mensagem = "Erro ao tentar adicionar produto no carrinho";
+				return "http://localhost:8082/ProjetoIntegrador/";
 			}
 		}
-		return null;
+	}
+	
+	public List<Carrinho> listarCarrinho(Carrinho carrinho){	
+		return carrinho.listarCarrinho(carrinho);		
+	}
+	
+	public List<Carrinho> listarCarrinhoTotal(Carrinho carrinho){		
+		return carrinho.listarCarrinhoTotal(carrinho);
+	}
+	
+	public String verCarrinho(Carrinho carrinho){
+		
+		if(carrinho.getIdf_Carrinho() != 0) {			
+			return "/usuario/carrinho.xhtml";
+		}
+		else {
+			mensagem = "Carrinho Vazio";
+			return "http://localhost:8082/ProjetoIntegrador/";	
+		}
+		
+	}
+	
+	public String apagarItemCarrinho(Carrinho carrinho){
+		
+		if(carrinho.apagarItemCarrinho(carrinho)) {
+			//toast de sucesso
+			mensagem = "Produto removido do carrinho";
+			return "http://localhost:8082/ProjetoIntegrador/usuario/carrinho.xhtml";	
+		}
+		else {
+			//toast de falha
+			mensagem = "Falha ao remover produto";
+			return "http://localhost:8082/ProjetoIntegrador/usuario/carrinho.xhtml";	
+		}
+		
 	}
 	
 

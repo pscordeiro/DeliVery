@@ -9,8 +9,8 @@ public class PedidoItem extends PedidoDAO {
 	private int Idf_Pedido;
 	private int Idf_Produto;
 	private int Quantidade;
-	private int Valor_Produto;
-	private int Valor_Total;
+	private double Valor_Produto;
+	private double Valor_Total;
 	private Produto produto;
 	
 	public int getIdf_Pedido() {
@@ -31,16 +31,16 @@ public class PedidoItem extends PedidoDAO {
 	public void setQuantidade(int quantidade) {
 		Quantidade = quantidade;
 	}
-	public int getValor_Produto() {
+	public double getValor_Produto() {
 		return Valor_Produto;
 	}
-	public void setValor_Produto(int valor_Produto) {
+	public void setValor_Produto(double valor_Produto) {
 		Valor_Produto = valor_Produto;
 	}
-	public int getValor_Total() {
+	public double getValor_Total() {
 		return Valor_Total;
 	}
-	public void setValor_Total(int valor_Total) {
+	public void setValor_Total(double valor_Total) {
 		Valor_Total = valor_Total;
 	}
 	public Produto getProduto() {

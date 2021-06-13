@@ -18,16 +18,15 @@
 			<div style="margin: 10px;background-color: orange;padding: 20px;">
 			
 			Idf_Pedido: #{pedido.idf_Pedido}
-				<br/>
+				<br/>	<br/>
 			#{pedido.endereco.desc_Logradouro} #{pedido.endereco.num_Endereco} - #{pedido.endereco.nme_Cidade}/#{pedido.endereco.sig_Estado}
-				<br/>
+				<br/>	<br/>
 				
 			<div>
-			
+				ITENS:
 				<h:dataTable value="#{salaAdmController.listarItens(pedido.idf_Pedido)}" var = "itemPedido">
+	
 					<h:column>
-					ITENS:
-					<br/>
 					 #{itemPedido.quantidade} x #{itemPedido.produto.desc_Produto}
 					<br/>
 					VALOR:

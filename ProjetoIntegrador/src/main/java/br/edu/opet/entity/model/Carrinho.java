@@ -1,9 +1,8 @@
 package br.edu.opet.entity.model;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 
 import br.edu.opet.model.entity.dao.CarrinhoDAO;
@@ -13,56 +12,77 @@ import br.edu.opet.model.entity.dao.CarrinhoDAO;
 public class Carrinho extends CarrinhoDAO{
 	
 	private int Idf_Carrinho;
-	private int Idf_Produto;
-	private int Quantidade;
-	private int Idf_Usuario;
-	private List<Produto> alProdutosCarrinho;
-		
+	private Produto Prod_Carrinho;
+	private double Sub_Total;
+	private int Total_Itens;
+	private double Total_Carrinho;
+
 	public int getIdf_Carrinho() {
 		return Idf_Carrinho;
 	}
 
 	public void setIdf_Carrinho(int idf_Carrinho) {
 		Idf_Carrinho = idf_Carrinho;
+	}	
+
+	public Produto getProd_Carrinho() {
+		return Prod_Carrinho;
 	}
 
-	public int getIdf_Produto() {
-		return Idf_Produto;
+	public void setProd_Carrinho(Produto prod_Carrinho) {
+		Prod_Carrinho = prod_Carrinho;
 	}
 
-	public void setIdf_Produto(int idf_Produto) {
-		Idf_Produto = idf_Produto;
+	public double getSub_Total() {
+		return Sub_Total;
 	}
 
-	public int getQuantidade() {
-		return Quantidade;
+	public void setSub_Total(double sub_Total) {
+		Sub_Total = sub_Total;
+	}
+	
+	public int getTotal_Itens() {
+		return Total_Itens;
 	}
 
-	public void setQuantidade(int quantidade) {
-		Quantidade = quantidade;
+	public void setTotal_Itens(int total_Itens) {
+		Total_Itens = total_Itens;
+	}
+	
+	public double getTotal_Carrinho() {
+		return Total_Carrinho;
 	}
 
-	public int getIdf_Usuario() {
-		return Idf_Usuario;
-	}
-
-	public void setIdf_Usuario(int idf_Usuario) {
-		Idf_Usuario = idf_Usuario;
-	}
-
-	public List<Produto> getAlProdutosCarrinho() {
-		return alProdutosCarrinho;
-	}
-
-	public void setAlProdutosCarrinho(List<Produto> alProdutosCarrinho) {
-		this.alProdutosCarrinho = alProdutosCarrinho;
+	public void setTotal_Carrinho(double total_Carrinho) {
+		Total_Carrinho = total_Carrinho;
 	}
 
 	public boolean adicionarAoCarrinho(Produto prod, Carrinho car) {
 		return super.adicionarAoCarrinho(prod, car);
 	}
 	
-	public boolean adicionarAoCarrinhoExistente(Produto prod, int Idf_Carrinho) {
-		return super.adicionarAoCarrinhoExistente(prod, Idf_Carrinho);
+	public boolean adicionarAoCarrinhoExistente(Produto prod, Carrinho car) {
+		return super.adicionarAoCarrinhoExistente(prod, car);
 	}
+	
+	public ArrayList<Carrinho> listarCarrinho(Carrinho car) {
+		return super.listarCarrinho(car);
+	}
+	
+	public ArrayList<Carrinho> listarCarrinhoTotal(Carrinho car) {
+		return super.listarCarrinhoTotal(car);
+	}
+
+	public boolean verItensCarrinho(Produto prod, Carrinho car) {
+		return super.verItemCarrinho(prod, car);
+	}
+	
+	public boolean apagarItemCarrinho(Carrinho car) {
+		return super.removerDoCarrinho(car);
+	}
+
+	public boolean apagarCarrinho(Carrinho car) {
+		return super.apagarCarrinho(car);	
+	}
+	
 }

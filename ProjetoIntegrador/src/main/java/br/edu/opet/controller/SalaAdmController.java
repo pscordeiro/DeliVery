@@ -20,6 +20,12 @@ public class SalaAdmController {
 	//na tela de cadastrar produto pode voltar para sala adm ou finalizar
 	//finalizando vai pra tela de sucesso e pode voltar pra sala adm
 	//pode também listar os usuarios cadastrados no banco
+	
+	private String mensagem = "";
+	
+	public String getMensagem() {
+		return mensagem;
+	}
 			
 	public List<Pedido> listarPedidos(){
 		Pedido ped = new Pedido();
@@ -33,11 +39,11 @@ public class SalaAdmController {
 	
 	public String excluir(Usuario us) {		
 		if(us.deletarUsuario()) {
-			//mensagem = "Deletado com sucesso !";
+			mensagem = "Deletado com sucesso !";
 			return "/usuario/cadusuario-sucesso.xhtml"; 
 		}
 		else {
-			//mensagem = "Falha ao deletar !";
+			mensagem = "Falha ao deletar !";
 			//Criar uma tela com erro ao criar usuario
 			return "/usuario/cadusuario-erro.xhtml";
 		}

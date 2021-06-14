@@ -203,5 +203,9 @@ public class Usuario extends UsuarioDAO{
 	public boolean deletarUsuario() {
 		return super.deletarUsuario(this);
 	}
+	
+	public Usuario buscarUsuario(Usuario user) {
+		return super.buscarUsuario(user);
+	}
 
 }

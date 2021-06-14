@@ -1,15 +1,16 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
+<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:h="http://java.sun.com/jsf/html"> 
-
-<h:head></h:head> 
-<body> 
+      xmlns:h="http://java.sun.com/jsf/html"
+      template="../template-logado.xhtml"> 
+  
 	<a href="http://localhost:8082/ProjetoIntegrador/index.xhtml">Voltar</a>
 	<h2>Carrinho </h2>
 	
-	<h:inputHidden value="#{carrinho.idf_Carrinho}" />	
+	<h:inputHidden value="#{carrinho.idf_Carrinho}" />
+	<h:inputHidden value="#{usuarioLogadoController.user.idf_Usuario};" />
+		
 	
 	<h:form id="formCarrinho">
 			
@@ -50,16 +51,13 @@
 				#{carrinho.total_Itens}  Itens              Total                   #{carrinho.total_Carrinho}    
 				<br/>
 				<h:commandButton 
-				action="#{pedidoController.inserirPedido(carrinho)}" 
+				action="#{pedidoController.inserirPedido(carrinho, usuarioLogadoController)}" 
 				value="Finalizar Compra"/>	      
 			</h:column>	
 
 
 		</h:dataTable>
 		
-
-		
 	</h:form>
 	
-</body> 
-</html>
+</ui:decorate> 

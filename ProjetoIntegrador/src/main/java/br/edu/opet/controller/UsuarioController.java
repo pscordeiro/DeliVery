@@ -23,6 +23,10 @@ public class UsuarioController {
 		this.mensagem = mensagem;
 	}
 	
+	public String verPerfil() {
+		return "/usuario/cad-perfil-usuario.xhtml";	
+	}
+	
 	public List<Usuario> listar(){
 		Usuario us = new Usuario();
 		return us.listarUsuarios();	

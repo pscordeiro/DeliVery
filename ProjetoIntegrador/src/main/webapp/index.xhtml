@@ -1,20 +1,19 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
+<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:h="http://java.sun.com/jsf/html"> 
+      xmlns:h="http://java.sun.com/jsf/html"
+      template="template-logado.xhtml"> 
+            
+  <div>
 
-<h:head></h:head> 
-<body> 
-
-	<h1>HEADER AQUI</h1><br/>
+	<br/>
 	
-	#{homeController.mensagem}
 	
-	<h:form>
-		<h:commandButton  action="#{homeController.verCarrinho(carrinho)}" value="Ver Carrinho"/>		
-	</h:form>
-		
+    <div class="toast-body">
+        #{homeController.mensagem} 
+    </div>     
+			
 	<h2>Faça seu pedido</h2>
 
 	<h:form id="formItemHome">
@@ -26,7 +25,7 @@
 			
 				<h:column >		
 				
-					<div style="margin: 10px;background-color: orange;padding: 20px;">
+					<div style="margin: 10px;background-color: purple;padding: 20px;">
 					
 							<h:inputHidden value="#{produto.idf_Produto}" />	
 							#{produto.desc_Produto}
@@ -51,5 +50,19 @@
 	
 	</h:form>
 
-</body> 
-</html>
+</div>  
+      
+<script>
+$(document).ready(function(){
+    
+	function mostrarToast(){
+		$("#myToast").toast('show');
+	}	
+	
+});
+</script>
+          
+</ui:decorate> 
+
+
+

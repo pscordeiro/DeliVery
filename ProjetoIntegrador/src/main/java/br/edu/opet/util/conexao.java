@@ -8,7 +8,7 @@ public class conexao {
 
 	public static Connection getConnection(boolean autoCommit) throws SQLException {
 		
-		String url = "jdbc:sqlserver://26.11.234.193;databaseName=ProjetoPI";
+		String url = "jdbc:sqlserver://26.11.234.193:49170;databaseName=ProjetoPI";
 		String user = "sa";
 		String password = "senha123";
 		

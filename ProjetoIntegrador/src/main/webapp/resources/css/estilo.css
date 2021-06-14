@@ -1,0 +1,50 @@
+body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+main {
+  flex: 1 0 auto;
+}
+
+.logo {
+  height: 500px;
+  width: 200px;
+}
+
+.logo2 {
+  height: 100px;
+  width: 150px;
+}
+
+.fa, .fab, .fal, .far, .fas {
+  margin: 0 5px 0 5px;
+}
+.banner {
+  height: 300px;
+  background-position: 50% 0%;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+footer {
+  background-color: #ee6e73;
+  padding-top: 20px;
+  color: white;
+}
+footer ul {
+  list-style: none;
+  padding-left: 0;
+}
+footer a {
+  text-decoration: none;
+  color: white;
+}
+footer a:hover {
+    color: white;
+    text-decoration: none;
+}
+.footer-copyright {
+  background-color: rgba(51,51,51,0.08);
+  padding: 15px 0 15px 0;
+}

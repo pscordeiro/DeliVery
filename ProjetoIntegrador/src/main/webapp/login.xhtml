@@ -11,13 +11,13 @@
 		<h:form id="formLogin">
 					
 			Email:<br/>
-			<h:inputText id="Email" value="#{login.email}" />
+			<h:inputText id="Email" value="#{usuarioLogadoController.user.eml_Pessoa}" />
 			<br/>
 			Senha:<br/>
-			<h:inputText id="Senha" value="#{login.senha}" />
+			<h:inputText id="Senha" value="#{usuarioLogadoController.user.senha}" />
 			<br/>	
 			
-			<h:commandButton action="#{loginController.logar(login)}" value="Logar"/>	
+			<h:commandButton action="#{usuarioLogadoController.fazerLogin()}" value="Logar"/>	
 				
 		</h:form>
 </body> 

@@ -13,7 +13,7 @@
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
-	<classpathentry kind="lib" path="D:/6-Projetos/Workspace/mssql-jdbc-9.2.1.jre11.jar">
+	<classpathentry kind="lib" path="D:/6-Projetos/ProjetoPI/git/ProjetoPI/ProjetoIntegrador/ext/mssql-jdbc-9.2.1.jre11.jar">
 		<attributes>
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>

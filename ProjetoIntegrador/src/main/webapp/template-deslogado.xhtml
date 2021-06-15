@@ -18,13 +18,13 @@
         <title>Delivery</title>
     </h:head>
     <h:body>
+    
         <header>
 
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 <div class="container">
-                    <a class="navbar-brand" href="http://localhost:8082/ProjetoIntegrador/index.xhtml">
+                    <a class="navbar-brand" href="index.xhtml">
                         <h:graphicImage styleClass="logo2" library="images" name="logo-delivery.svg" alt="Logo da empresa"></h:graphicImage>
-
                     </a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
@@ -32,23 +32,21 @@
 
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav ml-auto">
-                            <li class="nav-item">
-                                <h:link styleClass="nav-link" outcome="index.html"><i class="fas fa-home"></i>Home</h:link>
-                            </li>
+                        <h:commandButton styleClass="button" action="#{usuarioLogadoController.fazerLogin()}" value="Login" />
                             <li class="nav-item">
 								<h:form>
-                                	<h:commandLink styleClass="nav-link" action="#{homeController.verCarrinho(carrinho)}"><i class="fa fa-shopping-cart"></i>Carrinho</h:commandLink>
+                                	<h:commandLink styleClass="cart-button" action="#{homeController.verCarrinho(carrinho, usuarioLogadoController)}"><i class="fa fa-shopping-cart fa-1g"></i></h:commandLink>
                             	</h:form>
-                            </li>
-                            <li class="nav-item">
-                            	<h:link styleClass="nav-link" outcome="cad-perfil-usuario.xhtml"><i class="fas fa-sign-in-alt"></i>Logar</h:link>
-                            </li>
+                            </li>                         
                         </ul>
                     </div>
                 </div>
             </nav>
         </header>
+
+           
         <main>
+        	
             <ui:insert/>
         </main>
         <footer>

@@ -8,16 +8,6 @@ main {
   flex: 1 0 auto;
 }
 
-.logo {
-  height: 500px;
-  width: 200px;
-}
-
-.logo2 {
-  height: 100px;
-  width: 150px;
-}
-
 .fa, .fab, .fal, .far, .fas {
   margin: 0 5px 0 5px;
 }
@@ -47,4 +37,79 @@ footer a:hover {
 .footer-copyright {
   background-color: rgba(51,51,51,0.08);
   padding: 15px 0 15px 0;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 2px 8px;
+    box-shadow: 0 2px 4px rgba(30, 60, 90, 0.1);
+}
+
+.logo {
+    padding: 10px 0;
+   	width: 120px;
+    margin: none;
+}
+
+
+.button {
+    position: left;
+    background-color: #7875ff;
+    border: none;
+    border-radius: 4px;
+    font-size: 15px;
+    color: #FFFFFF;
+    padding: 10px;
+    width: 150px;
+    text-align: center;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.button:hover {
+	background-color: #6f42c1;
+}
+
+
+.cart-button {
+    position: left;
+    border:none;
+    font-size: 15px;
+    color: #7875ff;
+    padding: 10px;
+    width: 80px;
+    text-align: center;
+    text-decoration: none;
+    overflow: hidden;
+    cursor: pointer;
+    display: block;    
+}
+
+.cart-button:hover {
+  color: #6f42c1;
+}
+
+.fa-shopping-cart:hover {
+    color: #400080;
+}
+
+h1, .h1 {
+    font-size: calc(1.375rem + 1.5vw);
+}
+@media (min-width: 1200px) {
+    h1, .h1 {
+    font-size: 2.5rem;
+    }
+} 
+
+footer { 
+  background: #7875ff;
+  padding: 25px 0;
+  text-align: center;
+  font-size: 1.2rem;
+  color: #fff;
+  position: relative;
+  top: 75px; 
 }

@@ -23,7 +23,10 @@ public class UsuarioController {
 		this.mensagem = mensagem;
 	}
 	
-	public String verPerfil() {
+	public String verPerfil(Usuario usuario) {
+		HttpSession session = (HttpSession)FacesContext.getCurrentInstance()
+				.getExternalContext().getSession(false);
+		session.setAttribute("usuario", usuario);
 		return "/usuario/cad-perfil-usuario.xhtml";	
 	}
 	

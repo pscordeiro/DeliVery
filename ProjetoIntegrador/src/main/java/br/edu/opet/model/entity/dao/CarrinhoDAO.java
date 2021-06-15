@@ -83,13 +83,13 @@ public class CarrinhoDAO {
 		try {
 			conn = conexao.getConnection(true);		
 			stmt = conn. prepareStatement
-					("SELECT \r\n"
-					+ "SUM(quantidade) AS TotalItens,\r\n"
-					+ "SUM((PIC.Quantidade * PIC.Valor_Produto)) AS ValorTotalCarrinho,\r\n"
-					+ "Idf_Carrinho_Grupo\r\n"
-					+ "FROM PI_Carrinho PIC\r\n"
-					+ "WHERE Idf_Carrinho_Grupo = ?\r\n"
-					+ "GROUP BY Idf_Carrinho_Grupo");
+					(" SELECT "
+					+ "SUM(quantidade) AS TotalItens,"
+					+ "SUM((PIC.Quantidade * PIC.Valor_Produto)) AS ValorTotalCarrinho,"
+					+ "Idf_Carrinho_Grupo"
+					+ " FROM PI_Carrinho PIC "
+					+ " WHERE Idf_Carrinho_Grupo = ? "
+					+ " GROUP BY Idf_Carrinho_Grupo");
 			
 			stmt.setInt(1,car.getIdf_Carrinho());
 		

@@ -1,6 +1,6 @@
 package br.edu.opet.controller;
 
-import java.util.ArrayList;
+import java.io.IOException;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
@@ -66,12 +66,12 @@ public class HomeController {
 				session.setAttribute("carrinho", carrinho);
 				//toast de adicionado ao carrinho
 				mensagem = "Produto adicionado ao carrinho";
-				return "http://localhost:8082/ProjetoIntegrador/";
+				return "/ProjetoIntegrador/index.xhtml";
 			}
 			else {
 				//erro ao adicionar ao carrinho
 				mensagem = "Erro ao tentar adicionar produto no carrinho";
-				return "http://localhost:8082/ProjetoIntegrador/";
+				return "/ProjetoIntegrador/index.xhtml";
 			}
 		}
 	}
@@ -84,13 +84,14 @@ public class HomeController {
 		return carrinho.listarCarrinhoTotal(carrinho);
 	}
 	
-	public String verCarrinho(Carrinho carrinho, UsuarioLogadoController user){
+	public String verCarrinho(Carrinho carrinho, UsuarioLogadoController user) throws IOException{
 		List<Carrinho> alCarrinho = listarCarrinho(carrinho);
 		if(alCarrinho.size() == 0) {		
 			mensagem = "Carrinho Vazio";
-			return "http://localhost:8082/ProjetoIntegrador/";				
+			return "/ProjetoIntegrador/index.xhtml";				
 		}
 		else {
+            FacesContext.getCurrentInstance().getExternalContext().redirect("/ProjetoIntegrador/usuario/carrinho.xhtml");
 			return "/usuario/carrinho.xhtml";	
 		}
 		

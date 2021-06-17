@@ -3,10 +3,9 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:h="http://java.sun.com/jsf/html"
-      template="../template-logado.xhtml"> 
+      template="../template-usuario.xhtml"> 
   
-	<a href="http://localhost:8082/ProjetoIntegrador/index.xhtml">Voltar</a>
-	<h2>Carrinho </h2>
+	<h2>Finalizar Compra</h2>
 	
 	<h:inputHidden value="#{carrinho.idf_Carrinho}" />
 	<h:inputHidden value="#{usuarioLogadoController.user.idf_Usuario};" />
@@ -14,7 +13,7 @@
 	
 	<h:form id="formCarrinho">
 			
-		<h:dataTable value="#{homeController.listarCarrinho(carrinho)}" var = "carrinho">
+		<h:dataTable value="#{homeController.listarCarrinho(carrinho)}" rendered="#{!homeController.verificarCarrinhoVazio(carrinho)}" var = "carrinho">
 			
 			<h:column>
 				<f:facet name="header">Quantidade</f:facet>
@@ -45,18 +44,18 @@
 			
 		</h:dataTable>
 		
-		<h:dataTable value="#{homeController.listarCarrinhoTotal(carrinho)}" var = "carrinho">
+		<h:dataTable value="#{homeController.listarCarrinhoTotal(carrinho)}" rendered="#{!homeController.verificarCarrinhoVazio(carrinho)}" var = "carrinho">
 			
 			<h:column>
 				#{carrinho.total_Itens}  Itens              Total                   #{carrinho.total_Carrinho}    
 				<br/>
-				<h:commandButton 
-				action="#{pedidoController.inserirPedido(carrinho, usuarioLogadoController)}" 
-				value="Finalizar Compra"/>	      
+				<h:commandButton action="#{pedidoController.inserirPedido(carrinho, usuarioLogadoController)}" rendered="#{usuarioLogadoController.taLogado()}" value="Finalizar Compra"/>	      
+				<h:commandButton action="#{usuarioLogadoController.redirectToLogin(1)}" rendered="#{!usuarioLogadoController.taLogado()}" value="Logar para Finalizar Compra"/>	      
 			</h:column>	
 
-
 		</h:dataTable>
+		
+		<h:column rendered="#{homeController.verificarCarrinhoVazio(carrinho)}">Carrinho Vazio</h:column>
 		
 	</h:form>
 	

@@ -84,17 +84,19 @@ public class HomeController {
 		return carrinho.listarCarrinhoTotal(carrinho);
 	}
 	
-	public String verCarrinho(Carrinho carrinho, UsuarioLogadoController user) throws IOException{
+	public boolean verificarCarrinhoVazio(Carrinho carrinho) {
 		List<Carrinho> alCarrinho = listarCarrinho(carrinho);
 		if(alCarrinho.size() == 0) {		
-			mensagem = "Carrinho Vazio";
-			return "/ProjetoIntegrador/index.xhtml";				
+			return true;				
 		}
-		else {
-            FacesContext.getCurrentInstance().getExternalContext().redirect("/ProjetoIntegrador/usuario/carrinho.xhtml");
-			return "/usuario/carrinho.xhtml";	
-		}
-		
+		return false;
+	}
+	
+	public String verCarrinho(Carrinho carrinho, UsuarioLogadoController user) throws IOException{
+
+	    FacesContext.getCurrentInstance().getExternalContext().redirect("/ProjetoIntegrador/usuario/carrinho.xhtml");
+		return "";	
+
 	}
 	
 	public String apagarItemCarrinho(Carrinho carrinho){
@@ -112,5 +114,4 @@ public class HomeController {
 		
 	}
 	
-
 }

@@ -289,29 +289,31 @@ public class UsuarioDAO{
 			conn = conexao.getConnection(false);
 						
 			stmt = conn. prepareStatement("SELECT Idf_Usuario\r\n"
-					+ ",Num_CPF\r\n"
-					+ ",Nme_Pessoa\r\n"
-					+ ",PIS.Desc_Sexo\r\n"
-					+ ",PIC.Nme_Cidade \r\n"
-					+ ",PIE.Idf_Endereco\r\n"
-					+ ",PIE.Des_Logradouro\r\n"
-					+ ",PIE.Num_Endereco\r\n"
-					+ ",PIE.Num_CEP\r\n"
-					+ ",PIE.Des_Bairro\r\n"
-					+ ",PIE.Des_Complemento\r\n"
-					+ ",PIU.Dta_Nascimento\r\n"
-					+ ",Num_DDD_Celular\r\n"
-					+ ",Num_Celular\r\n"
-					+ ",Email_Pessoa\r\n"
-					+ ",PIU.Dta_Cadastro\r\n"
-					+ ",Idf_Estado_Civil\r\n"
-					+ ",PIU.Flg_Inativo\r\n"
-					+ ",Idf_Tipo_Usuario\r\n"
-					+ ",Senha\r\n"
-					+ " FROM PI_Usuarios PIU \r\n"
-					+ " JOIN PI_Sexo PIS ON PIS.Idf_Sexo = PIU.Idf_Sexo \r\n"
-					+ " JOIN PI_Endereco PIE ON PIE.Idf_Endereco = PIU.Idf_Endereco \r\n"
-					+ " JOIN PI_Cidade PIC ON PIC.Idf_Cidade = PIE.Idf_Cidade \r\n"
+					+ ",Num_CPF "
+					+ ",Nme_Pessoa "
+					+ ",PIS.Desc_Sexo "
+					+ ",PIU.Idf_Sexo "
+					+ ",PIC.Idf_Cidade"
+					+ ",PIC.Nme_Cidade "
+					+ ",PIE.Idf_Endereco "
+					+ ",PIE.Des_Logradouro "
+					+ ",PIE.Num_Endereco "
+					+ ",PIE.Num_CEP "
+					+ ",PIE.Des_Bairro "
+					+ ",PIE.Des_Complemento "
+					+ ",PIU.Dta_Nascimento "
+					+ ",Num_DDD_Celular "
+					+ ",Num_Celular "
+					+ ",Email_Pessoa "
+					+ ",PIU.Dta_Cadastro "
+					+ ",Idf_Estado_Civil "
+					+ ",PIU.Flg_Inativo "
+					+ ",Idf_Tipo_Usuario "
+					+ ",Senha "
+					+ " FROM PI_Usuarios PIU "
+					+ " JOIN PI_Sexo PIS ON PIS.Idf_Sexo = PIU.Idf_Sexo "
+					+ " JOIN PI_Endereco PIE ON PIE.Idf_Endereco = PIU.Idf_Endereco "
+					+ " JOIN PI_Cidade PIC ON PIC.Idf_Cidade = PIE.Idf_Cidade "
 					+ " WHERE PIU.Flg_Inativo = 0 AND PIU.Email_Pessoa = ? and PIU.Senha = ?");
 					
 			stmt.setString(1,user.getEml_Pessoa());
@@ -322,10 +324,27 @@ public class UsuarioDAO{
 			
 			if(status) {
 				Usuario us = new Usuario();
-				us.setIdf_Tipo_Usuario(rs.getInt("Idf_Tipo_Usuario"));
-				us.setIdf_Usuario(rs.getInt("Idf_Usuario"));	
+				Endereco end = new Endereco();
+				
+				us.setNme_Pessoa(rs.getString("Nme_Pessoa"));		
+				us.setNum_CPF(rs.getString("Num_CPF"));
+				us.setIdf_Sexo(rs.getInt("Idf_Sexo"));
+				us.setIdf_Cidade(rs.getInt("Idf_Cidade"));
+
+				end.setNum_CEP(rs.getString("Num_CEP"));
+				end.setDesc_Logradouro(rs.getString("Des_Logradouro"));
+				end.setDes_Bairro(rs.getString("Des_Bairro"));
+				end.setDesc_Complemento(rs.getString("Des_Complemento"));
+				end.setNum_Endereco(rs.getString("Num_Endereco"));
+				us.setEndereco(end);
+				
+				us.setDta_NascimentoDate(rs.getDate("Dta_Nascimento"));
+				us.setNum_DDD_Celular(rs.getString("Num_DDD_Celular"));
+				us.setNum_Celular(rs.getString("Num_Celular"));
 				us.setEml_Pessoa(rs.getString("Email_Pessoa"));
-				us.setNme_Pessoa(rs.getString("Nme_Pessoa"));
+				us.setIdf_Usuario(rs.getInt("Idf_Usuario"));	
+				us.setIdf_Tipo_Usuario(rs.getInt("Idf_Tipo_Usuario"));
+				
 				return us;
 			}
 			

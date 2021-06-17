@@ -9,6 +9,8 @@
 
 	<h1>Pedidos Na Fila</h1>
 	
+	#{usuarioLogadoController.checkUserCredential()}	
+	
 	<div>
 	
 		<h:dataTable value="#{salaAdmController.listarPedidos()}" var = "pedido">

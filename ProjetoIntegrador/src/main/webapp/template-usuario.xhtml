@@ -2,7 +2,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:h="http://java.sun.com/jsf/html"> 
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"      
+      xmlns:c="http://java.sun.com/jstl/core"> 
 
 <h:head></h:head> 
     <h:head>
@@ -22,7 +24,7 @@
 
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 <div class="container">
-                    <a class="navbar-brand" href="index.xhtml">
+                    <a class="navbar-brand" href="/ProjetoIntegrador/index.xhtml">
                         <h:graphicImage styleClass="logo" library="images" name="logo.png" alt="Logo da empresa"></h:graphicImage>
                     </a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -30,25 +32,32 @@
                     </button>
 
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="navbar-nav ml-auto">
+                        <ul class="navbar-nav ml-auto">                                             
                         <h:form>
-                        	<h:commandButton styleClass="button" action="#{usuarioController.verPerfil(usuarioLogadoController.user)}" value="Perfil" />
+                        	<h:commandButton styleClass="button" action="#{usuarioController.verPerfil(usuarioLogadoController.user)}" rendered="#{usuarioLogadoController.taLogado()}" value="Perfil" />
+                        </h:form>
+                        <h:form>
+                        	<h:commandButton styleClass="button" action="#{usuarioLogadoController.redirectToLogin(0)}" rendered="#{!usuarioLogadoController.taLogado()}" value="Login" />
                         </h:form>
                             <li class="nav-item">
 								<h:form>
                                 	<h:commandLink styleClass="cart-button" action="#{homeController.verCarrinho(carrinho, usuarioLogadoController)}"><i class="fa fa-shopping-cart fa-1g"></i></h:commandLink>
                             	</h:form>
-                            </li>                         
+                            </li>     
+                             <li class="nav-item">
+								<h:form>
+                                	<h:commandLink styleClass="cart-button" rendered="#{usuarioLogadoController.taLogado()}" action="#{usuarioLogadoController.logout()}"><i class="fas fa-sign-out-alt"></i></h:commandLink>
+                            	</h:form>
+                            </li>                     
                         </ul>
                     </div>
                 </div>
             </nav>
         </header>
-        
-        
+           
         <main>
             <ui:insert/>
-         <h:inputHidden value="#{usuarioLogadoController.nomeUsuario}" />     
+           
         </main>
          <footer class="background">
    		 	<div class="container">

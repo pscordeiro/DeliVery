@@ -4,7 +4,6 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:h="http://java.sun.com/jsf/html"> 
 
-<h:head></h:head> 
     <h:head>
         <!-- Required meta tags -->
         <meta charset="utf-8"/>
@@ -30,18 +29,32 @@
                     </button>
 
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="navbar-nav ml-auto">                                             
-                        <h:form>
-                        	<h:commandButton styleClass="button" action="#{usuarioController.verPerfil(usuarioLogadoController.user)}" rendered="#{usuarioLogadoController.taLogado()}" value="Perfil" />
-                        </h:form>
-                        <h:form>
-                        	<h:commandButton styleClass="button" action="#{usuarioLogadoController.redirectToLogin()}" rendered="#{!usuarioLogadoController.taLogado()}" value="Login" />
-                        </h:form>
+                        <ul class="navbar-nav ml-auto"> 
+                                                                    
+	                        <li class="nav-item">
+		                        <h:form>
+                                  	<h:commandLink styleClass="cart-button" action="#{salaAdmController.redirectToListarClientes()}"><i class="fas fa-users fa-lg"></i>Clientes</h:commandLink>	
+		                        </h:form>
+	                        </li>
+	                        
+	                        <li class="nav-item">
+		                        <h:form>
+                                    <h:commandLink styleClass="cart-button" action="#{salaAdmController.redirectToSalaAdm()}"><i class="far fa-list-alt fa-lg"></i>Pedidos</h:commandLink>	
+		                        </h:form>
+	                        </li>
+	                       	                        
+            	            <li class="nav-item">
+	            	            <h:form>
+       	                        	<h:commandLink styleClass="cart-button" action="#{salaAdmController.redirectToCadProduto()}"><i class="far fa-list-alt fa-lg"></i>CadProduto</h:commandLink>	            	            
+		                        </h:form>
+            	            </li>
+            	            
                             <li class="nav-item">
 								<h:form>
-                                	<h:commandLink styleClass="cart-button" action="#{homeController.verCarrinho(carrinho, usuarioLogadoController)}"><i class="fa fa-shopping-cart fa-1g"></i></h:commandLink>
-                            	</h:form>
-                            </li>                         
+       	                        	<h:commandLink styleClass="cart-button" action="#{usuarioLogadoController.logout()}"><i class="fa fa-power-off fa-lg"></i>Logout</h:commandLink>	            	            
+		                        </h:form>
+                            </li>  
+                                                  
                         </ul>
                     </div>
                 </div>

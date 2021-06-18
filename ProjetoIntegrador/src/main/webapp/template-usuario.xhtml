@@ -6,7 +6,6 @@
       xmlns:p="http://primefaces.org/ui"      
       xmlns:c="http://java.sun.com/jstl/core"> 
 
-<h:head></h:head> 
     <h:head>
         <!-- Required meta tags -->
         <meta charset="utf-8"/>
@@ -32,23 +31,38 @@
                     </button>
 
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="navbar-nav ml-auto">                                             
-                        <h:form>
-                        	<h:commandButton styleClass="button" action="#{usuarioController.verPerfil(usuarioLogadoController.user)}" rendered="#{usuarioLogadoController.taLogado()}" value="Perfil" />
-                        </h:form>
-                        <h:form>
-                        	<h:commandButton styleClass="button" action="#{usuarioLogadoController.redirectToLogin(0)}" rendered="#{!usuarioLogadoController.taLogado()}" value="Login" />
-                        </h:form>
+                        <ul class="navbar-nav ml-auto">  
+                        
                             <li class="nav-item">
 								<h:form>
-                                	<h:commandLink styleClass="cart-button" action="#{homeController.verCarrinho(carrinho, usuarioLogadoController)}"><i class="fa fa-shopping-cart fa-1g"></i></h:commandLink>
+                                	<h:commandLink styleClass="cart-button" action="#{homeController.verCarrinho(carrinho, usuarioLogadoController)}"><i class="fa fa-shopping-cart fa-lg"></i>Carrinho</h:commandLink>
                             	</h:form>
-                            </li>     
+                            </li>
+                             
+                            <li class="nav-item">                                                                  
+		                        <h:form>
+	                    	        <h:commandLink styleClass="cart-button" rendered="#{usuarioLogadoController.taLogado()}" action="#{usuarioController.verPerfil(usuarioLogadoController.user)}"><i class="fa fa-user fa-lg"></i>Perfil</h:commandLink>	                        	
+		                        </h:form>                        
+                            </li> 
+                             
+	                        <li class="nav-item">
+	                        	<h:form>
+                	                <h:commandLink styleClass="cart-button"  rendered="#{usuarioLogadoController.adm}" action="#{salaAdmController.redirectToSalaAdm()}"><i class="fas fa-cog fa-lg"></i>Adm</h:commandLink>
+	                        	</h:form>
+	                        </li> 
+	                                                        
                              <li class="nav-item">
+	                        
+		                        <h:form>
+	                	            <h:commandLink styleClass="cart-button" rendered="#{!usuarioLogadoController.taLogado()}" action="#{usuarioLogadoController.redirectToLogin(0)}"><i class="fas fa-sign-out-alt fa-lg"></i>Login</h:commandLink>	                        	
+		                        </h:form>                             
+                             
 								<h:form>
-                                	<h:commandLink styleClass="cart-button" rendered="#{usuarioLogadoController.taLogado()}" action="#{usuarioLogadoController.logout()}"><i class="fas fa-sign-out-alt"></i></h:commandLink>
+                                	<h:commandLink styleClass="cart-button" rendered="#{usuarioLogadoController.taLogado()}" action="#{usuarioLogadoController.logout()}"><i class="fa fa-power-off fa-lg"></i>Logout</h:commandLink>
                             	</h:form>
-                            </li>                     
+                            	
+                            </li>
+                                                 
                         </ul>
                     </div>
                 </div>

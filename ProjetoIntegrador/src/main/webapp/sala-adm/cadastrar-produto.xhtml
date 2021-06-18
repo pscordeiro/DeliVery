@@ -1,13 +1,15 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
+<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:h="http://java.sun.com/jsf/html"> 
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"      
+      xmlns:c="http://java.sun.com/jstl/core"  
+      template="../template-adm.xhtml"> 
+            
 
-<h:head></h:head> 
-<body> 
+#{usuarioLogadoController.checkUserCredential()}	
 
-[logo]<br/>
 
 <h1>Cadastrar novo Produto</h1>
 
@@ -18,5 +20,6 @@
 </h:form>
 
 
-</body> 
-</html>
+</ui:decorate> 
+
+

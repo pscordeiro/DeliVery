@@ -57,7 +57,7 @@ public class UsuarioLogadoController {
 	        user = u;
         
 	        if(u.getIdf_Tipo_Usuario() == 2) {
-	            FacesContext.getCurrentInstance().getExternalContext().redirect("/ProjetoIntegrador/sala-adm/lista-pedidos.xhtml");
+	            FacesContext.getCurrentInstance().getExternalContext().redirect("/ProjetoIntegrador/sala-adm/listar-pedidos.xhtml");
 	            return "";
 	        }
 	        else {
@@ -114,6 +114,13 @@ public class UsuarioLogadoController {
     
     public boolean taLogado() {
         if(usuarioLogado)
+            return true;
+        else
+        	return false;    
+    }
+    
+    public boolean isAdm() {
+        if(user.getIdf_Tipo_Usuario() == 2)
             return true;
         else
         	return false;    

@@ -22,7 +22,7 @@ public class PedidoController{
 		
 		ped.setIdf_Usuario(Idf_usuario);
 		if(ped.salvarPedido(ped,car)) {
-			return "pedido-sucesso.xhtml";
+			return "/ProjetoIntegrador/usuario/pedido-sucesso.xhtml";
 		}
 		else {
 			return "";

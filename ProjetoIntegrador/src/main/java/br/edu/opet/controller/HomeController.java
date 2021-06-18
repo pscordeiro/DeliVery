@@ -104,12 +104,12 @@ public class HomeController {
 		if(carrinho.apagarItemCarrinho(carrinho)) {
 			//toast de sucesso
 			mensagem = "Produto removido do carrinho";
-			return "usuario/carrinho.xhtml";	
+			return "/ProjetoIntegrador/usuario/carrinho.xhtml";	
 		}
 		else {
 			//toast de falha
 			mensagem = "Falha ao remover produto";
-			return "usuario/carrinho.xhtml";	
+			return "/ProjetoIntegrador/usuario/carrinho.xhtml";	
 		}
 		
 	}

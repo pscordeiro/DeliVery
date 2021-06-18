@@ -7,45 +7,71 @@
       xmlns:c="http://java.sun.com/jstl/core"  
       template="../template-adm.xhtml"> 
 
-	<h1>Pedidos Na Fila</h1>
 	
 	#{usuarioLogadoController.checkUserCredential()}	
 	
-	<div>
+	<div class="container text-center mt-5 mb-5">
+		<h1>Pedidos Na Fila</h1>
+	</div>	
 	
-		<h:dataTable value="#{salaAdmController.listarPedidos()}" var = "pedido">
-			
-			<h:column>
-			
-			<div style="margin: 10px;background-color: orange;padding: 20px;">
-			
-			Idf_Pedido: #{pedido.idf_Pedido}
-				<br/>	<br/>
-			#{pedido.endereco.desc_Logradouro} #{pedido.endereco.num_Endereco} - #{pedido.endereco.nme_Cidade}/#{pedido.endereco.sig_Estado}
-				<br/>	<br/>
-				
-			<div>
-				ITENS:
-				<h:dataTable value="#{salaAdmController.listarItens(pedido.idf_Pedido)}" var = "itemPedido">
+	<div class="container center">
 	
-					<h:column>
-					 #{itemPedido.quantidade} x #{itemPedido.produto.desc_Produto}
-					<br/>
-					VALOR:
-					 #{itemPedido.valor_Total}
-					</h:column>			
-				</h:dataTable>
+		<h:form id="formPedidoList">	
+		
+		<div class="pedido-list">
 			
-			</div>		
+ 			<c:forEach items="#{salaAdmController.listarPedidos()}" var="pedido">
+ 			
+ 				<div class="card-pedido">
+ 				
+ 					<div class="card-idf">
+						<p><strong>Idf_Pedido: #{pedido.idf_Pedido}</strong></p> 
+					</div>
+				
+					<div class="card-pedido-endereco">
+						<p>#{pedido.endereco.desc_Logradouro} #{pedido.endereco.num_Endereco} - #{pedido.endereco.nme_Cidade}/#{pedido.endereco.sig_Estado}</p>
+					</div>
+						
+					<p>ITENS:</p>
+											
+					<div class="">
+										
+						<c:forEach items="#{salaAdmController.listarItens(pedido.idf_Pedido)}" var="itemPedido">
+						
+							<div class="card-itens">
+							
+								<div class="">																	
+										<p> #{itemPedido.quantidade} x #{itemPedido.produto.desc_Produto} </p>																																																									
+								</div>
+									
+							</div>	
+							
+							<div class="">	
+							
+								<div class="">								
+										#{itemPedido.subtotal}																
+								</div>	
+														
+							</div>
+					
+						</c:forEach>
+												
+					</div>	 				
+ 				
+ 				</div>
+ 			
 	
-				
-			</div>
-				
-			</h:column>				
+							  			
+			</c:forEach>				
 			
-		</h:dataTable>
+		</div>
+	
+	</h:form>
 	
 	</div>
+	
+
+
 
      
 </ui:decorate> 

@@ -111,7 +111,7 @@ public class PedidoDAO {
 				Produto prod = new Produto();
 				pedItem.setValor_Produto(rs.getDouble("Valor_Produto"));
 				pedItem.setQuantidade(rs.getInt("Quantidade"));
-				pedItem.setValor_Total(rs.getDouble("Valor_Total"));
+				pedItem.setSubtotal(rs.getDouble("Valor_Total"));
 				prod.setDesc_Produto(rs.getString("Desc_Produto"));
 				pedItem.setProduto(prod);
 				

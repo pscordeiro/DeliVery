@@ -6,54 +6,44 @@
       xmlns:p="http://primefaces.org/ui"      
       xmlns:c="http://java.sun.com/jstl/core"  
       template="template-usuario.xhtml"> 
-            
 	<br/>
-	
-    <div class="toast-body">
-        #{homeController.mensagem} 
-    </div>     
-		
+   	<div class="toast">
+       	#{homeController.mensagem} 
+   	</div>     
 	<div class="container text-center mb-5">
 		<h1>Faça seu pedido</h1>
 	</div>	
-			
 	<div class="container center">
-			
-			<h:form id="formItemHome">	
-	
-				<h:inputHidden value="#{carrinho.idf_Carrinho}" />	
-				
-				<div class="product-list">
-				
-			  			<c:forEach items="#{homeController.listarProdutos()}" var="produto">
-		  			
-						<div style="background-color: gray;padding:10px;">
-					
-							<h:inputHidden value="#{produto.idf_Produto}" />	
-							#{produto.desc_Produto}
-							<br/><br/>
-							
-							<img src="#{produto.url_Produto}" height="300px" width="300px" alt="" />
-												
-							<br/>
-							#{produto.valor_Produto}   
-							<br/><br/>											
-																			
-							<h:commandButton  action="#{homeController.adicionarCarrinho(produto, carrinho, 1)}" value="Add Carrinho"/>		
-																						
-						</div>		  			
-		    			
-	  				</c:forEach>				
-				
-				</div>
-			
-			</h:form>
-			
-			
-		</div>
-	
-
-     
+		<h:form id="formItemHome">	
+		<h:inputHidden value="#{carrinho.idf_Carrinho}" />	
+			<div class="product-list">
+		  		<c:forEach items="#{homeController.listarProdutos()}" var="produto">
+			  		<div class="card h-100">
+                    	<div class="badge text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Novo</div>
+                        <img class="card-img-top" src="#{produto.url_Produto}" alt="..." />
+                        <div class="card-body p-4">
+                        	<div class="text-center">
+                                  <h5>
+	                                  <h:inputHidden value="#{produto.idf_Produto}" />     
+	                                  #{produto.desc_Produto}			
+									  <br/>  							
+                                  </h5>
+                                  <h6>
+                                  	  R$
+									  #{produto.valor_Produto} 
+                                  </h6>
+                        	  </div>
+                        </div>
+                   		<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                        	<div class="text-center">
+                            	<h:commandButton class="add" action="#{homeController.adicionarCarrinho(produto, carrinho, 1)}" value="Adicionar"/>
+                        	</div>
+                    	</div>
+                	</div>
+               	</c:forEach> 			
+			</div>
+		</h:form>
+	</div>     
 </ui:decorate> 
 
 

@@ -63,7 +63,9 @@ public class UsuarioDAO{
 				us.setDta_NascimentoDate(rs.getDate("Dta_Nascimento"));
 				us.setNum_DDD_Celular(rs.getString("Num_DDD_Celular"));
 				us.setNum_Celular(rs.getString("Num_Celular"));
-				us.setEml_Pessoa(rs.getString("Email_Pessoa"));		
+				us.setEml_Pessoa(rs.getString("Email_Pessoa"));	
+				us.setDesc_Sexo(rs.getString("Desc_Sexo"));
+				us.setDta_CadastroDate(rs.getDate("Dta_Cadastro"));
 				end.setIdf_Endereco(rs.getInt("Idf_Endereco"));
 				end.setDesc_Logradouro(rs.getString("Des_Logradouro"));
 				end.setNum_Endereco(rs.getString("Num_Endereco"));
@@ -205,20 +207,11 @@ public class UsuarioDAO{
 				stmt.setString(9, us.getSenha());
 
 				int rowAffected = stmt.executeUpdate();
-					
-				if(rowAffected == 1){
-					conn.commit();
-					stmt.close();
-					conn.close();
-					return true;
-				}
-				else {
-					conn.rollback();
-					stmt.close();
-					conn.close();
-					conn.close();
-					return false;
-				}				
+
+				conn.commit();
+				stmt.close();
+				conn.close();
+				return true;			
 			}
 			else {
 				conn.rollback();
@@ -336,8 +329,10 @@ public class UsuarioDAO{
 				end.setDes_Bairro(rs.getString("Des_Bairro"));
 				end.setDesc_Complemento(rs.getString("Des_Complemento"));
 				end.setNum_Endereco(rs.getString("Num_Endereco"));
+				end.setIdf_Cidade(rs.getInt("Idf_Cidade"));
 				us.setEndereco(end);
 				
+				us.setIdf_Estado_Civil(rs.getInt("Idf_Estado_Civil"));
 				us.setDta_NascimentoDate(rs.getDate("Dta_Nascimento"));
 				us.setNum_DDD_Celular(rs.getString("Num_DDD_Celular"));
 				us.setNum_Celular(rs.getString("Num_Celular"));

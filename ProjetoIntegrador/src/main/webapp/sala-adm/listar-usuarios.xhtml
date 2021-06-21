@@ -7,47 +7,58 @@
       xmlns:c="http://java.sun.com/jstl/core"  
       template="../template-adm.xhtml"> 
       
-      
-	<h2>Usuarios</h2>
+  <div class="container center">
+
+     <div class="titulo mb-4 mt-4">
+    	<h2>Lista de Clientes</h2> 
+     </div>
+	
 	#{usuarioController.mensagem}
 	
 	#{usuarioLogadoController.checkUserCredential()}	
-		
 	
-	<h:form id="formUsuario">
-		<h:commandButton action="#{usuarioController.inserir()}" value="Cadastror Novo"/>
-			
-		<h:dataTable value="#{usuarioController.listar()}" var = "usuario">
-			
-			<h:column>
-				<f:facet name="header">Nome</f:facet>
-				#{usuario.nme_Pessoa}
-			</h:column>	
-			
-			<h:column>
-				<f:facet name="header">CPF</f:facet>
-				#{usuario.num_CPF}
-			</h:column>		
-			
-			<h:column>
-				<f:facet name="header">CEP:</f:facet>
-				#{usuario.endereco.num_CEP}
-			</h:column>		
-				
-			<h:column>
-				<f:facet name="header">Ação</f:facet>
-				<h:commandButton 
-					action="#{usuarioController.excluir(usuario)}" 
-					value="Deletar"/>
-				<h:commandButton 
-					action="#{usuarioController.atualizar(usuario)}" 
-					value="Alterar"/>
-			</h:column>
-			
-		</h:dataTable>
-		
-	</h:form>
+	<div class="">
 
+		<h:form id="formUsuario">
+								
+			<div class="container center">
+			
+				<table class="table table-hover">
+					<tr>
+					  <th>ID</th>
+					  <th>CPF</th>	
+					  <th>Nome</th>				 
+					  <th>Data Nascimento</th>
+  					  <th>DDD</th>
+					  <th>Celular</th>
+					  <th>Email</th>
+					  <th>Data Cadastro</th>
+					  <th>Gênero</th>
+					</tr>
+					
+			  		<c:forEach items="#{usuarioController.listar()}" var="usuario">
+					    <tr>
+					      <td>${usuario.idf_Usuario}</td>
+					      <td>${usuario.num_CPF}</td>
+					      <td class="coluna-nome">${usuario.nme_Pessoa}</td>			      
+					      <td>${usuario.dta_Nascimento}</td>
+					      <td class="coluna-ddd">${usuario.num_DDD_Celular}</td>
+					      <td>${usuario.num_Celular}</td>	
+					      <td>${usuario.eml_Pessoa}</td>	
+					      <td>${usuario.dta_Cadastro}</td>		
+  			      		  <td class="coluna-genero">${usuario.desc_Sexo}</td>					      					      			      				      					      				      
+					    </tr>
+				  	</c:forEach>
+				  	
+				</table>						          	              		
+
+			</div>
+			
+		</h:form>	
+		
+	</div>		
+	
+ </div>
 
 </ui:decorate> 
 

@@ -1,5 +1,6 @@
 package br.edu.opet.controller;
 
+import java.io.IOException;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
@@ -45,13 +46,23 @@ public class UsuarioController {
 		
 		if(retorno) {
 			mensagem = "Salvo com sucesso !";	
-			return "/usuario/cadusuario-sucesso.xhtml";
+            try {
+				FacesContext.getCurrentInstance().getExternalContext().redirect("/ProjetoIntegrador/usuario/cadusuario-sucesso.xhtml");
+			} catch (IOException e) {
+				e.printStackTrace();
+				return "";
+			}		
+			return "";
 		}	
 		else {
-			mensagem = "Erro ao salvar";	
-			return "/usuario/cadusuario-falha.xhtml";
+			try {
+				mensagem = "Erro ao salvar";	
+				FacesContext.getCurrentInstance().getExternalContext().redirect("/ProjetoIntegrador/usuario/cadusuario-falha.xhtml");
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			return "";
 		}
-		
 	}
 	
 	public String inserir() {

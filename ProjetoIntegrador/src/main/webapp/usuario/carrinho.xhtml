@@ -3,80 +3,92 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:h="http://java.sun.com/jsf/html"
-      template="../template-usuario.xhtml"> 
-      
-      
-<div class="container">
-              	
+      xmlns:c="http://java.sun.com/jstl/core" 
+      template="../template-usuario.xhtml">  
+        
+	<div class="container center">
 	
-	<h:inputHidden value="#{carrinho.idf_Carrinho}" />
-	<h:inputHidden value="#{usuarioLogadoController.user.idf_Usuario};" />
+		<h:inputHidden value="#{carrinho.idf_Carrinho}" />
+		<h:inputHidden value="#{usuarioLogadoController.user.idf_Usuario};" />	
 		
-	
-	<h:form id="formCarrinho" rendered="#{!homeController.verificarCarrinhoVazio(carrinho)}">
-			
-		<h2>Finalizar Compra</h2>	
-			
-		<h:dataTable value="#{homeController.listarCarrinho(carrinho)}" var = "carrinho">
-			
-			<h:column>
-				<f:facet name="header">Quantidade</f:facet>
-				#{carrinho.prod_Carrinho.quantidade}
-			</h:column>	
-			
-			<h:column>
-				<f:facet name="header">Produto</f:facet>
-				#{carrinho.prod_Carrinho.desc_Produto}
-			</h:column>		
-			
-			<h:column>
-				<f:facet name="header">Valor Unitário</f:facet>
-				#{carrinho.prod_Carrinho.valor_Produto}
-			</h:column>		
-			
-			<h:column>
-				<f:facet name="header">Sub Total</f:facet>
-				#{carrinho.sub_Total}
-			</h:column>	
-				
-			<h:column>
-				<f:facet name="header">A</f:facet>
-				<h:commandButton 
-					action="#{homeController.apagarItemCarrinho(carrinho)}" 
-					value="Apagar"/>
-			</h:column>
-			
-		</h:dataTable>
+		<h:form id="formCarrinho" rendered="#{!homeController.verificarCarrinhoVazio(carrinho)}">
 		
-		<h:dataTable value="#{homeController.listarCarrinhoTotal(carrinho)}" rendered="#{!homeController.verificarCarrinhoVazio(carrinho)}" var = "carrinho">
+		<div class= "cartContainer container center">
+			<h2 class= "">Carrinho</h2>			
+		</div>
+		
+		<div class="container center">
+		  		<div class="container mt-5 mb-5">
+            		<div class="d-flex justify-content-center row">
+                		<div class="col-md-8">
+                    		<c:forEach items="#{homeController.listarCarrinho(carrinho)}" var="itemCarrinho">                   		
+	                    		<div class="d-flex flex-row justify-content-between align-items-center p-2 bg-white mt-4 px-3 rounded">
+	                        		<div class="mr-1"><img class="card-img-top" src="" alt="..." /></div>
+	                        		<div class="d-flex flex-column align-items-left product-details">
+	                        			<h6 class="font-weight-bold">   
+                                 			#{itemCarrinho.prod_Carrinho.desc_Produto}	
+	                        			</h6>
+	                        		<div class="d-flex flex-row product-desc">
+	                                <div class="size mr-1"><span class="text-grey">Size:</span><span class="font-weight-bold">&nbsp;M</span></div>
+	                                	<div class="color"><span class="text-grey">Color:</span><span class="font-weight-bold">&nbsp;Grey</span></div>
+	                            	</div>
+	                        		</div>
+	                        		<div class="d-flex flex-row align-items-center qty">
+	                        		<h5 class="text-grey">
+	                            		#{itemCarrinho.prod_Carrinho.quantidade}
+	                            		</h5>
+	                        		</div>
+	                        		<div>
+	                            		<h5 class="text-grey">
+	                            			#{itemCarrinho.sub_Total}
+	                            		</h5>
+	                        		</div>
+	                        		<div class="d-flex align-items-center"><i class="fa fa-trash mb-1 text-danger"></i>
+	                        		</div>
+	                    		</div>
+                    		</c:forEach>
+                    		<div class="d-flex flex-row align-items-center mt-3 p-2 bg-white rounded">
+                        	<h:commandButton class="paymentButton" value="Pagar"></h:commandButton>
+                   			</div>
+                		</div>
+            		</div>
+       			</div>
+			</div>
 			
-			<h:column>
-				#{carrinho.total_Itens}  Itens              Total                   #{carrinho.total_Carrinho}    
-				<br/>
-				<h:commandButton action="#{pedidoController.inserirPedido(carrinho, usuarioLogadoController)}" rendered="#{usuarioLogadoController.taLogado()}" value="Finalizar Compra"/>	      
-				<h:commandButton action="#{usuarioLogadoController.redirectToLogin(1)}" rendered="#{!usuarioLogadoController.taLogado()}" value="Logar para Finalizar Compra"/>	      
-			</h:column>	
-	
-		</h:dataTable>
+			<div class="">
 			
-										
-	</h:form>
-		
-	<h:column rendered="#{homeController.verificarCarrinhoVazio(carrinho)}">
-							
-		<div class="text-center center empty-cart">
-		
-			<h2 class="empty-cart-text mb-5">Seu carrinho está vazio</h2>
-		
-			<h:graphicImage styleClass="empty-cart-img" library="images" name="empty-cart.svg" alt="Carrinho vazio"></h:graphicImage>
+                 <c:forEach items="#{homeController.listarCarrinhoTotal(carrinho)}" var="totalCarrinho">
+                 
+            			<div>
+            			
+            				#{totalCarrinho.total_Itens}  Itens   
+            			
+            			</div>
+            			
+            			<div>
+            			
+            				Total  #{totalCarrinho.total_Carrinho}  
+            			
+            			</div>    
+            			         					
+						<h:commandButton action="#{pedidoController.inserirPedido(carrinho, usuarioLogadoController)}" rendered="#{usuarioLogadoController.taLogado()}" value="Finalizar Compra"/>	      
+						<h:commandButton action="#{usuarioLogadoController.redirectToLogin(1)}" rendered="#{!usuarioLogadoController.taLogado()}" value="Logar para Finalizar Compra"/>	
+                 
+                 </c:forEach>              		
 						
+			</div>
+			
+		</h:form>
+		
+		<div class="container center">
+		
+			<h:form rendered="#{homeController.verificarCarrinhoVazio(carrinho)}">			
+				<div class="text-center center empty-cart">			
+					<h2 class="empty-cart-text mb-5">Seu carrinho está vazio</h2>			
+					<h:graphicImage styleClass="empty-cart-img" library="images" name="empty-cart.svg" alt="Carrinho vazio"></h:graphicImage>								
+				</div>								
+			</h:form>
 		</div>
 	
-	</h:column>	
-        
-     
-</div>
-  
-
-	
+	</div>
 </ui:decorate> 

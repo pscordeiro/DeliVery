@@ -28,6 +28,7 @@ public class CarrinhoDAO {
 					+ " PIP.Desc_Produto,"
 					+ " PIC.Quantidade, "
 					+ " PIC.Valor_Produto,"
+					+ " PIP.Url_Produto,"					
 					+ " (PIC.Quantidade * PIC.Valor_Produto) as SubTotal "
 					+ " FROM PI_Carrinho PIC "
 					+ " JOIN PI_Produtos PIP ON PIP.Idf_Produto = PIC.Idf_Produto "
@@ -46,6 +47,7 @@ public class CarrinhoDAO {
 				prod.setDesc_Produto(rs.getString("Desc_Produto"));
 				prod.setQuantidade(rs.getInt("Quantidade"));
 				prod.setValor_Produto(rs.getDouble("Valor_Produto"));
+				prod.setUrl_Produto(rs.getString("Url_Produto"));
 				carrinho.setSub_Total(rs.getDouble("SubTotal"));
 				carrinho.setIdf_Carrinho(rs.getInt("Idf_Carrinho_Grupo"));
 				carrinho.setProd_Carrinho(prod);

@@ -1,48 +1,64 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
+<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:h="http://java.sun.com/jsf/html"> 
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"      
+      xmlns:c="http://java.sun.com/jstl/core"  
+      template="../template-adm.xhtml"> 
+      
+  <div class="container center">
 
-<h:head></h:head> 
-<body> 
-	<a href="../index.xhtml">Voltar</a>
-	<h2>Usuarios</h2>
+     <div class="titulo mb-4 mt-4">
+    	<h2>Lista de Clientes</h2> 
+     </div>
+	
 	#{usuarioController.mensagem}
 	
+	#{usuarioLogadoController.checkUserCredential()}	
 	
-	<h:form id="formUsuario">
-		<h:commandButton action="#{usuarioController.inserir()}" value="Cadastror Novo"/>
+	<div class="">
+
+		<h:form id="formUsuario">
+								
+			<div class="container center">
 			
-		<h:dataTable value="#{usuarioController.listar()}" var = "usuario">
+				<table class="table table-hover">
+					<tr>
+					  <th>ID</th>
+					  <th>CPF</th>	
+					  <th>Nome</th>				 
+					  <th>Data Nascimento</th>
+  					  <th>DDD</th>
+					  <th>Celular</th>
+					  <th>Email</th>
+					  <th>Data Cadastro</th>
+					  <th>Gênero</th>
+					</tr>
+					
+			  		<c:forEach items="#{usuarioController.listar()}" var="usuario">
+					    <tr>
+					      <td>${usuario.idf_Usuario}</td>
+					      <td>${usuario.num_CPF}</td>
+					      <td class="coluna-nome">${usuario.nme_Pessoa}</td>			      
+					      <td>${usuario.dta_Nascimento}</td>
+					      <td class="coluna-ddd">${usuario.num_DDD_Celular}</td>
+					      <td>${usuario.num_Celular}</td>	
+					      <td>${usuario.eml_Pessoa}</td>	
+					      <td>${usuario.dta_Cadastro}</td>		
+  			      		  <td class="coluna-genero">${usuario.desc_Sexo}</td>					      					      			      				      					      				      
+					    </tr>
+				  	</c:forEach>
+				  	
+				</table>						          	              		
+
+			</div>
 			
-			<h:column>
-				<f:facet name="header">Nome</f:facet>
-				#{usuario.nme_Pessoa}
-			</h:column>	
-			
-			<h:column>
-				<f:facet name="header">CPF</f:facet>
-				#{usuario.num_CPF}
-			</h:column>		
-			
-			<h:column>
-				<f:facet name="header">CEP:</f:facet>
-				#{usuario.endereco.num_CEP}
-			</h:column>		
-				
-			<h:column>
-				<f:facet name="header">Ação</f:facet>
-				<h:commandButton 
-					action="#{usuarioController.excluir(usuario)}" 
-					value="Deletar"/>
-				<h:commandButton 
-					action="#{usuarioController.atualizar(usuario)}" 
-					value="Alterar"/>
-			</h:column>
-			
-		</h:dataTable>
+		</h:form>	
 		
-	</h:form>
-</body> 
-</html>
+	</div>		
+	
+ </div>
+
+</ui:decorate> 
+

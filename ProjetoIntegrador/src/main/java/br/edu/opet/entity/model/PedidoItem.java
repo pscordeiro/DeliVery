@@ -10,7 +10,7 @@ public class PedidoItem extends PedidoDAO {
 	private int Idf_Produto;
 	private int Quantidade;
 	private double Valor_Produto;
-	private double Valor_Total;
+	private double Subtotal;
 	private Produto produto;
 	
 	public int getIdf_Pedido() {
@@ -37,11 +37,11 @@ public class PedidoItem extends PedidoDAO {
 	public void setValor_Produto(double valor_Produto) {
 		Valor_Produto = valor_Produto;
 	}
-	public double getValor_Total() {
-		return Valor_Total;
+	public double getSubtotal() {
+		return Subtotal;
 	}
-	public void setValor_Total(double valor_Total) {
-		Valor_Total = valor_Total;
+	public void setSubtotal(double subtotal) {
+		Subtotal = subtotal;
 	}
 	public Produto getProduto() {
 		return produto;

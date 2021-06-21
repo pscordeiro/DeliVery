@@ -1,9 +1,11 @@
 package br.edu.opet.controller;
 
+import java.io.IOException;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.context.FacesContext;
 
 import br.edu.opet.entity.model.Pedido;
 import br.edu.opet.entity.model.PedidoItem;
@@ -40,13 +42,40 @@ public class SalaAdmController {
 	public String excluir(Usuario us) {		
 		if(us.deletarUsuario()) {
 			mensagem = "Deletado com sucesso !";
-			return "/usuario/cadusuario-sucesso.xhtml"; 
+			return "/ProjetoIntegrador/usuario/cadusuario-sucesso.xhtml"; 
 		}
 		else {
 			mensagem = "Falha ao deletar !";
 			//Criar uma tela com erro ao criar usuario
-			return "/usuario/cadusuario-erro.xhtml";
+			return "/ProjetoIntegrador/usuario/cadusuario-erro.xhtml";
 		}
+	}
+	
+	public String redirectToCadProduto() {
+	    try {
+			FacesContext.getCurrentInstance().getExternalContext().redirect("/ProjetoIntegrador/sala-adm/cadastrar-produto.xhtml");
+		} catch (IOException e) {
+			System.out.println(e);
+		}
+		return "";
+	}
+	
+	public String redirectToListarClientes() {
+	    try {
+			FacesContext.getCurrentInstance().getExternalContext().redirect("/ProjetoIntegrador/sala-adm/listar-usuarios.xhtml");
+		} catch (IOException e) {
+			System.out.println(e);
+		}
+		return "";
+	}
+	
+	public String redirectToSalaAdm() {
+	    try {
+			FacesContext.getCurrentInstance().getExternalContext().redirect("/ProjetoIntegrador/sala-adm/listar-pedidos.xhtml");
+		} catch (IOException e) {
+			System.out.println(e);
+		}
+		return "";
 	}
 
 }

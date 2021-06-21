@@ -1,5 +1,6 @@
 package br.edu.opet.controller;
 
+import java.io.IOException;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
@@ -44,17 +45,17 @@ public class HomeController {
 			if(car.verItensCarrinho(prod, car)) {
 				//produto já está no carrinho, quantidade aumentada
 				mensagem = "Produto já está no carrinho, quantidade incrementada";
-				return "http://localhost:8082/ProjetoIntegrador/";
+				return "";
 			}
 			else if(car.adicionarAoCarrinhoExistente(prod, car)) {
 				//toast de adicionado ao carrinho
 				mensagem = "Produto adicionado ao carrinho";
-				return "http://localhost:8082/ProjetoIntegrador/";
+				return "";
 			}
 			else {
 				//erro ao adicionar ao carrinho
 				mensagem = "Erro ao tentar adicionar produto no carrinho";
-				return "http://localhost:8082/ProjetoIntegrador/";
+				return "";
 			}
 		}
 		else {
@@ -65,12 +66,12 @@ public class HomeController {
 				session.setAttribute("carrinho", carrinho);
 				//toast de adicionado ao carrinho
 				mensagem = "Produto adicionado ao carrinho";
-				return "http://localhost:8082/ProjetoIntegrador/";
+				return "/ProjetoIntegrador/index.xhtml";
 			}
 			else {
 				//erro ao adicionar ao carrinho
 				mensagem = "Erro ao tentar adicionar produto no carrinho";
-				return "http://localhost:8082/ProjetoIntegrador/";
+				return "/ProjetoIntegrador/index.xhtml";
 			}
 		}
 	}
@@ -83,16 +84,23 @@ public class HomeController {
 		return carrinho.listarCarrinhoTotal(carrinho);
 	}
 	
-	public String verCarrinho(Carrinho carrinho){
-		
-		if(carrinho.getIdf_Carrinho() != 0) {			
-			return "/usuario/carrinho.xhtml";
+	public boolean verificarCarrinhoVazio(Carrinho carrinho) {
+		List<Carrinho> alCarrinho = listarCarrinho(carrinho);		
+		if(alCarrinho.size() == 0) {		
+			return true;				
 		}
-		else {
-			mensagem = "Carrinho Vazio";
-			return "http://localhost:8082/ProjetoIntegrador/";	
+		return false;
+	}
+	
+	public String verCarrinho(Carrinho carrinho, UsuarioLogadoController user){
+
+	    try {
+			FacesContext.getCurrentInstance().getExternalContext().redirect("/ProjetoIntegrador/usuario/carrinho.xhtml");
+		} catch (IOException e) {
+			System.out.println(e);
 		}
-		
+		return "";	
+
 	}
 	
 	public String apagarItemCarrinho(Carrinho carrinho){
@@ -100,15 +108,14 @@ public class HomeController {
 		if(carrinho.apagarItemCarrinho(carrinho)) {
 			//toast de sucesso
 			mensagem = "Produto removido do carrinho";
-			return "http://localhost:8082/ProjetoIntegrador/usuario/carrinho.xhtml";	
+			return "/ProjetoIntegrador/usuario/carrinho.xhtml";	
 		}
 		else {
 			//toast de falha
 			mensagem = "Falha ao remover produto";
-			return "http://localhost:8082/ProjetoIntegrador/usuario/carrinho.xhtml";	
+			return "/ProjetoIntegrador/usuario/carrinho.xhtml";	
 		}
 		
 	}
 	
-
 }

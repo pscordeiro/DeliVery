@@ -111,7 +111,7 @@ public class PedidoDAO {
 				Produto prod = new Produto();
 				pedItem.setValor_Produto(rs.getDouble("Valor_Produto"));
 				pedItem.setQuantidade(rs.getInt("Quantidade"));
-				pedItem.setValor_Total(rs.getDouble("Valor_Total"));
+				pedItem.setSubtotal(rs.getDouble("Valor_Total"));
 				prod.setDesc_Produto(rs.getString("Desc_Produto"));
 				pedItem.setProduto(prod);
 				
@@ -145,18 +145,14 @@ public class PedidoDAO {
 		try {
 			conn = conexao.getConnection(false);
 			ArrayList<Carrinho> alListaItens = car.listarCarrinho(car);
-			//ArrayList<Carrinho> alTotalCarrinho = car.listarCarrinhoTotal(car);
 	
 			if(inserirPedido(ped, conn)) {
-							
-				int teste = alListaItens.size();
-				System.out.println("tamanho-> " + teste);
 				
 				for(Carrinho item : alListaItens) {
 					
 					stmt = conn. prepareStatement(
-							"INSERT into PI_PedidoItem (Idf_Pedido, Idf_Produto, Quantidade, Valor_Produto,Percentual_Desconto, Valor_Desconto, Valor_Total) "
-							+ "values (?,?,?,?,0,0,?)"
+						"INSERT into PI_PedidoItem (Idf_Pedido, Idf_Produto, Quantidade, Valor_Produto,Percentual_Desconto, Valor_Desconto, Valor_Total) "
+						+ "values (?,?,?,?,0,0,?)"
 					);
 					
 					stmt.setInt(1,ped.getIdf_Pedido());
@@ -211,7 +207,7 @@ public class PedidoDAO {
 					"INSERT into PI_Pedido values (getdate(),1,1,?)",
 					Statement.RETURN_GENERATED_KEYS);
 					
-			stmt.setInt(1,3);
+			stmt.setInt(1,ped.getIdf_Usuario());
 
 			int rowAffected = stmt.executeUpdate();
 			

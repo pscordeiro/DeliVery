@@ -1,89 +1,207 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
+<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:h="http://java.sun.com/jsf/html"> 
+      xmlns:h="http://java.sun.com/jsf/html"
+      template="../template-usuario.xhtml"> 
+           
+<h:form rendered="#{!usuarioLogadoController.taLogado()}" id="formVoltarLogin" styleClass="mt-3 mb-3">
+	
+	<div class="container">
+		<div class="">
+			<h:commandLink styleClass="btn-voltar" action="#{usuarioLogadoController.redirectToLogin(1)}"><i class="fas fa-arrow-left fa-lg"></i>Voltar para o login</h:commandLink>
+		</div>		
+	
+		<div class="titulo text-center">
+			<h1>Cadastro de Usuario</h1>		
+		</div>	
+	</div>
+		
+</h:form>
 
-<h:head></h:head> 
-<body> 
-	<a href="../index.xhtml">Voltar</a>
-	<h2>Cadastro de Usuario</h2>
+<h:form rendered="#{usuarioLogadoController.taLogado()}" id="formIdfUsuario" styleClass="mt-3 mb-3">
+		
+	<div class="titulo container text-center">
+		<h1>Dados cadastrados</h1>
+	</div>
+						
+</h:form>
 
-		<h:form id="formInserirUsuario">
-			<h:inputHidden id="idf_usuario" value="#{usuario.idf_Usuario}"/>
-					
-			Nome Completo:<br/>
-			<h:inputText id="Nome" value="#{usuario.nme_Pessoa}" />
-			<br/>
-			CPF:<br/>
-			<h:inputText id="Cpf" value="#{usuario.num_CPF}" />
-			<br/>
-			Gênero:<br/>
-			<h:selectOneMenu  id="Idf_Sexo" value="#{usuario.idf_Sexo}">
-				<f:selectItem itemValue="1" itemLabel="Feminino"/>
-				<f:selectItem itemValue="2" itemLabel="Masculino"/>		
-				<f:selectItem itemValue="3" itemLabel="Não Binario"/>		
-				<f:selectItem itemValue="4" itemLabel="Outros"/>		
-			</h:selectOneMenu>
-			<br/>	
-			
-			Cidade:<br/>
-			<h:selectOneMenu  id="Idf_Cidade" value="#{usuario.endereco.idf_Cidade}">
-				<f:selectItem itemValue="3272" itemLabel="Colombo"/>
-				<f:selectItem itemValue="3287" itemLabel="Curitiba"/>		
-			</h:selectOneMenu>
-			<br/>
-			
-			CEP:<br/>
-			<h:inputText id="NumCEP" value="#{usuario.endereco.num_CEP}"/>
-			<br/>	
-			
-			Endereço:<br/>
-			<h:inputText id="DesLogradouro" value="#{usuario.endereco.desc_Logradouro}"/>
-			<br/>
+<h:form id="formInserirUsuario">
 
-			Num_Casa:<br/>
-			<h:inputText id="NumEndereco" value="#{usuario.endereco.num_Endereco}"/>
-			<br/>
-			
-			Bairro:<br/>
-			<h:inputText id="Bairro" value="#{usuario.endereco.des_Bairro}"/>
-			<br/>
-									
-			Complemento:<br/>
-			<h:inputText id="Complemento" value="#{usuario.endereco.desc_Complemento}"/>
-			<br/>
-			
-			Data Nascimento (dd/mm/aaaa):<br/>
-			<h:inputText id="DtaNasc" value="#{usuario.dta_Nascimento}"/>
-			<br/>
-			DDD:<br/>
-			<h:inputText id="DDD" value="#{usuario.num_DDD_Celular}"/>
-			<br/>
-			Celular:<br/>
-			<h:inputText id="Celular" value="#{usuario.num_Celular}"/>
-			<br/>
-			Email:<br/>
-			<h:inputText id="Email" value="#{usuario.eml_Pessoa}"/>	
-			<br/>
-			Senha:<br/>
-			<h:inputSecret id="Senha" value="#{usuario.senha}"/>	
-			<br/>
-			Estado Civil:<br/>
-			<h:selectOneMenu  id="Idf_Estado_Civil" value="#{usuario.idf_Estado_Civil}">
-				<f:selectItem itemValue="1" itemLabel="Solteiro(a)"/>
-				<f:selectItem itemValue="2" itemLabel="Casado(a)"/>		
-				<f:selectItem itemValue="3" itemLabel="Divorciado(a)"/>		
-				<f:selectItem itemValue="4" itemLabel="Viúvo(a)"/>	
-				<f:selectItem itemValue="5" itemLabel="Outros"/>
-				<f:selectItem itemValue="6" itemLabel="Amansiado(a)"/>						
-			</h:selectOneMenu>
-			<br/>	
-			
-			
-			<br/>	
-			<h:commandButton action="#{usuarioController.salvar(usuario)}" value="Salvar"/>		
-		</h:form>
+	
+	<div class="container main-container">
+	
+		<h:inputHidden id="idf_usuario" value="#{usuario.idf_Usuario}"/>
+		
+		<div class="row">
+		
+			<div class="col-md-6">
+
+                <div class="half-box spacing">
+		           <h:outputLabel for="NomeCompleto">Nome Completo:</h:outputLabel>          
+		            <h:inputText styleClass="input" id="NomeCompleto" value="#{usuario.nme_Pessoa}">
+		         		<f:passThroughAttribute name="placeholder" value="Ex: Jose Da Silva" />
+		            </h:inputText>
+				</div>
 				
-</body> 
-</html>
+                <div class="half-box spacing">
+				 	<h:outputLabel for="Email">Email:</h:outputLabel>          
+					<h:inputText id="Email" value="#{usuario.eml_Pessoa}">
+						<f:passThroughAttribute name="placeholder" value="Ex: teste@gmail.com" />
+					</h:inputText>									
+				</div>
+				
+                <div class="half-box spacing">
+		           <h:outputLabel for="Cpf">CPF:</h:outputLabel>          
+		           <h:inputText id="Cpf" value="#{usuario.num_CPF}">
+		         		<f:passThroughAttribute name="placeholder" value="Ex: 113.941.039.30" />
+		            </h:inputText>
+				</div>
+				
+				<div class="row">
+				
+					<div class="col-md-3">
+               		<div class="half-box spacing">
+		           			<h:outputLabel for="DDD">DDD:</h:outputLabel>          							
+							<h:inputText id="DDD" value="#{usuario.num_DDD_Celular}"/>					
+						</div>									
+					</div>
+					
+					<div class="col-md-9">
+               			<div class="half-box spacing">
+		           			<h:outputLabel for="Celular">Celular:</h:outputLabel>          							
+							<h:inputText id="Celular" value="#{usuario.num_Celular}"/>									
+						</div>										
+					</div>
+				
+				</div>
+				
+            	<div class="half-box spacing">
+					<h:outputLabel for="DtaNasc">Data de nascimento:</h:outputLabel>          							
+					<h:inputText id="DtaNasc" value="#{usuario.dta_Nascimento}">
+		         		<f:passThroughAttribute name="placeholder" value="Ex: 22/08/2001" /> 						
+					</h:inputText>								
+				</div>
+				
+            	<div class="half-box spacing">
+					<h:outputLabel for="senha">Senha:</h:outputLabel>          							
+                    <h:inputSecret id="senha" value="#{usuario.senha}"/>	              
+                </div>				
+										
+			</div><!--  Fecha col-->		
+			
+						
+			<div class="col-md-6">
+			
+                <div class="half-box">
+		            <h:outputLabel for="Idf_Sexo">Gênero:</h:outputLabel>                 
+					<h:selectOneMenu styleClass="input-select"  id="Idf_Sexo" value="#{usuario.idf_Sexo}">
+						<f:selectItem itemDisabled="true" itemValue="0" itemLabel="Selecione uma opção"/>
+						<f:selectItem itemValue="1" itemLabel="Feminino"/>
+						<f:selectItem itemValue="2" itemLabel="Masculino"/>		
+						<f:selectItem itemValue="3" itemLabel="Não Binario"/>		
+						<f:selectItem itemValue="4" itemLabel="Outros"/>		
+					</h:selectOneMenu>		        		        
+		        </div>	
+		        
+                <div class="half-box">
+		            <h:outputLabel for="Idf_Estado_Civil">Estado Civil:</h:outputLabel>                 		        
+					<h:selectOneMenu styleClass="input-select" id="Idf_Estado_Civil" value="#{usuario.idf_Estado_Civil}">
+						<f:selectItem itemDisabled="true" itemValue="0" itemLabel="Selecione uma opção"/>					
+						<f:selectItem itemValue="1" itemLabel="Solteiro(a)"/>
+						<f:selectItem itemValue="2" itemLabel="Casado(a)"/>		
+						<f:selectItem itemValue="3" itemLabel="Divorciado(a)"/>		
+						<f:selectItem itemValue="4" itemLabel="Viúvo(a)"/>	
+						<f:selectItem itemValue="5" itemLabel="Outros"/>
+						<f:selectItem itemValue="6" itemLabel="Amansiado(a)"/>						
+					</h:selectOneMenu>		        	        
+		        </div>
+		        
+		        <div class="row">
+		        
+			        <div class="col-md-12">
+			        
+				        <!--  Adicionar suggest  -->	
+                		<div class="half-box">
+			            	<h:outputLabel for="Idf_Cidade">Cidade:</h:outputLabel>                 
+							<h:selectOneMenu styleClass="input-select" id="Idf_Cidade" value="#{usuario.endereco.idf_Cidade}">
+								<f:selectItem itemDisabled="true" itemValue="0" itemLabel="Selecione uma opção"/>												
+								<f:selectItem itemValue="3272" itemLabel="Colombo"/>
+								<f:selectItem itemValue="3287" itemLabel="Curitiba"/>		
+							</h:selectOneMenu>									
+						</div>				        
+			        
+			        </div>
+			        
+			         <!--Adicionar select de UF`s puxando de uma lista do banco-->		
+			        <!-- 
+				        <div class="col-md-3">							        
+	                		<div class="half-box">
+				            	<h:outputLabel for="Uf">UF:</h:outputLabel>  
+				            	<h:inputText id="Uf" value="#{usuario.endereco.sig_Estado}"/>               								
+							</div>			        			        
+				        </div>					        
+			         -->
+			        
+			        <div class="col-md-9">
+
+                		<div class="half-box">
+				           	<h:outputLabel for="DesLogradouro">Endereço:</h:outputLabel>                 
+							<h:inputText id="DesLogradouro" value="#{usuario.endereco.desc_Logradouro}"/>
+						</div>														        			        
+			        
+			        </div>    
+			        
+		       		 <div class="col-md-3">
+			        
+                		<div class="half-box">
+			            	<h:outputLabel for="NumEndereco">Nº endereço:</h:outputLabel>  
+			            	<h:inputText id="NumEndereco" value="#{usuario.endereco.num_Endereco}"/>			            	
+						</div>		
+		        
+			        </div>			        	            
+		        
+		        </div>	
+		     			
+		        <div class="row">
+			        
+			        <div class="col-md-6">
+			        
+                		<div class="half-box">
+				           	<h:outputLabel for="NumCEP">CEP:</h:outputLabel>                 						
+							<h:inputText id="NumCEP" value="#{usuario.endereco.num_CEP}"/>					
+						</div>						
+			        
+			        </div>	
+			        
+			        <div class="col-md-6">
+			        
+                		<div class="half-box">
+			            	<h:outputLabel for="Bairro">Bairro:</h:outputLabel>  
+			            	<h:inputText id="Bairro" value="#{usuario.endereco.des_Bairro}"/>			            	
+						</div>					        
+			        
+			        </div>			        
+			        
+		        </div>	
+		        
+              	<div class="half-box">
+		           	<h:outputLabel for="Complemento">Complemento:</h:outputLabel>                 								        
+		        	<h:inputText id="Complemento" value="#{usuario.endereco.desc_Complemento}"/>
+		        </div>
+		        	     								
+			</div><!--  Fecha col-->				
+			
+		</div><!--  Fecha row-->		
+			
+        <div class="btn-enviar">
+			<h:commandButton styleClass="btn-submit" action="#{usuarioController.salvar(usuario)}" value="Salvar"/>
+		</div>
+					
+	</div>
+	    
+</h:form>
+
+				
+</ui:decorate> 

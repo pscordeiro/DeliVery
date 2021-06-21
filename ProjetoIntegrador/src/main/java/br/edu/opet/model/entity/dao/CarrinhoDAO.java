@@ -28,6 +28,7 @@ public class CarrinhoDAO {
 					+ " PIP.Desc_Produto,"
 					+ " PIC.Quantidade, "
 					+ " PIC.Valor_Produto,"
+					+ " PIP.Url_Produto,"					
 					+ " (PIC.Quantidade * PIC.Valor_Produto) as SubTotal "
 					+ " FROM PI_Carrinho PIC "
 					+ " JOIN PI_Produtos PIP ON PIP.Idf_Produto = PIC.Idf_Produto "
@@ -46,6 +47,7 @@ public class CarrinhoDAO {
 				prod.setDesc_Produto(rs.getString("Desc_Produto"));
 				prod.setQuantidade(rs.getInt("Quantidade"));
 				prod.setValor_Produto(rs.getDouble("Valor_Produto"));
+				prod.setUrl_Produto(rs.getString("Url_Produto"));
 				carrinho.setSub_Total(rs.getDouble("SubTotal"));
 				carrinho.setIdf_Carrinho(rs.getInt("Idf_Carrinho_Grupo"));
 				carrinho.setProd_Carrinho(prod);
@@ -83,13 +85,13 @@ public class CarrinhoDAO {
 		try {
 			conn = conexao.getConnection(true);		
 			stmt = conn. prepareStatement
-					("SELECT \r\n"
-					+ "SUM(quantidade) AS TotalItens,\r\n"
-					+ "SUM((PIC.Quantidade * PIC.Valor_Produto)) AS ValorTotalCarrinho,\r\n"
-					+ "Idf_Carrinho_Grupo\r\n"
-					+ "FROM PI_Carrinho PIC\r\n"
-					+ "WHERE Idf_Carrinho_Grupo = ?\r\n"
-					+ "GROUP BY Idf_Carrinho_Grupo");
+					(" SELECT "
+					+ "SUM(quantidade) AS TotalItens,"
+					+ "SUM((PIC.Quantidade * PIC.Valor_Produto)) AS ValorTotalCarrinho,"
+					+ "Idf_Carrinho_Grupo"
+					+ " FROM PI_Carrinho PIC "
+					+ " WHERE Idf_Carrinho_Grupo = ? "
+					+ " GROUP BY Idf_Carrinho_Grupo");
 			
 			stmt.setInt(1,car.getIdf_Carrinho());
 		

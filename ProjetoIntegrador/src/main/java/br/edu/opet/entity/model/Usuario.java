@@ -17,6 +17,7 @@ public class Usuario extends UsuarioDAO{
 	private String Num_CPF;
 	private String Nme_Pessoa;
 	private int Idf_Sexo;
+	private String Desc_Sexo;
 	private int Idf_Cidade;
 	private Date Dta_Nascimento = new Date();
 	private Endereco Endereco = new Endereco();
@@ -149,11 +150,19 @@ public class Usuario extends UsuarioDAO{
 		Eml_Pessoa = eml_Pessoa;
 	}
 
-	public Date getDta_Cadastro() {
+	public void setDta_Cadastro(String dta_Cadastro) {
+		Dta_Cadastro = DataUtil.strToDate(dta_Cadastro);
+	}
+
+	public String getDta_Cadastro() {
+		return DataUtil.dateToStr(Dta_Cadastro);
+	}
+	
+	public Date getDta_CadastroDate() {
 		return Dta_Cadastro;
 	}
 
-	public void setDta_Cadastro(Date dta_Cadastro) {
+	public void setDta_CadastroDate(Date dta_Cadastro) {
 		Dta_Cadastro = dta_Cadastro;
 	}
 
@@ -188,6 +197,14 @@ public class Usuario extends UsuarioDAO{
 	public void setSenha(String senha) {
 		Senha = senha;
 	}
+	
+	public String getDesc_Sexo() {
+		return Desc_Sexo;
+	}
+	
+	public void setDesc_Sexo(String desc_Sexo) {
+		Desc_Sexo = desc_Sexo;
+	}
 
 	public boolean inserirUsuarios() {
 		return super.inserirUsuarios(this);
@@ -202,6 +219,10 @@ public class Usuario extends UsuarioDAO{
 	}
 	public boolean deletarUsuario() {
 		return super.deletarUsuario(this);
+	}
+	
+	public Usuario buscarUsuario(Usuario user) {
+		return super.buscarUsuario(user);
 	}
 
 }

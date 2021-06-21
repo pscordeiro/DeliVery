@@ -88,16 +88,10 @@ public class EnderecoDAO  {
 			stmt.setInt(7,end.getIdf_Endereco());
 
 			int rowAffected = stmt.executeUpdate();
-			
-			if(rowAffected == 1){				
-				stmt.close();
-				return true;
-			}
-			else {
-				conn.rollback();
-				stmt.close();
-				return false;
-			}										
+						
+			stmt.close();
+			return true;
+									
 		} catch (SQLException e) {
 			System.err.println(e);
 			try {

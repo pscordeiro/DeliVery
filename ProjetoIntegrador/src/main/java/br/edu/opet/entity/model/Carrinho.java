@@ -56,7 +56,7 @@ public class Carrinho extends CarrinhoDAO{
 	public void setTotal_Carrinho(double total_Carrinho) {
 		Total_Carrinho = total_Carrinho;
 	}
-
+	
 	public boolean adicionarAoCarrinho(Produto prod, Carrinho car) {
 		return super.adicionarAoCarrinho(prod, car);
 	}

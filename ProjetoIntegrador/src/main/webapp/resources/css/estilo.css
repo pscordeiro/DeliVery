@@ -60,6 +60,26 @@ nav {
     text-decoration: none;
 }
 
+.paymentButton{
+	position: left;
+    background-color: #7875ff;
+    border: none;
+    border-radius: 4px;
+    font-size: 15px;
+    color: #FFFFFF;
+    padding: 10px;
+    width: 100%;
+    text-align: center;
+    overflow: hidden;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.paymentButton:hover{
+	background-color: #6f42c1;
+    text-decoration: none;	
+}
+
 .a {
     position: left;
     background-color: #7875ff;
@@ -623,4 +643,46 @@ abbr[data-bs-original-title] {
 .toast {
 	background-color:7875ff;
 	font-family: 'Roboto', sans-serif;	
+}
+
+.size span {
+    font-size: 11px
+}
+
+.color span {
+    font-size: 11px
+}
+
+.product-deta {
+    margin-right: 70px
+}
+
+.gift-card:focus {
+    box-shadow: none
+}
+
+.pay-button {
+    color: #fff
+}
+
+.pay-button:hover {
+    color: #fff
+}
+
+.pay-button:focus {
+    color: #fff;
+    box-shadow: none
+}
+
+.text-grey {
+    color: #a39f9f
+}
+
+.qty i {
+    font-size: 11px
+}
+
+.cartContainer{
+	margin-top: 3%;
+ 	text-align:center;
 }

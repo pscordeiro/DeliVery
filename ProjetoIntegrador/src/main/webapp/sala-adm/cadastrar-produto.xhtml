@@ -11,14 +11,42 @@
 #{usuarioLogadoController.checkUserCredential()}	
 
 
-<h1>Cadastrar novo Produto</h1>
+<div class="container d-flex container-full mt-5">
+	
+	<h:form>
+	
+		<div class="container center text-center mt-4">
+			<h1>Cadastrar novo Produto</h1>
+		</div>
+				    
+		<div class="mt-5">
+			<h:outputLabel for="nomeProduto">Nome do produto:</h:outputLabel>          			
+			<h:inputText styleClass="input" id="nomeProduto" value="#{produto.desc_Produto}">
+	       		<f:passThroughAttribute name="placeholder" value="Ex: Refrigerante Pepsi 2l" />
+	        </h:inputText>
+		</div>
+		
+		<div class="mt-5">
+			<h:outputLabel for="valorProduto">Valor do produto:</h:outputLabel>          			
+			<h:inputText styleClass="input" id="valorProduto" value="#{produto.valor_Produto}">
+	       		<f:passThroughAttribute name="placeholder" value="Ex: 3,45" />
+	        </h:inputText>
+		</div>		
+				
+		<div class="mt-5">
+			<h:outputLabel for="urlProduto">URL da imagem do produto:</h:outputLabel>          			
+			<h:inputText styleClass="input" id="urlProduto" value="#{produto.url_Produto}">
+	       		<f:passThroughAttribute name="placeholder" value="Ex: www.google.com.br/imagem/teste.jpg" />
+	        </h:inputText>
+		</div>		
+					
+        <div class="btn-enviar mt-2 mb-2">
+			<h:commandButton styleClass="btn-submit" action="#{salaAdmController.cadastrarProduto(produto)}" value="Cadastrar"/>
+		</div>
+	
+	</h:form>
 
-<h:form>
-
-
-
-</h:form>
-
+</div>
 
 </ui:decorate> 
 

@@ -24,24 +24,20 @@
                		
 							<c:forEach items="#{homeController.listarCarrinho(carrinho)}" var="itemCarrinho">							
 							    <div class="d-flex flex-row justify-content-between align-items-center p-2 bg-white mt-4 px-3 rounded">							        
-							        <div class="mr-1">
-							            <img class="card-img-top" width="10px;" height="10px;" src="#{itemCarrinho.prod_Carrinho.url_Produto}" alt="produto-carrinho" />
+							        <div class="d-flex align-items-center div-image">				        	
+							            	<img class="image" src="#{itemCarrinho.prod_Carrinho.url_Produto}" alt="produto-carrinho" />
 							        </div>									
-							        <div class="d-flex flex-column align-items-left product-details">
+							        <div class="d-flex flex-column align-items-center product-details">
+							         	<h5 class="text-grey">
+							                #{itemCarrinho.prod_Carrinho.quantidade}
+							            </h5>
+							            <div class="d-flex flex-column items-center product-desc">
+							            </div>
+							        </div>							
+							        <div class="d-flex flex-column align-items-center qty">
 							            <h6 class="font-weight-bold">
 							                #{itemCarrinho.prod_Carrinho.desc_Produto}
 							            </h6>
-							            <div class="d-flex flex-row product-desc">
-							                <div class="size mr-1"><span class="text-grey">Size:</span><span class="font-weight-bold">&nbsp;M</span>
-							                </div>
-							                <div class="color"><span class="text-grey">Color:</span><span class="font-weight-bold">&nbsp;Grey</span>
-							                </div>
-							            </div>
-							        </div>							
-							        <div class="d-flex flex-row align-items-center qty">
-							            <h5 class="text-grey">
-							                #{itemCarrinho.prod_Carrinho.quantidade}
-							            </h5>
 							        </div>							
 							        <div>
 							            <h5 class="text-grey">
@@ -53,39 +49,35 @@
 							        </div>							
 							    </div>						    
 							</c:forEach>                  		                    		
-                   			
-                 			<div class="d-flex flex-row align-items-center mt-3 p-2 bg-white rounded">
-			
-				                 <c:forEach items="#{homeController.listarCarrinhoTotal(carrinho)}" var="totalCarrinho">
-				                 
-				            			<div>         			
-				            				#{totalCarrinho.total_Itens}  Itens               			
-				            			</div>
-				            			
-				            			<div>          			
-				            				Total  #{totalCarrinho.total_Carrinho}              			
-				            			</div>    
-				            			
-				            			<div class="d-flex flex-row align-items-center mt-3 p-2 bg-white rounded">            			         					
-											<h:commandButton styleClass="paymentButton" action="#{pedidoController.inserirPedido(carrinho, usuarioLogadoController)}" rendered="#{usuarioLogadoController.taLogado()}" value="Finalizar Compra"/>	      
-											<h:commandButton styleClass="paymentButton" action="#{usuarioLogadoController.redirectToLogin(1)}" rendered="#{!usuarioLogadoController.taLogado()}" value="Logar para Finalizar Compra"/>	
-				                       </div>                   			
-				                 
-				                 </c:forEach>              		
-						
-							</div>                 			
-                   			
-                		</div>
-            		</div>
-       			</div>
-			</div>
-			
-
-			
+				             <c:forEach items="#{homeController.listarCarrinhoTotal(carrinho)}" var="totalCarrinho">
+				                 <div class = "mb-4">
+				                 		<div class=" d-flex justify-content-between mt-3 p-4 bg-white rounded">
+				                 			<div>
+				                 				<h5>TOTAL</h5>
+				                 			</div>
+					                 		<div>
+								            	#{totalCarrinho.total_Itens}  Itens 
+					                 		</div>
+					                 		<div >
+						            				Total  #{totalCarrinho.total_Carrinho}              			
+					                 		</div>
+					                 		<div>
+					                 			<p>
+					                 			</p>
+					                 		</div>
+				                 		</div>
+				                 	</div>
+		            			<div class="d-flex flex-row align-items-center ">            			         					
+									<h:commandButton styleClass="paymentButton" action="#{pedidoController.inserirPedido(carrinho, usuarioLogadoController)}" rendered="#{usuarioLogadoController.taLogado()}" value="Finalizar Compra"/>	      
+									<h:commandButton styleClass="paymentButton" action="#{usuarioLogadoController.redirectToLogin(1)}" rendered="#{!usuarioLogadoController.taLogado()}" value="Logar para Finalizar Compra"/>	
+		                       </div>                   			
+			            </c:forEach>              	                			
+               		</div>
+           		</div>
+      		</div>
+		</div>	
 		</h:form>
-		
 		<div class="d-flex justify-content-center center">
-		
 			<h:form rendered="#{homeController.verificarCarrinhoVazio(carrinho)}">			
 				<div class="text-center center empty-cart">			
 					<h2 class="empty-cart-text mb-5">Seu carrinho está vazio</h2>			
@@ -93,6 +85,5 @@
 				</div>								
 			</h:form>
 		</div>
-	
 	</div>
 </ui:decorate> 

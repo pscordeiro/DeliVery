@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 import br.edu.opet.entity.model.Produto;
@@ -59,5 +60,96 @@ public class ProdutoDAO {
 		}
 		return alProduto;	
 	}
+	protected boolean cadastrarProduto(Produto prod) {
+		
+		Connection conn = null;
+		PreparedStatement stmt = null;
+				
+		try {
+			conn = conexao.getConnection(false);
+			
+			stmt = conn. prepareStatement("INSERT INTO PI_Produtos(Desc_Produto, Valor_Produto, Flg_Inativo, Url_Produto) "
+					+ "VALUES(?,?,0,?)",Statement.RETURN_GENERATED_KEYS);
+					
+			stmt.setString(1,prod.getDesc_Produto());
+			stmt.setDouble(2,prod.getValor_Produto());
+			stmt.setString(3,prod.getUrl_Produto());
 
+			int rowAffected = stmt.executeUpdate();
+				
+			if(rowAffected == 1){	
+				
+				ResultSet rs = stmt.getGeneratedKeys();
+				rs.next();
+				int id = rs.getInt(1);
+				prod.setIdf_Produto(id);
+				
+				if(inserirEstoque(prod, conn)) {
+					conn.commit();
+					stmt.close();
+					conn.close();
+					return true;
+				}
+				else {
+					conn.rollback();
+					stmt.close();
+					conn.close();
+					return false;	
+				}				
+			}
+			else {
+				conn.rollback();
+				stmt.close();
+				conn.close();
+				return false;
+			}		
+
+		} catch (SQLException e) {
+			System.err.println(e);
+			try {
+				conn.rollback();
+				stmt.close();
+				conn.close();
+			} catch (SQLException e1) {
+				System.err.println(e1);
+				return false;
+			}
+	
+		}
+		return false;	
+	}
+	
+	protected boolean inserirEstoque(Produto prod, Connection conn) {
+		
+		PreparedStatement stmt = null;
+		
+		try {
+			stmt = conn. prepareStatement("INSERT INTO PI_Estoque(Idf_Produto, Quantidade) VALUES(?,?)");
+				
+			stmt.setInt(1,prod.getIdf_Produto());
+			stmt.setInt(2,prod.getQuantidade());
+		
+			int rowAffected = stmt.executeUpdate();
+			
+			if(rowAffected == 1){
+				stmt.close();
+				return true;
+			}
+			else {
+				stmt.close();
+				return false;
+			}
+			
+		} catch (SQLException e) {
+			System.err.println(e);
+			try {
+				conn.rollback();
+				stmt.close();
+			} catch (SQLException e1) {
+				return false;
+			}
+		}
+		return false;	
+	}
+	
 }

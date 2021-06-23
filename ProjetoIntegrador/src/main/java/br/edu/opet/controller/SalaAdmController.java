@@ -42,7 +42,7 @@ public class SalaAdmController {
 	
 	public String cadastrarProduto(Produto prod) {
 		
-		if(prod.cadastrarProduto()) {
+		if(prod.cadastrarProduto(prod)) {
 			try {
 				FacesContext.getCurrentInstance().getExternalContext().redirect("/ProjetoIntegrador/sala-adm/cadproduto-sucesso.xhtml");
 			} catch (IOException e) {
@@ -73,7 +73,7 @@ public class SalaAdmController {
 	}
 	
 	public String redirectToCadProduto() {
-	    try {
+		try {
 			FacesContext.getCurrentInstance().getExternalContext().redirect("/ProjetoIntegrador/sala-adm/cadastrar-produto.xhtml");
 		} catch (IOException e) {
 			System.out.println(e);

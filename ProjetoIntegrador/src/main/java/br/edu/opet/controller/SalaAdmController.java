@@ -9,6 +9,7 @@ import javax.faces.context.FacesContext;
 
 import br.edu.opet.entity.model.Pedido;
 import br.edu.opet.entity.model.PedidoItem;
+import br.edu.opet.entity.model.Produto;
 import br.edu.opet.entity.model.Usuario;
 
 @ManagedBean
@@ -39,6 +40,26 @@ public class SalaAdmController {
 		return pedItem.listarItens(Idf_Pedido);	
 	}
 	
+	public String cadastrarProduto(Produto prod) {
+		
+		if(prod.cadastrarProduto(prod)) {
+			try {
+				FacesContext.getCurrentInstance().getExternalContext().redirect("/ProjetoIntegrador/sala-adm/cadproduto-sucesso.xhtml");
+			} catch (IOException e) {
+				System.out.println(e);
+			}
+			return "";
+		}
+		else {
+			try {
+				FacesContext.getCurrentInstance().getExternalContext().redirect("/ProjetoIntegrador/sala-adm/cadproduto-falha.xhtml");
+			} catch (IOException e) {
+				System.out.println(e);
+			}
+			return "";
+		}
+	}
+	
 	public String excluir(Usuario us) {		
 		if(us.deletarUsuario()) {
 			mensagem = "Deletado com sucesso !";
@@ -52,7 +73,7 @@ public class SalaAdmController {
 	}
 	
 	public String redirectToCadProduto() {
-	    try {
+		try {
 			FacesContext.getCurrentInstance().getExternalContext().redirect("/ProjetoIntegrador/sala-adm/cadastrar-produto.xhtml");
 		} catch (IOException e) {
 			System.out.println(e);

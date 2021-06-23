@@ -707,13 +707,11 @@ input, label {
 
 input {
     font-style: normal;
-    font-weight: normal;
     font-size: 18px;
     line-height: 21px;
     border: 1px solid #ced4da;
     border-radius: 0.25rem;
     padding: 0.75rem 1.5rem 0.75rem 1.5rem;
-    font-size: 18px;
     font-weight: 400;
     height: 50px;
 }
@@ -761,12 +759,6 @@ button:focus {
     margin-left: auto;
     margin-right: auto;
     display: flex;
-}
-
-form {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
 }
 
 table{
@@ -875,5 +867,19 @@ th {
 
 .template {
     display: none; 
+}
+
+.container-full{
+	min-height: calc(100vh - 210px);
+	justify-content: center;
+}
+
+.div-image {
+    height:5%
+}
+
+.image{
+    height: 70px;
+    width:  70px;
 }
 

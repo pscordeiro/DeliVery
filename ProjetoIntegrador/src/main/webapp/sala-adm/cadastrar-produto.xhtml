@@ -4,21 +4,81 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:p="http://primefaces.org/ui"      
-      xmlns:c="http://java.sun.com/jstl/core"  
+      xmlns:c="http://java.sun.com/jstl/core"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"      
       template="../template-adm.xhtml"> 
             
 
 #{usuarioLogadoController.checkUserCredential()}	
 
 
-<h1>Cadastrar novo Produto</h1>
+<div class="container d-flex container-full mt-5">
+	
+	<h:form id="formCadProduto">
+	
+		<div class="container center text-center mb-5 mt-4">
+			<h1>Cadastrar novo Produto</h1>
+		</div>
+				    
+		<div class="mt-3">
+			<h:outputLabel for="nomeProduto">Nome do produto:</h:outputLabel>          			
+			<h:inputText onchange="removeError()" styleClass="input nomeProduto" id="nomeProduto" value="#{produto.desc_Produto}"
+				required="true" requiredMessage="Por favor, preencha este campo" 
+            	validatorMessage="Digite no máximo 100 caracteres" >
+            	<f:validateLength maximum="100"/>
+	       		<f:passThroughAttribute name="placeholder" value="Ex: Refrigerante Pepsi 2l" />
+	        </h:inputText>
+	        <h:message id="spanNomeProduto" styleClass="text-danger" for="nomeProduto" />
+		</div>
+		
+		<div class="mt-3">
+			<h:outputLabel for="valorProduto">Valor do produto:</h:outputLabel>          			
+			<h:inputText styleClass="input" id="valorProduto" value="#{produto.valor_Produto}"
+				required="true" requiredMessage="Por favor, preencha este campo" 
+            	validatorMessage="Digite um valor entre 1.00 e 100.00" >
+    			<f:convertNumber currencySymbol="R$" type="currency"/>
+   				<f:validateDoubleRange minimum="1.00" maximum="100.000"/>
+	       		<f:passThroughAttribute name="placeholder" value="Ex: 3.45" />       		
+	        </h:inputText>
+       		<h:message styleClass="text-danger" for="valorProduto" />	       			        
+		</div>	
+		
+		<div class="mt-3">
+			<h:outputLabel for="qtdInicial">Quantidade inicial:</h:outputLabel>          			
+			<h:inputText styleClass="input" id="qtdInicial" value="#{produto.quantidade}"
+				required="true" requiredMessage="Por favor, preencha este campo" 
+				converterMessage="Digite apenas números inteiros"
+				validatorMessage="Valor fora do intervalo" 
+				pt:type="number" >			
+				<f:validateLongRange minimum = "1" maximum = "10000" />		
+				<f:convertNumber integerOnly="true" type="number" />						
+	       		<f:passThroughAttribute name="placeholder" value="Ex: 20" />
+	        </h:inputText>
+       		<h:message styleClass="text-danger" for="qtdInicial" />	       			        	        
+		</div>				
+				
+		<div class="mt-3">
+			<h:outputLabel for="urlProduto">URL da imagem do produto:</h:outputLabel>    		      			
+			<h:inputText styleClass="input" id="urlProduto" value="#{produto.url_Produto}"
+				required="true" requiredMessage="Por favor, preencha este campo" >
+	       		<f:passThroughAttribute name="placeholder" value="Ex: www.google.com.br/imagem/teste.jpg" />
+	        </h:inputText>
+       		<h:message styleClass="text-danger" for="urlProduto" />	       			        	        	        
+		</div>		
+					
+        <div class="btn-enviar mt-2 mb-2">
+			<h:commandButton styleClass="btn-submit" action="#{salaAdmController.cadastrarProduto(produto)}" value="Cadastrar"/>
+		</div>
+	
+	</h:form>
 
-<h:form>
+</div>
 
 
+<script type="text/javascript">
 
-</h:form>
 
+</script>
 
 </ui:decorate> 
 

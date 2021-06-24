@@ -87,7 +87,8 @@ public class EnderecoDAO  {
 			stmt.setInt(6,end.getIdf_Cidade());
 			stmt.setInt(7,end.getIdf_Endereco());
 
-			int rowAffected = stmt.executeUpdate();
+			//int rowAffected = -> Pode ser que atualize alguma coisa ou não, retornando 0 
+			stmt.executeUpdate();
 						
 			stmt.close();
 			return true;

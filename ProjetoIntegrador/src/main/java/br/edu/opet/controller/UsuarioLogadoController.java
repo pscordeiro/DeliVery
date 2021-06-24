@@ -55,8 +55,7 @@ public class UsuarioLogadoController {
 	    else {
 	        usuarioLogado = Boolean.TRUE;
 	        user = u;
-        
-	        if(u.getIdf_Tipo_Usuario() == 2) {
+	        if(u.getIdf_Tipo_Usuario() == 2 && redirectUrl != "/ProjetoIntegrador/usuario/carrinho.xhtml") {
 	            FacesContext.getCurrentInstance().getExternalContext().redirect("/ProjetoIntegrador/sala-adm/listar-pedidos.xhtml");
 	            return "";
 	        }
@@ -80,6 +79,11 @@ public class UsuarioLogadoController {
     {
         this.user = null;
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+        try {
+			FacesContext.getCurrentInstance().getExternalContext().redirect("/ProjetoIntegrador/index.xhtml");
+		} catch (IOException e) {
+			System.out.println(e);
+		}
     }
     
     public String checkUserCredential() throws IOException

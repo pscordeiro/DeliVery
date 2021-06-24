@@ -206,7 +206,8 @@ public class UsuarioDAO{
 				stmt.setInt(8,us.getIdf_Usuario());
 				stmt.setString(9, us.getSenha());
 
-				int rowAffected = stmt.executeUpdate();
+				//int rowAffected -> Pode ter sido alterado ou não
+				stmt.executeUpdate();
 
 				conn.commit();
 				stmt.close();

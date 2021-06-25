@@ -882,3 +882,58 @@ th {
     width:  70px;
 }
 
+
+
+
+
+#titulo-login {
+    font-size: 36px;
+    line-height: 36px;
+    font-weight: 500;
+    padding-bottom: 2rem;
+}
+
+.pessoas-bebendo-login {
+    position: relative;
+    height: 80%;
+}
+
+#btn-entrar-login {
+    cursor: pointer;
+    position: relative;
+    font-weight: 700;
+    font-style: normal;
+    line-height: 21,09px;
+    background-color: #7875FF;
+    border: none;
+    border-radius: 4px;
+    padding: 10px;
+    width: 450px;
+    text-align: center;
+    overflow: hidden;
+    cursor: pointer;
+    color: #FFFFFF;
+}
+
+#texto-cadastrar {
+    position: relative;
+    font-weight: 100;
+    font-size: 18px;
+    line-height: 36px;
+    left: 160px;
+}
+
+h:inputText {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 21px;
+    color: #A8A8B3;
+    border: 1px solid #ced4da;
+    border-radius: 0.5rem;
+    padding: 0.75rem 1.5rem 0.75rem 1.5rem;
+    font-size: 18px;
+    font-weight: 400;
+    height: 50px;
+}
+

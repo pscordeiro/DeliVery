@@ -21,17 +21,20 @@
 			
  			<c:forEach items="#{salaAdmController.listarPedidos()}" var="pedido">
  			
- 				<div class="card card-pedido pedido-wrapper">
+ 				<div class="card card-pedido pedido-wrapper mb-2">
  				
  					<div class="description-pedido">
  					
 	 					<div class="card-idf">
-							<p><strong>Idf_Pedido:</strong> ##{pedido.idf_Pedido}</p> 
+							<p><strong>Pedido:</strong> ##{pedido.idf_Pedido}</p> 
 						</div>
 					
 						<div class="card-pedido-endereco">
 							<p>#{pedido.endereco.desc_Logradouro} #{pedido.endereco.num_Endereco} - #{pedido.endereco.nme_Cidade}/#{pedido.endereco.sig_Estado}</p>
-						</div> 	
+						</div> 
+						<div>
+							<p>#{pedido.dataHoraPedido}</p>
+						</div>	
 																						
 						<div class="itens">
 						
@@ -39,44 +42,26 @@
 																
 							<c:forEach items="#{salaAdmController.listarItens(pedido.idf_Pedido)}" var="itemPedido">
 							
-								<div class="item">
-								
-									<div class="item-description">																	
-											<p> #{itemPedido.quantidade} x #{itemPedido.produto.desc_Produto} </p>	  																																																																																												
+								<div class="itemPedido">
+									<div>																	
+										<h6> #{itemPedido.quantidade} x #{itemPedido.produto.desc_Produto} </h6>
 									</div>
-									
-									<div class="item-subtotal">
-										<strong>R$#{itemPedido.subtotal}</strong>	
-									</div>
-										
+									<div>		  																																																																																												
+										<h6><b>R$#{itemPedido.subtotal}</b></h6>	
+									</div>	
 								</div>	
-						
 							</c:forEach>
-													
-						</div>	 						
-													
+						</div>	 												
  					</div>
- 					
  					 <div class="pedido-icons">
 						<h:commandLink action="#{salaAdmController.pedidoFinalizado(pedido)}"><i class="fa fa-trash mb-1 cartTrash"></i></h:commandLink>
- 					</div>
- 					
+ 					</div>		
  					<div class="pedido-icons">
- 						<h:commandLink action="#{salaAdmController.pedidoCancelado(pedido)}"><i class="fa fa-check mb-1 cartTrash"></i></h:commandLink>					
- 					</div>
- 													
- 				</div>
-							  			
+ 						<h:commandLink action="#{salaAdmController.pedidoCancelado(pedido)}"><i class="fa fa-check mb-12 cartTrash"></i></h:commandLink>					
+ 					</div>								
+ 				</div>  			
 			</c:forEach>				
-			
 		</div>
-	
 	</h:form>
-	
 	</div>
-	
-
-
-
-     
 </ui:decorate> 

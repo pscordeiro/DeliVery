@@ -23,48 +23,56 @@
                 		<div class="col-md-8">
                		
 							<c:forEach items="#{homeController.listarCarrinho(carrinho)}" var="itemCarrinho">							
-							    <div class="d-flex flex-row justify-content-between align-items-center p-2 bg-white mt-4 px-3 rounded">							        
-							        <div class="d-flex align-items-center div-image">				        	
+							    <div class="wrapper p-2 bg-white mt-4 px-3 rounded">							        
+							        <div class=" ">				        	
 							            	<img class="image" src="#{itemCarrinho.prod_Carrinho.url_Produto}" alt="produto-carrinho" />
 							        </div>									
-							        <div class="d-flex flex-column align-items-center product-details">
+							        <div class="">
 							         	<h5 class="text-grey">
 							                #{itemCarrinho.prod_Carrinho.quantidade}
 							            </h5>
-							            <div class="d-flex flex-column items-center product-desc">
+							            <div class="">
 							            </div>
 							        </div>							
-							        <div class="d-flex flex-column align-items-center qty">
+							        <div class="">
 							            <h6 class="font-weight-bold">
 							                #{itemCarrinho.prod_Carrinho.desc_Produto}
 							            </h6>
 							        </div>							
-							        <div>
+							        <div class= "">
 							            <h5 class="text-grey">
-							                #{itemCarrinho.sub_Total}
+							                R$ #{itemCarrinho.sub_Total}
 							            </h5>
 							        </div>							
-							        <div class="d-flex align-items-center">
-							            <h:commandLink action="#{homeController.apagarItemCarrinho(carrinho)}"><i class="fa fa-trash mb-1 text-danger"></i></h:commandLink>
+							        <div class="">
+							            <h:commandLink action="#{homeController.apagarItemCarrinho(itemCarrinho)}"><i class="fa fa-trash mb-1 cartTrash"></i></h:commandLink>
 							        </div>							
 							    </div>						    
 							</c:forEach>                  		                    		
 				             <c:forEach items="#{homeController.listarCarrinhoTotal(carrinho)}" var="totalCarrinho">
 				                 <div class = "mb-4">
-				                 		<div class=" d-flex justify-content-between mt-3 p-4 bg-white rounded">
+				                 		<div class=" wrapper mt-3 p-4 bgTotal rounded">
 				                 			<div>
-				                 				<h5>TOTAL</h5>
+				                 				<h5 class="text-white" >TOTAL</h5>
 				                 			</div>
 					                 		<div>
-								            	#{totalCarrinho.total_Itens}  Itens 
-					                 		</div>
-					                 		<div >
-						            				Total  #{totalCarrinho.total_Carrinho}              			
+					                 			<h5 class="text-white">
+								            		#{totalCarrinho.total_Itens}  Itens 
+								            	</h5>	
 					                 		</div>
 					                 		<div>
 					                 			<p>
 					                 			</p>
 					                 		</div>
+					                 		<div >
+					                 			<h5 class="text-white">
+						            				 R$ #{totalCarrinho.total_Carrinho}  
+						            			</h5>	            			
+					                 		</div>
+					                 		<div>
+					                 			<p>
+					                 			</p>
+					                 		</div>    		
 				                 		</div>
 				                 	</div>
 		            			<div class="d-flex flex-row align-items-center ">            			         					

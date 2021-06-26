@@ -937,3 +937,21 @@ h:inputText {
     height: 50px;
 }
 
+.cartTrash {
+	color: #7875ff;
+}
+.cartTrash:hover{
+	color: #6f42c1;
+	text-decoration: none;
+}
+
+.wrapper {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  align-items: center;
+  text-align: center;
+}
+
+.bgTotal {
+	background-color: #343a4085;
+}

@@ -19,7 +19,9 @@
 			<div class="product-list">
 		  		<c:forEach items="#{homeController.listarProdutos()}" var="produto">
 			  		<div class="card h-100">
-                    	<div class="badge text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Novo</div>
+					<h:form rendered="#{homeController.verificarProdutoNovo(produto)}">								
+						<div class="badge text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Novo</div>			  		
+			  		</h:form>
                         <img class="card-img-top" src="#{produto.url_Produto}" alt="..." />
                         <div class="card-body p-4">
                         	<div class="text-center">
@@ -28,10 +30,10 @@
 	                                  #{produto.desc_Produto}			
 									  <br/>  							
                                   </h5>
-                                  <h6>
+                                  <h6 class="mt-5 font-weight-bold">
                                   	  R$
 									  #{produto.valor_Produto} 
-                                  </h6>
+                                  </h6>                                                                                                                                 
                         	  </div>
                         </div>
                    		<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">

@@ -138,8 +138,7 @@ nav {
 .empty-cart, .form-login{
 	box-sizing: border-box;
 	padding:32px;
-	min-height: calc(100vh - 242px);
-	display: flex;
+	min-height: calc(100vh - 299px);
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
@@ -331,6 +330,12 @@ nav {
 	align-content: flex-start;
 }
 
+
+.pedido-wrapper {
+  display: grid;
+  grid-template-columns: 10fr 1fr 1fr;
+}
+
 .product-list > div{
 	display: flex;
 	flex-direction: column;
@@ -338,18 +343,19 @@ nav {
 }
 
 .pedido-list > div{
-	display: flex;
-	flex-direction: column;
 	align-items: flex-start;
 }
 
+.pedido-icons{
+  text-align: end;
+}
+
 .card-pedido{
-	background-color: gray;
 	padding: 16px;
 	margin: 16px;
 }
 
-.card-itens{
+.item{
 	/*tá em teste tentando arrumar*/
     display: flex;
     flex-direction: row;
@@ -707,13 +713,11 @@ input, label {
 
 input {
     font-style: normal;
-    font-weight: normal;
     font-size: 18px;
     line-height: 21px;
     border: 1px solid #ced4da;
     border-radius: 0.25rem;
     padding: 0.75rem 1.5rem 0.75rem 1.5rem;
-    font-size: 18px;
     font-weight: 400;
     height: 50px;
 }
@@ -761,12 +765,6 @@ button:focus {
     margin-left: auto;
     margin-right: auto;
     display: flex;
-}
-
-form {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
 }
 
 table{
@@ -877,3 +875,86 @@ th {
     display: none; 
 }
 
+.container-full{
+	min-height: calc(100vh - 210px);
+	justify-content: center;
+}
+
+.div-image {
+    height:5%
+}
+
+.image{
+    height: 70px;
+    width:  70px;
+}
+
+#titulo-login {
+    font-size: 36px;
+    line-height: 36px;
+    font-weight: 500;
+    padding-bottom: 2rem;
+}
+
+.pessoas-bebendo-login {
+    position: relative;
+    height: 80%;
+}
+
+#btn-entrar-login {
+    cursor: pointer;
+    position: relative;
+    font-weight: 700;
+    font-style: normal;
+    line-height: 21,09px;
+    background-color: #7875FF;
+    border: none;
+    border-radius: 4px;
+    padding: 10px;
+    width: 450px;
+    text-align: center;
+    overflow: hidden;
+    cursor: pointer;
+    color: #FFFFFF;
+}
+
+#texto-cadastrar {
+    position: relative;
+    font-weight: 100;
+    font-size: 18px;
+    line-height: 36px;
+    left: 160px;
+}
+
+h:inputText {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 21px;
+    color: #A8A8B3;
+    border: 1px solid #ced4da;
+    border-radius: 0.5rem;
+    padding: 0.75rem 1.5rem 0.75rem 1.5rem;
+    font-size: 18px;
+    font-weight: 400;
+    height: 50px;
+}
+
+.cartTrash {
+	color: #7875ff;
+}
+.cartTrash:hover{
+	color: #6f42c1;
+	text-decoration: none;
+}
+
+.wrapper {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  align-items: center;
+  text-align: center;
+}
+
+.bgTotal {
+	background-color: #343a4085;
+}

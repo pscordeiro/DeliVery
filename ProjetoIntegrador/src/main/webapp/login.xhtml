@@ -1,35 +1,52 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
-<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+  <ui:decorate xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:p="http://primefaces.org/ui"      
-      xmlns:c="http://java.sun.com/jstl/core"  
+      xmlns:h="http://java.sun.com/jsf/html"      
       template="/template-usuario.xhtml"> 
-      	
-	<div class="container center">
-	
-		<div class="form-login">
-		
-			<h:form id="formLogin" styleClass="card">
-			
-				Email:<br/>
-				<div>
-					<h:inputText id="Email" value="#{usuarioLogadoController.user.eml_Pessoa}" />
+    
+    <div class="main-container-login container">
+    
+        <h:form id="form-login">
+        
+        	<div class="row ">
+        	
+        		<div class="col-md-4 login ">
+        		
+        		    <div>
+      					<h:graphicImage styleClass="logo-login" library="images" name="logo-delivery-login.svg" alt="Logo da empresa"></h:graphicImage>
+    				</div>
+    				
+        			<h1 id="titulo-login">Faça seu login</h1>
+	            
+		            <div class="full-box">
+		              <h:inputText id="Email" value="#{usuarioLogadoController.user.eml_Pessoa}" />
+		                <f:passThroughAttribute name="placeholder" value="Ex: teste@gmail.com" />
+		            </div>
+		            
+		            <div class="full-box">
+		              <h:inputSecret id="Senha" value="#{usuarioLogadoController.user.senha}" />
+		            </div>
+		            
+		            <div class="full-box">
+		              <h:commandButton id="btn-entrar-login" action="#{usuarioLogadoController.fazerLogin()}" value="Logar"/>
+		            </div>
+		            
+		            <div>
+		                <p id="texto-cadastrar">Não possui conta? Cadastra-se <a href="#">aqui</a>.</p>
+		            </div>
+	            
+	      		</div>
+	      		
+	      		<div class="col-md-8 foto_pessoas">
+      				<h:graphicImage styleClass="pessoas-bebendo-login" library="images" name="pessoas-bebendo.svg" alt="Pessoas bebendo"></h:graphicImage>
 				</div>
-				<br/>
-				Senha:<br/>
-				<div>
-					<h:inputText id="Senha" value="#{usuarioLogadoController.user.senha}" />				
-				</div>
-				<br/>				
-				<h:commandButton action="#{usuarioLogadoController.fazerLogin()}" value="Logar"/>	
-				
-			</h:form>
-		
-		</div>
-			
+	      		
+	      	</div>
+					      	 
+		</h:form> 
+        	
 	</div>
-		
+        
 </ui:decorate> 
 

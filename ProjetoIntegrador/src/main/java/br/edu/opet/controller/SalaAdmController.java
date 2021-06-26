@@ -9,20 +9,13 @@ import javax.faces.context.FacesContext;
 
 import br.edu.opet.entity.model.Pedido;
 import br.edu.opet.entity.model.PedidoItem;
+import br.edu.opet.entity.model.Produto;
 import br.edu.opet.entity.model.Usuario;
 
 @ManagedBean
 @RequestScoped
 public class SalaAdmController {
-	
-	//pessoa cai na tela login de adm (login é opcional mas eu acho que vai dar boa)
-	//loga e vai pra lista de pedidos
-	//pedido pode ser marcado como confirmado ou cancelado
-	//pode ir pra tela para cadastrar novo produto
-	//na tela de cadastrar produto pode voltar para sala adm ou finalizar
-	//finalizando vai pra tela de sucesso e pode voltar pra sala adm
-	//pode também listar os usuarios cadastrados no banco
-	
+		
 	private String mensagem = "";
 	
 	public String getMensagem() {
@@ -39,6 +32,34 @@ public class SalaAdmController {
 		return pedItem.listarItens(Idf_Pedido);	
 	}
 	
+	public String pedidoFinalizado(Pedido ped) {
+		return "";
+	}
+	
+	public String pedidoCancelado(Pedido ped) {
+		return "";
+	}
+	
+	public String cadastrarProduto(Produto prod) {
+		
+		if(prod.cadastrarProduto(prod)) {
+			try {
+				FacesContext.getCurrentInstance().getExternalContext().redirect("/ProjetoIntegrador/sala-adm/cadproduto-sucesso.xhtml");
+			} catch (IOException e) {
+				System.out.println(e);
+			}
+			return "";
+		}
+		else {
+			try {
+				FacesContext.getCurrentInstance().getExternalContext().redirect("/ProjetoIntegrador/sala-adm/cadproduto-falha.xhtml");
+			} catch (IOException e) {
+				System.out.println(e);
+			}
+			return "";
+		}
+	}
+	
 	public String excluir(Usuario us) {		
 		if(us.deletarUsuario()) {
 			mensagem = "Deletado com sucesso !";
@@ -52,7 +73,7 @@ public class SalaAdmController {
 	}
 	
 	public String redirectToCadProduto() {
-	    try {
+		try {
 			FacesContext.getCurrentInstance().getExternalContext().redirect("/ProjetoIntegrador/sala-adm/cadastrar-produto.xhtml");
 		} catch (IOException e) {
 			System.out.println(e);

@@ -14,22 +14,12 @@ import br.edu.opet.entity.model.Produto;
 @ManagedBean
 @RequestScoped
 public class HomeController {
-	
-	//Tela inicial é a home deslogada listando os produtos
-	//Cliente pode ir para o login ou
-	//Cliente pode ir adicionando os produtos no carrinho
-	//Ao clicar para ir ao carrinho logar
-	//Após logar redirecionar para finalizar compra
-	//Na tela de login podera ir para o cadastro de novo usuario
-	//Na tela de cadastro finalizado poderá voltar para home porém logado
-	//Na tela de finalizar compra podera remover ou nao itens adicionados e finalizar redirecionando para tela de sucesso
-	//Na tela de pedido realizado podera voltar para home
-	
+		
 	private String mensagem = "";
 	
 	public String getMensagem() {
 		return mensagem;
-	}
+	}	
 	
 	public List<Produto> listarProdutos(){
 		Produto prod = new Produto();
@@ -39,7 +29,6 @@ public class HomeController {
 	//adiciona produto no carrinho
 	public String adicionarCarrinho(Produto prod, Carrinho car, int quantidade){
 		
-		//int Idf_Carrinho = car.getIdf_Carrinho();
 		prod.setQuantidade(quantidade);
 		if(car.getIdf_Carrinho() != 0 && car != null) {
 			if(car.verItensCarrinho(prod, car)) {
@@ -90,6 +79,11 @@ public class HomeController {
 			return true;				
 		}
 		return false;
+	}
+	
+	public boolean verificarProdutoNovo(Produto prod) {
+		//if produto is novo return true se nao return false		
+		return true;
 	}
 	
 	public String verCarrinho(Carrinho carrinho, UsuarioLogadoController user){

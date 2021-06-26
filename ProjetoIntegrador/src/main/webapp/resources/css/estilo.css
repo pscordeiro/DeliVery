@@ -330,6 +330,12 @@ nav {
 	align-content: flex-start;
 }
 
+
+.pedido-wrapper {
+  display: grid;
+  grid-template-columns: 10fr 1fr 1fr;
+}
+
 .product-list > div{
 	display: flex;
 	flex-direction: column;
@@ -337,18 +343,19 @@ nav {
 }
 
 .pedido-list > div{
-	display: flex;
-	flex-direction: column;
 	align-items: flex-start;
 }
 
+.pedido-icons{
+  text-align: end;
+}
+
 .card-pedido{
-	background-color: gray;
 	padding: 16px;
 	margin: 16px;
 }
 
-.card-itens{
+.item{
 	/*tá em teste tentando arrumar*/
     display: flex;
     flex-direction: row;
@@ -881,10 +888,6 @@ th {
     height: 70px;
     width:  70px;
 }
-
-
-
-
 
 #titulo-login {
     font-size: 36px;

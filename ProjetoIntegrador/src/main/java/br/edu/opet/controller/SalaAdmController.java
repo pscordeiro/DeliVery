@@ -15,15 +15,7 @@ import br.edu.opet.entity.model.Usuario;
 @ManagedBean
 @RequestScoped
 public class SalaAdmController {
-	
-	//pessoa cai na tela login de adm (login é opcional mas eu acho que vai dar boa)
-	//loga e vai pra lista de pedidos
-	//pedido pode ser marcado como confirmado ou cancelado
-	//pode ir pra tela para cadastrar novo produto
-	//na tela de cadastrar produto pode voltar para sala adm ou finalizar
-	//finalizando vai pra tela de sucesso e pode voltar pra sala adm
-	//pode também listar os usuarios cadastrados no banco
-	
+		
 	private String mensagem = "";
 	
 	public String getMensagem() {
@@ -38,6 +30,14 @@ public class SalaAdmController {
 	public List<PedidoItem> listarItens(int Idf_Pedido){
 		PedidoItem pedItem = new PedidoItem();
 		return pedItem.listarItens(Idf_Pedido);	
+	}
+	
+	public String pedidoFinalizado(Pedido ped) {
+		return "";
+	}
+	
+	public String pedidoCancelado(Pedido ped) {
+		return "";
 	}
 	
 	public String cadastrarProduto(Produto prod) {

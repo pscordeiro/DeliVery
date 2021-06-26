@@ -6,7 +6,6 @@
       xmlns:p="http://primefaces.org/ui"      
       xmlns:c="http://java.sun.com/jstl/core"  
       template="../template-adm.xhtml"> 
-
 	
 	#{usuarioLogadoController.checkUserCredential()}	
 	
@@ -22,45 +21,51 @@
 			
  			<c:forEach items="#{salaAdmController.listarPedidos()}" var="pedido">
  			
- 				<div class="card-pedido">
+ 				<div class="card card-pedido pedido-wrapper">
  				
- 					<div class="card-idf">
-						<p><strong>Idf_Pedido: #{pedido.idf_Pedido}</strong></p> 
-					</div>
-				
-					<div class="card-pedido-endereco">
-						<p>#{pedido.endereco.desc_Logradouro} #{pedido.endereco.num_Endereco} - #{pedido.endereco.nme_Cidade}/#{pedido.endereco.sig_Estado}</p>
-					</div>
-						
-					<p>ITENS:</p>
-											
-					<div class="">
-										
-						<c:forEach items="#{salaAdmController.listarItens(pedido.idf_Pedido)}" var="itemPedido">
-						
-							<div class="card-itens">
-							
-								<div class="">																	
-										<p> #{itemPedido.quantidade} x #{itemPedido.produto.desc_Produto} </p>																																																									
-								</div>
-									
-							</div>	
-							
-							<div class="">	
-							
-								<div class="">								
-										#{itemPedido.subtotal}																
-								</div>	
-														
-							</div>
+ 					<div class="description-pedido">
+ 					
+	 					<div class="card-idf">
+							<p><strong>Idf_Pedido:</strong> ##{pedido.idf_Pedido}</p> 
+						</div>
 					
-						</c:forEach>
-												
-					</div>	 				
- 				
+						<div class="card-pedido-endereco">
+							<p>#{pedido.endereco.desc_Logradouro} #{pedido.endereco.num_Endereco} - #{pedido.endereco.nme_Cidade}/#{pedido.endereco.sig_Estado}</p>
+						</div> 	
+																						
+						<div class="itens">
+						
+							<p class="font-weight-bold">ITENS:</p>												
+																
+							<c:forEach items="#{salaAdmController.listarItens(pedido.idf_Pedido)}" var="itemPedido">
+							
+								<div class="item">
+								
+									<div class="item-description">																	
+											<p> #{itemPedido.quantidade} x #{itemPedido.produto.desc_Produto} </p>	  																																																																																												
+									</div>
+									
+									<div class="item-subtotal">
+										<strong>R$#{itemPedido.subtotal}</strong>	
+									</div>
+										
+								</div>	
+						
+							</c:forEach>
+													
+						</div>	 						
+													
+ 					</div>
+ 					
+ 					 <div class="pedido-icons">
+						<h:commandLink action="#{salaAdmController.pedidoFinalizado(pedido)}"><i class="fa fa-trash mb-1 cartTrash"></i></h:commandLink>
+ 					</div>
+ 					
+ 					<div class="pedido-icons">
+ 						<h:commandLink action="#{salaAdmController.pedidoCancelado(pedido)}"><i class="fa fa-check mb-1 cartTrash"></i></h:commandLink>					
+ 					</div>
+ 													
  				</div>
- 			
-	
 							  			
 			</c:forEach>				
 			

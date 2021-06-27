@@ -21,6 +21,13 @@ public class HomeController {
 		return mensagem;
 	}	
 	
+	public boolean temMensagem() {
+		if(mensagem.length() > 0)
+			return true;
+		else
+			return false;
+	}
+	
 	public List<Produto> listarProdutos(){
 		Produto prod = new Produto();
 		return prod.listar();	

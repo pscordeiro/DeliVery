@@ -63,6 +63,10 @@ nav {
     border: none;
 }
 
+.btn-lista{
+	width: 65px !important;
+}
+
 .paymentButton{
 	position: left;
     background-color: #7875ff;
@@ -977,3 +981,5 @@ h:inputText {
 .bgTotal {
 	background-color: #343a4085;
 }
+
+

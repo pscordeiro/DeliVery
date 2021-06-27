@@ -7,7 +7,8 @@ import java.util.Date;
 
 public class DataUtil {
 	
-	private static SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+	private static SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+	private static SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd");
 	private static SimpleDateFormat sdfDataAndHour = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
 	private static SimpleDateFormat sdfSoAsHour = new SimpleDateFormat("hh:mm:ss aa");
 	private static SimpleDateFormat sdfSoDate = new SimpleDateFormat("dd/MM/yyyy");
@@ -15,6 +16,15 @@ public class DataUtil {
 	public static Date strToDate (String dt) {
 		try {
 			return sdf.parse(dt);
+		}
+		catch(ParseException e){
+			return null;
+		}
+	}
+	
+	public static Date strToDate2 (String dt) {
+		try {
+			return sdf2.parse(dt);
 		}
 		catch(ParseException e){
 			return null;

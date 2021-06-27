@@ -19,6 +19,19 @@ public class UsuarioLogadoController {
     private String redirectUrl;
     private int codRedirect;
     
+	private String mensagem = "";
+	
+	public String getMensagem() {
+		return mensagem;
+	}
+	
+	public boolean temMensagem() {
+		if(mensagem.length() > 0)
+			return true;
+		else
+			return false;
+	}
+    
     private static UsuarioLogadoController instance;
 
     @PostConstruct
@@ -39,7 +52,8 @@ public class UsuarioLogadoController {
         	return "";
         }
         else {
-            FacesContext.getCurrentInstance().getExternalContext().redirect("/ProjetoIntegrador/login.xhtml");
+	        mensagem = "";
+        	FacesContext.getCurrentInstance().getExternalContext().redirect("/ProjetoIntegrador/login.xhtml");
             return "";
         }
     	
@@ -53,6 +67,7 @@ public class UsuarioLogadoController {
 	       //Erro usuario ou senha incorretos
 	        FacesContext.getCurrentInstance().addMessage("MessageId", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "Usuário/Senha incorretos ou conta inexistente"));
 	        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "Usuário/Senha incorretos ou conta inexistente"));
+	        mensagem = "Usuário/Senha incorretos ou conta inexistente";
 	        return "";
 	    }
 	    else {

@@ -5,11 +5,15 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:p="http://primefaces.org/ui"      
       xmlns:c="http://java.sun.com/jstl/core"  
-      template="template-usuario.xhtml"> 
-	<br/>
-   	<div class="toast">
-       	#{homeController.mensagem} 
-   	</div>     
+      template="template-usuario.xhtml">  
+   	
+	<h:form rendered="#{homeController.temMensagem()}">
+		<div class="alert alert-success alert-dismissible">
+		  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+		  <h:outputText value="#{homeController.mensagem}" />
+		</div>	
+	</h:form>	   	
+ 
 	<div class="container text-center mt-5 mb-5">
 		<h1>Faça seu pedido</h1>
 	</div>	

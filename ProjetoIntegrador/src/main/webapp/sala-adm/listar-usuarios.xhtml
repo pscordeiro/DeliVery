@@ -7,7 +7,7 @@
       xmlns:c="http://java.sun.com/jstl/core"  
       template="../template-adm.xhtml"> 
       
-  <div class="container center">
+  <div class="center empty-cart mb-4">
 
      <div class="titulo mb-4 mt-4">
     	<h2>Lista de Clientes</h2> 
@@ -21,7 +21,7 @@
 
 		<h:form id="formUsuario">
 								
-			<div class="container center">
+			<div class="center">
 			
 				<table class="table table-hover">
 					<tr>
@@ -34,6 +34,9 @@
 					  <th>Email</th>
 					  <th>Data Cadastro</th>
 					  <th>Gênero</th>
+					  <th>Cidade</th>					  
+					  <th>Inativar</th>					  
+					  <th>Alterar Dados</th>					  				  					  
 					</tr>
 					
 			  		<c:forEach items="#{usuarioController.listar()}" var="usuario">
@@ -41,12 +44,15 @@
 					      <td>${usuario.idf_Usuario}</td>
 					      <td>${usuario.num_CPF}</td>
 					      <td class="coluna-nome">${usuario.nme_Pessoa}</td>			      
-					      <td>${usuario.dta_Nascimento}</td>
+					      <td>${usuario.dta_NascimentoStr}</td>
 					      <td class="coluna-ddd">${usuario.num_DDD_Celular}</td>
 					      <td>${usuario.num_Celular}</td>	
 					      <td>${usuario.eml_Pessoa}</td>	
 					      <td>${usuario.dta_Cadastro}</td>		
-  			      		  <td class="coluna-genero">${usuario.desc_Sexo}</td>					      					      			      				      					      				      
+  			      		  <td class="coluna-genero">${usuario.desc_Sexo}</td>	
+  			      		  <td class="coluna-genero">${usuario.endereco.nme_Cidade}</td>		
+  			      		  <td class="coluna-genero"><h:commandButton styleClass="button btn-lista" action="#{usuarioController.excluir(usuario)}" value="Inativar" /></td>		
+  			      		  <td class="coluna-genero"><h:commandButton styleClass="button btn-lista" action="#{usuarioController.atualizar(usuario)}" value="Alterar" /></td>			      					      			      				      					      				        			      		  	      					      			      				      					      				      
 					    </tr>
 				  	</c:forEach>
 				  	

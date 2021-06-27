@@ -8,9 +8,18 @@
       
 	<h:form>
 
-		<div class="container text-center justify-content-center center">						        	        
-		<h1 class="mt-4 text-center display-4">Cadastro realizado <br /> com sucesso!</h1>
-		    <h:commandButton styleClass="mt-4 btn-enviar" action="#{usuarioLogadoController.redirectToLogin(1)}" value="Ir para o login"></h:commandButton>	            
+		<div class="container text-center justify-content-center center">	
+		
+			<h:form rendered="#{!usuarioLogadoController.taLogado()}">	
+				<h1 class="mt-4 text-center display-4">Cadastro realizado <br /> com sucesso!</h1>
+			    <h:commandButton styleClass="mt-4 btn-enviar" action="#{usuarioLogadoController.redirectToLogin(1)}" value="Ir para o login"></h:commandButton>	            
+			</h:form>	 
+			
+			<h:form rendered="#{usuarioLogadoController.taLogado()}">	
+				<h1 class="mt-4 text-center display-4">Dados atualizados com sucesso !</h1>
+			    <h:commandButton styleClass="mt-4 btn-enviar" action="#{homeController.redirectToHome()}" value="Voltar para a home"></h:commandButton>	            	
+			</h:form>			
+         
 		</div>
 		      
 		<div class="mt-4 text-center">

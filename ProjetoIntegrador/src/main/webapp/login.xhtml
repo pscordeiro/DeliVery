@@ -32,16 +32,20 @@
 				            <h:inputSecret styleClass="input" id="Senha" value="#{usuarioLogadoController.user.senha}">
 				            </h:inputSecret>
 						</div>		
-						
-						 <p:messages for="MessageId" showDetail="true" autoUpdate="true" closable="true"></p:messages>
-						 <p:messages showDetail="true" />
+																						
+						<h:form rendered="#{usuarioLogadoController.temMensagem()}">
+							<div class="alert alert-danger alert-dismissible">
+							  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+							  <h:outputText value="#{usuarioLogadoController.mensagem}" />
+							</div>	
+						</h:form>														
 						    	            
 			            <div class="mt-4 mb-3">
 			              <h:commandButton styleClass="btn-entrar-login button" action="#{usuarioLogadoController.fazerLogin()}" value="Fazer login"/>
 			            </div>
 			            
 			            <div class="mt-3">
-			            	<h:commandLink action="#{homeController.redirectToCad()}" styleClass="texto-cadastrar" value="Não possui conta? Cadastre-se aqui" />
+			            	<h:commandLink action="#{usuarioController.cadastrarConta()}" styleClass="texto-cadastrar" value="Não possui conta? Cadastre-se aqui" />
 			            </div>        		
 	        			
 	        		</div>

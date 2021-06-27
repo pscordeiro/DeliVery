@@ -48,12 +48,12 @@ public class SalaAdmController {
 	
 	public String pedidoFinalizado(Pedido ped) {
 		ped.finalizarPedido(ped);
-		return "";
+		return "/ProjetoIntegrador/sala-adm/listar-pedidos.xhtml";
 	}
 	
 	public String pedidoCancelado(Pedido ped) {
 		ped.cancelarPedido(ped);
-		return "";
+		return "/ProjetoIntegrador/sala-adm/listar-pedidos.xhtml";
 	}
 	
 	public String cadastrarProduto(Produto prod) {

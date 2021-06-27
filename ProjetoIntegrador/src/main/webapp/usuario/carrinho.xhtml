@@ -36,13 +36,13 @@
 							        </div>							
 							        <div class="">
 							            <h5 class="text-grey">
-							                #{itemCarrinho.prod_Carrinho.desc_Produto}
+							                R$ #{itemCarrinho.prod_Carrinho.desc_Produto}
 							            </h5>
 							        </div>							
-							        <div class= "">
-							            <h5 class="text-grey">
-							                R$ #{itemCarrinho.sub_Total}
-							            </h5>
+							        <div class= "text-grey h5">
+								        R$ <h:outputText value="#{itemCarrinho.sub_Total}" >
+											<f:convertNumber pattern="0.00" />
+										</h:outputText>
 							        </div>							
 							        <div class="">
 							            <h:commandLink action="#{homeController.apagarItemCarrinho(itemCarrinho)}"><i class="fa fa-trash mb-1 cartTrash"></i></h:commandLink>
@@ -63,12 +63,12 @@
 					                 		<div>
 					                 			<p>
 					                 			</p>
-					                 		</div>
-					                 		<div >
-					                 			<h5 class="text-white">
-						            				 R$ #{totalCarrinho.total_Carrinho}  
-						            			</h5>	            			
-					                 		</div>
+					                 		</div>			                 		
+									        <div class= "text-white h5">
+										        R$ <h:outputText value="#{totalCarrinho.total_Carrinho}" >
+													<f:convertNumber pattern="0.00" />
+												</h:outputText>
+									        </div>					                 					                 
 					                 		<div>
 					                 			<p>
 					                 			</p>

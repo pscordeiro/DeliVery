@@ -3,42 +3,52 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:h="http://java.sun.com/jsf/html"      
+      xmlns:p="http://primefaces.org/ui"            
       template="/template-usuario.xhtml"> 
     
-    <div class="main-container-login container">
+    <div class="container wrapper-login mb-5">
     
         <h:form id="form-login">
         
-        	<div class="row ">
+        	<div class="row">
         	
-        		<div class="col-md-4 login ">
+        		<div class="col-md-4 mt-3 text-center">
         		
-        		    <div>
-      					<h:graphicImage styleClass="logo-login" library="images" name="logo-delivery-login.svg" alt="Logo da empresa"></h:graphicImage>
-    				</div>
-    				
-        			<h1 id="titulo-login">Faça seu login</h1>
+	        		<div class="mt-3">
+	        		
+	        			 <div class="mt-3 mb-3">
+      						<h:graphicImage styleClass="logo-delivery" library="images" name="Logo-escrita.svg" alt="Logo delivery"></h:graphicImage>
+						</div>
+			            		            
+		                <div class="half-box text-left">
+				           <h:outputLabel for="Email">Email:</h:outputLabel>          
+				            <h:inputText styleClass="input" id="Email" value="#{usuarioLogadoController.user.eml_Pessoa}">
+				         		<f:passThroughAttribute name="placeholder" value="Ex: teste@gmail.com" />
+				            </h:inputText>
+						</div>
+						
+						<div class="half-box text-left">
+				           <h:outputLabel for="Senha">Senha:</h:outputLabel>          
+				            <h:inputSecret styleClass="input" id="Senha" value="#{usuarioLogadoController.user.senha}">
+				            </h:inputSecret>
+						</div>		
+						
+						 <p:messages for="MessageId" showDetail="true" autoUpdate="true" closable="true"></p:messages>
+						 <p:messages showDetail="true" />
+						    	            
+			            <div class="mt-4 mb-3">
+			              <h:commandButton styleClass="btn-entrar-login button" action="#{usuarioLogadoController.fazerLogin()}" value="Fazer login"/>
+			            </div>
+			            
+			            <div class="mt-3">
+			            	<h:commandLink action="#{homeController.redirectToCad()}" styleClass="texto-cadastrar" value="Não possui conta? Cadastre-se aqui" />
+			            </div>        		
+	        			
+	        		</div>
 	            
-		            <div class="full-box">
-		              <h:inputText id="Email" value="#{usuarioLogadoController.user.eml_Pessoa}" />
-		                <f:passThroughAttribute name="placeholder" value="Ex: teste@gmail.com" />
-		            </div>
-		            
-		            <div class="full-box">
-		              <h:inputSecret id="Senha" value="#{usuarioLogadoController.user.senha}" />
-		            </div>
-		            
-		            <div class="full-box">
-		              <h:commandButton id="btn-entrar-login" action="#{usuarioLogadoController.fazerLogin()}" value="Logar"/>
-		            </div>
-		            
-		            <div>
-		                <p id="texto-cadastrar">Não possui conta? Cadastra-se <a href="#">aqui</a>.</p>
-		            </div>
-	            
-	      		</div>
+      			</div>
 	      		
-	      		<div class="col-md-8 foto_pessoas">
+	      		<div class="col-md-8">
       				<h:graphicImage styleClass="pessoas-bebendo-login" library="images" name="pessoas-bebendo.svg" alt="Pessoas bebendo"></h:graphicImage>
 				</div>
 	      		

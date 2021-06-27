@@ -121,4 +121,13 @@ public class HomeController {
 		return "";
 	}
 	
+	public String redirectToCad() {
+		try {
+			FacesContext.getCurrentInstance().getExternalContext().redirect("/ProjetoIntegrador/usuario/cad-perfil-usuario.xhtml");
+		} catch (IOException e) {
+			System.out.println(e);
+		}
+		return "";
+	}
+	
 }

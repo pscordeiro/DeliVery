@@ -54,7 +54,7 @@
 				
                 <div class="half-box spacing">
 		           <h:outputLabel for="Cpf">CPF:</h:outputLabel>          
-		           <h:inputText id="Cpf" value="#{usuario.num_CPF}">
+		           <h:inputText id="Cpf" value="#{usuario.num_CPF}" disabled="#{usuarioLogadoController.taLogado()}">
 		         		<f:passThroughAttribute name="placeholder" value="Ex: 113.941.039.30" />
 		            </h:inputText>
 				</div>

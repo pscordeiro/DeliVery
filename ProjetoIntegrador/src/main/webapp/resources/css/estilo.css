@@ -893,41 +893,56 @@ th {
     width:  70px;
 }
 
-#titulo-login {
-    font-size: 36px;
-    line-height: 36px;
+.titulo-login {
+    font-size: 28px;
+    line-height: 28px;
     font-weight: 500;
     padding-bottom: 2rem;
+    text-decoration: none
+}
+
+.wrapper-login{
+  display: grid;
+  grid-template-columns: 10fr 1fr;
+  padding: 18px;
 }
 
 .pessoas-bebendo-login {
-    position: relative;
-    height: 80%;
+    width:100%;
+    height: 90%;
+    margin-left: 20%;
 }
 
-#btn-entrar-login {
+.logo-delivery{
+	width:100%;
+    height: 90%;
+}
+
+.btn-entrar-login {
     cursor: pointer;
-    position: relative;
     font-weight: 700;
     font-style: normal;
-    line-height: 21,09px;
     background-color: #7875FF;
     border: none;
     border-radius: 4px;
     padding: 10px;
-    width: 450px;
+    width: 314px;
     text-align: center;
-    overflow: hidden;
     cursor: pointer;
     color: #FFFFFF;
 }
 
-#texto-cadastrar {
-    position: relative;
+.texto-cadastrar {
     font-weight: 100;
     font-size: 18px;
     line-height: 36px;
-    left: 160px;
+    color: #7875ff;
+    margin: 4px;
+}
+
+.texto-cadastrar:hover {
+	text-decoration: none;
+	color: #6f42c1;
 }
 
 h:inputText {

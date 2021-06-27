@@ -3,6 +3,7 @@ package br.edu.opet.controller;
 import java.io.IOException;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
@@ -50,7 +51,9 @@ public class UsuarioLogadoController {
 	    if(u == null)
 	    {
 	       //Erro usuario ou senha incorretos
-	    	return null;
+	        FacesContext.getCurrentInstance().addMessage("MessageId", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "Usuário/Senha incorretos ou conta inexistente"));
+	        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "Usuário/Senha incorretos ou conta inexistente"));
+	        return "";
 	    }
 	    else {
 	        usuarioLogado = Boolean.TRUE;

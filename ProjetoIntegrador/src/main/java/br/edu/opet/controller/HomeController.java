@@ -112,4 +112,13 @@ public class HomeController {
 		
 	}
 	
+	public String redirectToHome() {
+		try {
+			FacesContext.getCurrentInstance().getExternalContext().redirect("/ProjetoIntegrador/index.xhtml");
+		} catch (IOException e) {
+			System.out.println(e);
+		}
+		return "";
+	}
+	
 }

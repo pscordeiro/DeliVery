@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 
 import br.edu.opet.entity.model.Carrinho;
@@ -38,15 +39,17 @@ public class PedidoDAO {
 			+ " JOIN PI_Usuarios PIU on PIU.Idf_Usuario = PIP.Idf_Usuario "
 			+ " JOIN PI_Endereco PIE on PIE.Idf_Endereco = PIU.Idf_Endereco "
 			+ " JOIN PI_Cidade PIC on PIC.Idf_Cidade = PIE.Idf_Cidade "
-			+ " WHERE PIP.Idf_Situacao = 1");
+			+ " WHERE PIP.Idf_Situacao = 1 "
+			+ " ORDER BY DataHoraPedido DESC ");
 		
 			ResultSet rs = stmt.executeQuery();
-			
+
 			while(rs.next()) {
 				
 				Pedido ped = new Pedido();
 				Usuario us = new Usuario();
 				Endereco end = new Endereco();
+				Timestamp DataSql;
 				
 				end.setDesc_Logradouro(rs.getString("Des_Logradouro"));
 				end.setNum_Endereco(rs.getString("Num_Endereco"));
@@ -57,9 +60,9 @@ public class PedidoDAO {
 				ped.setEndereco(end);
 				ped.setUsuario(us);				
 				ped.setIdf_Pedido(rs.getInt("Idf_Pedido"));
-				ped.setDataHoraPedido(rs.getDate("DataHoraPedido"));
+				DataSql = (rs.getTimestamp("DataHoraPedido"));				
+				ped.setDataHoraPedidoSql(DataSql);
 				ped.setIdf_Usuario(rs.getInt("Idf_Usuario"));
-				
 				alPedido.add(ped);
 			}
 			
@@ -104,7 +107,7 @@ public class PedidoDAO {
 				
 			stmt.setInt(1,Idf_Pedido);
 			ResultSet rs = stmt.executeQuery();
-			
+					
 			while(rs.next()) {
 				
 				PedidoItem pedItem = new PedidoItem();
@@ -113,8 +116,7 @@ public class PedidoDAO {
 				pedItem.setQuantidade(rs.getInt("Quantidade"));
 				pedItem.setSubtotal(rs.getDouble("Valor_Total"));
 				prod.setDesc_Produto(rs.getString("Desc_Produto"));
-				pedItem.setProduto(prod);
-				
+				pedItem.setProduto(prod);			
 				alPedidoItem.add(pedItem);
 			}
 			
@@ -238,5 +240,117 @@ public class PedidoDAO {
 		}
 		return false;	
 	}
+	protected boolean cancelarPedido(Pedido ped) {
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		
+		try {
+			conn = conexao.getConnection(false);			
+			stmt = conn.prepareStatement("UPDATE PI_Pedido SET Idf_Situacao = 3 WHERE Idf_Pedido = ?");
+					
+			stmt.setInt(1,ped.getIdf_Pedido());
+			
+			int rowAffected = stmt.executeUpdate();
+				
+			if(rowAffected == 1){											
+				conn.commit();
+				stmt.close();
+				conn.close();
+				return true;
+			}
+			else {
+				conn.rollback();
+				stmt.close();
+				conn.close();
+				return false;
+			}					
+		} catch (SQLException e) {
+			System.err.println(e);
+			try {
+				conn.rollback();
+				conn.close();
+			} catch (SQLException e1) {
+				System.err.println(e1);
+				return false;
+			}
 
+		}
+		return false;
+	}
+	protected boolean finalizarPedido(Pedido ped) {
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		
+		try {
+			conn = conexao.getConnection(false);			
+			stmt = conn.prepareStatement("UPDATE PI_Pedido SET Idf_Situacao = 2 WHERE Idf_Pedido = ?");
+					
+			stmt.setInt(1,ped.getIdf_Pedido());
+			
+			int rowAffected = stmt.executeUpdate();
+				
+			if(rowAffected == 1){											
+				conn.commit();
+				stmt.close();
+				conn.close();
+				return true;
+			}
+			else {
+				conn.rollback();
+				stmt.close();
+				conn.close();
+				return false;
+			}					
+		} catch (SQLException e) {
+			System.err.println(e);
+			try {
+				conn.rollback();
+				conn.close();
+			} catch (SQLException e1) {
+				System.err.println(e1);
+				return false;
+			}
+
+		}
+		return false;
+	}
+	protected Double totalPedido(int Idf_Pedido, PedidoItem pedItem) {
+		
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		
+		try {
+			conn = conexao.getConnection(true);		
+			stmt = conn. prepareStatement(
+			"SELECT SUM(Valor_Total) AS TotalPedido "
+	 		+ "FROM PI_PedidoItem "
+	 		+ "WHERE Idf_Pedido = ? ");
+				
+			stmt.setInt(1,Idf_Pedido);
+			ResultSet rs = stmt.executeQuery();
+					
+			while(rs.next()) {		
+				pedItem.setValorTotal(rs.getDouble("TotalPedido"));
+			}
+			
+			rs.close();
+			stmt.close();
+			conn.close();
+			
+			return pedItem.getValorTotal();
+			
+		} catch (SQLException e) {
+			System.err.println(e);
+			try {
+				conn.rollback();
+				stmt.close();
+				conn.close();
+			} catch (SQLException e1) {
+				System.err.println(e1);
+				return 0.0;
+			}
+
+		}
+		return 0.0;		
+	}
 }

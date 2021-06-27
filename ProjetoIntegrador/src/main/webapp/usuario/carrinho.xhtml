@@ -6,7 +6,7 @@
       xmlns:c="http://java.sun.com/jstl/core" 
       template="../template-usuario.xhtml">  
         
-	<div class="empty-cart container center">
+	<div class="empty-cart container mt-2 center">
 	
 		<h:inputHidden value="#{carrinho.idf_Carrinho}" />
 		<h:inputHidden value="#{usuarioLogadoController.user.idf_Usuario};" />	
@@ -14,7 +14,7 @@
 		<h:form id="formCarrinho" rendered="#{!homeController.verificarCarrinhoVazio(carrinho)}">
 		
 		<div class= "cartContainer container center">
-			<h2 class= "">Carrinho</h2>			
+			<h1 class= "">Carrinho</h1>			
 		</div>
 		
 		<div class="container center">	
@@ -35,9 +35,9 @@
 							            </div>
 							        </div>							
 							        <div class="">
-							            <h6 class="font-weight-bold">
+							            <h5 class="text-grey">
 							                #{itemCarrinho.prod_Carrinho.desc_Produto}
-							            </h6>
+							            </h5>
 							        </div>							
 							        <div class= "">
 							            <h5 class="text-grey">
@@ -85,9 +85,10 @@
       		</div>
 		</div>	
 		</h:form>
+		
 		<div class="d-flex justify-content-center center">
 			<h:form rendered="#{homeController.verificarCarrinhoVazio(carrinho)}">			
-				<div class="text-center center empty-cart">			
+				<div class="d-flex text-center center empty-cart">			
 					<h2 class="empty-cart-text mb-5">Seu carrinho está vazio</h2>			
 					<h:graphicImage styleClass="empty-cart-img" library="images" name="empty-cart.svg" alt="Carrinho vazio"></h:graphicImage>								
 				</div>								

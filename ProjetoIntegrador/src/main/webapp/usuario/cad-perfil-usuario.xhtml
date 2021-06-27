@@ -140,17 +140,7 @@
 						</div>				        
 			        
 			        </div>
-			        
-			         <!--Adicionar select de UF`s puxando de uma lista do banco-->		
-			        <!-- 
-				        <div class="col-md-3">							        
-	                		<div class="half-box">
-				            	<h:outputLabel for="Uf">UF:</h:outputLabel>  
-				            	<h:inputText id="Uf" value="#{usuario.endereco.sig_Estado}"/>               								
-							</div>			        			        
-				        </div>					        
-			         -->
-			        
+			        			        
 			        <div class="col-md-9">
 
                 		<div class="half-box">
@@ -202,8 +192,9 @@
 			
 		</div><!--  Fecha row-->		
 			
-        <div class="btn-enviar">
-			<h:commandButton styleClass="btn-submit" action="#{usuarioController.salvar(usuario)}" value="Salvar"/>
+        <div class="mb-5 mt-5">
+			<h:commandButton rendered="#{!usuarioLogadoController.taLogado()}" styleClass="btn-enviar" action="#{usuarioController.salvar(usuario)}" value="Salvar"/>
+			<h:commandButton rendered="#{usuarioLogadoController.taLogado()}" styleClass="btn-enviar" action="#{usuarioController.salvar(usuario)}" value="Atualizar"/>
 		</div>
 					
 	</div>

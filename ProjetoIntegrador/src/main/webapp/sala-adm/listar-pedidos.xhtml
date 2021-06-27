@@ -9,11 +9,14 @@
 	
 	#{usuarioLogadoController.checkUserCredential()}	
 	
-	<div class="container text-center mt-5 mb-5">
-		<h1>Pedidos Na Fila</h1>
-	</div>	
+	<h:form rendered="#{!salaAdmController.verificarListaPedidoVazia()}">
+		<div class="container text-center mt-5 mb-5" >
+			<h1>Pedidos Na Fila</h1>
+		</div>		
+	</h:form>
+
 	
-	<div class="container center">
+	<div class="container empty-cart center">
 	
 		<h:form id="formPedidoList">	
 		
@@ -28,13 +31,15 @@
 	 					<div class="card-idf">
 							<p><strong>Pedido:</strong> ##{pedido.idf_Pedido}</p> 
 						</div>
+						
+						<div>							
+							<p><strong>Realizado dia: </strong> #{pedido.dataPedido} <strong> às </strong> #{pedido.horaPedido}</p>
+						</div>	
 					
 						<div class="card-pedido-endereco">
+							<p><strong>Endereço:</strong></p>
 							<p>#{pedido.endereco.desc_Logradouro} #{pedido.endereco.num_Endereco} - #{pedido.endereco.nme_Cidade}/#{pedido.endereco.sig_Estado}</p>
-						</div> 
-						<div>
-							<p>#{pedido.dataHoraPedido}</p>
-						</div>	
+						</div> 				
 																						
 						<div class="itens">
 						
@@ -46,22 +51,54 @@
 									<div>																	
 										<h6> #{itemPedido.quantidade} x #{itemPedido.produto.desc_Produto} </h6>
 									</div>
-									<div>		  																																																																																												
-										<h6><b>R$#{itemPedido.subtotal}</b></h6>	
-									</div>	
-								</div>	
+									<div>	
+										<h:outputText value="#{itemPedido.subtotal}" >
+											<f:convertNumber type="currency" currencySymbol="R$" minFractionDigits="2"/>
+										</h:outputText>			  																																																																																												
+									</div>								
+								</div>
+																
 							</c:forEach>
+							
+							<div class="itemPedido mt-4">
+							
+								<div>
+									<b>Total do Pedido</b>
+								</div>
+							
+								<div>								
+									<h:outputText styleClass="font-weight-bold" value="#{salaAdmController.TotalPedido(pedido.idf_Pedido)}" >
+										<f:convertNumber type="currency" currencySymbol="R$" minFractionDigits="2"/>
+									</h:outputText>								
+								</div>	
+							
+							</div>	
+							
+					
 						</div>	 												
  					</div>
+ 					
  					 <div class="pedido-icons">
 						<h:commandLink action="#{salaAdmController.pedidoFinalizado(pedido)}"><i class="fa fa-trash mb-1 cartTrash"></i></h:commandLink>
- 					</div>		
+ 					</div>	
+ 						
  					<div class="pedido-icons">
  						<h:commandLink action="#{salaAdmController.pedidoCancelado(pedido)}"><i class="fa fa-check mb-12 cartTrash"></i></h:commandLink>					
- 					</div>								
+ 					</div>	
+ 												
  				</div>  			
 			</c:forEach>				
 		</div>
 	</h:form>
+	
+		<div class="d-flex justify-content-center center">
+			<h:form rendered="#{salaAdmController.verificarListaPedidoVazia()}">			
+				<div class="text-center center empty-cart">			
+					<h2 class="empty-cart-text mb-5">Não existe nenhum pedido na fila</h2>			
+					<h:graphicImage width="500px;" library="images" name="lista-vazia.png" alt="Lista de pedidos vazio"></h:graphicImage>								
+				</div>								
+			</h:form>
+		</div>
+				
 	</div>
 </ui:decorate> 

@@ -60,7 +60,6 @@ public class Produto extends ProdutoDAO {
 	public ArrayList<Produto> listar() {
 		return super.listarProdutos();
 	}
-	
 	public boolean cadastrarProduto(Produto prod) {
 		return super.cadastrarProduto(prod);
 	}

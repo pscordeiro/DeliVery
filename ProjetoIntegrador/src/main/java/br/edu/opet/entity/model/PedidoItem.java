@@ -11,6 +11,7 @@ public class PedidoItem extends PedidoDAO {
 	private int Quantidade;
 	private double Valor_Produto;
 	private double Subtotal;
+	private double ValorTotal;
 	private Produto produto;
 	
 	public int getIdf_Pedido() {
@@ -43,6 +44,12 @@ public class PedidoItem extends PedidoDAO {
 	public void setSubtotal(double subtotal) {
 		Subtotal = subtotal;
 	}
+	public double getValorTotal() {
+		return ValorTotal;
+	}
+	public void setValorTotal(double valor_Total) {
+		ValorTotal = valor_Total;
+	}
 	public Produto getProduto() {
 		return produto;
 	}
@@ -51,6 +58,8 @@ public class PedidoItem extends PedidoDAO {
 	}
 	public ArrayList<PedidoItem> listarItens(int Idf_Pedido) {
 		return super.listarItensPedido(Idf_Pedido);
-	}
-	
+	}	
+	public Double TotalPedido(int Idf_Pedido, PedidoItem pedItem) {
+		return super.totalPedido(Idf_Pedido, pedItem);
+	}	
 }

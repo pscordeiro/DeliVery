@@ -12,11 +12,11 @@
 #{usuarioLogadoController.checkUserCredential()}	
 
 
-<div class="container d-flex container-full mt-5">
+<div class="container d-flex empty-cart mt-5">
 	
 	<h:form id="formCadProduto">
 	
-		<div class="container center text-center mb-5 mt-4">
+		<div class="container center text-center mb-5">
 			<h1>Cadastrar novo Produto</h1>
 		</div>
 				    
@@ -36,13 +36,13 @@
 			<h:inputText styleClass="input" id="valorProduto" value="#{produto.valor_Produto}"
 				required="true" requiredMessage="Por favor, preencha este campo" 
             	validatorMessage="Digite um valor entre 1.00 e 100.00" >
-    			<f:convertNumber currencySymbol="R$" type="currency"/>
+    			<f:convertNumber pattern="#0.00" type="number"/>
    				<f:validateDoubleRange minimum="1.00" maximum="100.000"/>
-	       		<f:passThroughAttribute name="placeholder" value="Ex: 3.45" />       		
+   				<f:passThroughAttribute name="placeholder" value="Ex: 3.45" />       		 				
 	        </h:inputText>
        		<h:message styleClass="text-danger" for="valorProduto" />	       			        
 		</div>	
-		
+				
 		<div class="mt-3">
 			<h:outputLabel for="qtdInicial">Quantidade inicial:</h:outputLabel>          			
 			<h:inputText styleClass="input" id="qtdInicial" value="#{produto.quantidade}"
@@ -66,19 +66,14 @@
        		<h:message styleClass="text-danger" for="urlProduto" />	       			        	        	        
 		</div>		
 					
-        <div class="btn-enviar mt-2 mb-2">
-			<h:commandButton styleClass="btn-submit" action="#{salaAdmController.cadastrarProduto(produto)}" value="Cadastrar"/>
+        <div class="mt-5 mb-5">
+			<h:commandButton styleClass="btn-enviar" action="#{salaAdmController.cadastrarProduto(produto)}" value="Cadastrar"/>
 		</div>
 	
 	</h:form>
 
 </div>
 
-
-<script type="text/javascript">
-
-
-</script>
 
 </ui:decorate> 
 

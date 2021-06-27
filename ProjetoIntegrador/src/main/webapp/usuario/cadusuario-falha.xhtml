@@ -3,10 +3,29 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:h="http://java.sun.com/jsf/html"
-      template="../template-usuario.xhtml"> 
- 
+      xmlns:c="http://java.sun.com/jstl/core" 
+      template="../template-usuario.xhtml">  
+      
+	<h:form>
 
-<h1>Falha</h1>
-
+		<div class="container text-center justify-content-center center">	
+		
+		<h:form rendered="#{!usuarioLogadoController.taLogado()}">	
+			<h1 class="mt-4 text-center display-4">Falha ao cadastrar !</h1>
+		    <h:commandButton styleClass="mt-4 btn-enviar" action="#{homeController.redirectToHome()}" value="Voltar para a home"></h:commandButton>	            	
+		</h:form>	 
+		
+		<h:form rendered="#{usuarioLogadoController.taLogado()}">	
+			<h1 class="mt-4 text-center display-4">Falha ao atualizar dados de cadastro !</h1>
+		    <h:commandButton styleClass="mt-4 btn-enviar" action="#{homeController.redirectToHome()}" value="Voltar para a home"></h:commandButton>	            	
+		</h:form>			
+		       	        
+		</div>
+		      
+		<div class="mt-4 text-center">
+			<img src="../resources/images/cad-usuario-falha.svg" width="35%" alt="Falha cadastro img" class="mt-0"/>
+		</div>
+	
+	</h:form>
 
 </ui:decorate> 

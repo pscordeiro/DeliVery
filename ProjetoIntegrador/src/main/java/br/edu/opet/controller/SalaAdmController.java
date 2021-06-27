@@ -27,16 +27,32 @@ public class SalaAdmController {
 		return ped.listar();	
 	}
 	
+	public boolean verificarListaPedidoVazia(){
+		Pedido ped = new Pedido();
+		List<Pedido> alPedido = ped.listar();	
+		if(alPedido.size() == 0) {		
+			return true;				
+		}
+		return false;		
+	}
+	
 	public List<PedidoItem> listarItens(int Idf_Pedido){
 		PedidoItem pedItem = new PedidoItem();
 		return pedItem.listarItens(Idf_Pedido);	
 	}
 	
+	public Double TotalPedido(int Idf_Pedido) {
+		PedidoItem pedItem = new PedidoItem();
+		return pedItem.TotalPedido(Idf_Pedido, pedItem);	
+	}
+	
 	public String pedidoFinalizado(Pedido ped) {
+		ped.finalizarPedido(ped);
 		return "";
 	}
 	
 	public String pedidoCancelado(Pedido ped) {
+		ped.cancelarPedido(ped);
 		return "";
 	}
 	

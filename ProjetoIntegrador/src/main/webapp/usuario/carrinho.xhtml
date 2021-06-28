@@ -6,7 +6,7 @@
       xmlns:c="http://java.sun.com/jstl/core" 
       template="../template-usuario.xhtml">  
         
-	<div class="empty-cart container center">
+	<div class="empty-cart container mt-3 center">
 	
 		<h:inputHidden value="#{carrinho.idf_Carrinho}" />
 		<h:inputHidden value="#{usuarioLogadoController.user.idf_Usuario};" />	
@@ -14,7 +14,7 @@
 		<h:form id="formCarrinho" rendered="#{!homeController.verificarCarrinhoVazio(carrinho)}">
 		
 		<div class= "cartContainer container center">
-			<h2 class= "">Carrinho</h2>			
+			<h1 class= "">Carrinho</h1>			
 		</div>
 		
 		<div class="container center">	
@@ -35,14 +35,14 @@
 							            </div>
 							        </div>							
 							        <div class="">
-							            <h6 class="font-weight-bold">
-							                #{itemCarrinho.prod_Carrinho.desc_Produto}
-							            </h6>
-							        </div>							
-							        <div class= "">
 							            <h5 class="text-grey">
-							                R$ #{itemCarrinho.sub_Total}
+							             	#{itemCarrinho.prod_Carrinho.desc_Produto}
 							            </h5>
+							        </div>							
+							        <div class= "text-grey h5">
+								        R$ <h:outputText value="#{itemCarrinho.sub_Total}" >
+											<f:convertNumber pattern="0.00" />
+										</h:outputText>
 							        </div>							
 							        <div class="">
 							            <h:commandLink action="#{homeController.apagarItemCarrinho(itemCarrinho)}"><i class="fa fa-trash mb-1 cartTrash"></i></h:commandLink>
@@ -63,31 +63,54 @@
 					                 		<div>
 					                 			<p>
 					                 			</p>
-					                 		</div>
-					                 		<div >
-					                 			<h5 class="text-white">
-						            				 R$ #{totalCarrinho.total_Carrinho}  
-						            			</h5>	            			
-					                 		</div>
+					                 		</div>			                 		
+									        <div class= "text-white h5">
+										        R$ <h:outputText value="#{totalCarrinho.total_Carrinho}" >
+													<f:convertNumber pattern="0.00" />
+												</h:outputText>
+									        </div>					                 					                 
 					                 		<div>
 					                 			<p>
 					                 			</p>
 					                 		</div>    		
 				                 		</div>
 				                 	</div>
+				                 	
+								 <h:form rendered="#{usuarioLogadoController.taLogado()}">
+					                 <div class = "mb-4">
+					                 		<div class=" wrapper-endereco mt-3 p-4 bgEndereco rounded">
+					                 			<div>
+					                 				<h6 class="text-white" >Endereço de entrega</h6>
+					                 			</div>
+										        <div class= "text-white h6">
+											    	<h:outputText value="#{usuarioLogadoController.user.endereco.desc_Logradouro}"></h:outputText>
+										        </div>			
+										        <div class= "text-white h6">
+											        Nº<h:outputText value="#{usuarioLogadoController.user.endereco.num_Endereco}" >
+													</h:outputText>
+										        </div>				                 		
+										        <div class= "text-white h6">
+											        <h:outputText value="#{usuarioLogadoController.user.endereco.nme_Cidade}" >
+													</h:outputText>
+										        </div>					                 					                     		
+					                 		</div>
+				                 	</div>	
+								</h:form>			                 	
 		            			<div class="d-flex flex-row align-items-center ">            			         					
 									<h:commandButton styleClass="paymentButton" action="#{pedidoController.inserirPedido(carrinho, usuarioLogadoController)}" rendered="#{usuarioLogadoController.taLogado()}" value="Finalizar Compra"/>	      
 									<h:commandButton styleClass="paymentButton" action="#{usuarioLogadoController.redirectToLogin(1)}" rendered="#{!usuarioLogadoController.taLogado()}" value="Logar para Finalizar Compra"/>	
 		                       </div>                   			
-			            </c:forEach>              	                			
+			            </c:forEach> 
+			                         	                			
                		</div>
            		</div>
       		</div>
 		</div>	
 		</h:form>
+		
 		<div class="d-flex justify-content-center center">
 			<h:form rendered="#{homeController.verificarCarrinhoVazio(carrinho)}">			
-				<div class="text-center center empty-cart">			
+				<div class="d-flex text-center center empty-cart">			
 					<h2 class="empty-cart-text mb-5">Seu carrinho está vazio</h2>			
 					<h:graphicImage styleClass="empty-cart-img" library="images" name="empty-cart.svg" alt="Carrinho vazio"></h:graphicImage>								
 				</div>								

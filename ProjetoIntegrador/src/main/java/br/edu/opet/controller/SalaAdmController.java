@@ -27,17 +27,33 @@ public class SalaAdmController {
 		return ped.listar();	
 	}
 	
+	public boolean verificarListaPedidoVazia(){
+		Pedido ped = new Pedido();
+		List<Pedido> alPedido = ped.listar();	
+		if(alPedido.size() == 0) {		
+			return true;				
+		}
+		return false;		
+	}
+	
 	public List<PedidoItem> listarItens(int Idf_Pedido){
 		PedidoItem pedItem = new PedidoItem();
 		return pedItem.listarItens(Idf_Pedido);	
 	}
 	
+	public Double TotalPedido(int Idf_Pedido) {
+		PedidoItem pedItem = new PedidoItem();
+		return pedItem.TotalPedido(Idf_Pedido, pedItem);	
+	}
+	
 	public String pedidoFinalizado(Pedido ped) {
-		return "";
+		ped.finalizarPedido(ped);
+		return "/ProjetoIntegrador/sala-adm/listar-pedidos.xhtml";
 	}
 	
 	public String pedidoCancelado(Pedido ped) {
-		return "";
+		ped.cancelarPedido(ped);
+		return "/ProjetoIntegrador/sala-adm/listar-pedidos.xhtml";
 	}
 	
 	public String cadastrarProduto(Produto prod) {

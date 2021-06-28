@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import br.edu.opet.entity.model.Endereco;
 import br.edu.opet.entity.model.Usuario;
+import br.edu.opet.util.DataUtil;
 import br.edu.opet.util.conexao;
 
 public class UsuarioDAO{
@@ -35,13 +36,16 @@ public class UsuarioDAO{
 					+ ",PIE.Num_Endereco"
 					+ ",PIE.Num_CEP"
 					+ ",PIE.Des_Bairro"
-					+ ",PIE.Des_Complemento"
+					+ ",PIE.Des_Complemento "
+					+ ",PIE.Idf_Cidade"
+					+ ",PIC.Nme_Cidade"
 					+ ",PIU.Dta_Nascimento"
 					+ ",Num_DDD_Celular"
 					+ ",Num_Celular"
 					+ ",Email_Pessoa"
 					+ ",PIU.Dta_Cadastro"
 					+ ",Idf_Estado_Civil"
+					+ ",PIS.Idf_Sexo"
 					+ ",PIU.Flg_Inativo"
 					+ ",Idf_Tipo_Usuario"
 					+ " FROM PI_Usuarios PIU "
@@ -60,17 +64,22 @@ public class UsuarioDAO{
 				us.setIdf_Usuario(rs.getInt("Idf_Usuario"));
 				us.setNum_CPF(rs.getString("Num_CPF"));
 				us.setNme_Pessoa(rs.getString("Nme_Pessoa"));
-				us.setDta_NascimentoDate(rs.getDate("Dta_Nascimento"));
+				us.setDta_NascimentoDateSq(rs.getDate("Dta_Nascimento"));
+				us.setDta_NascimentoStr(DataUtil.dateToStr(rs.getDate("Dta_Nascimento")));
 				us.setNum_DDD_Celular(rs.getString("Num_DDD_Celular"));
 				us.setNum_Celular(rs.getString("Num_Celular"));
 				us.setEml_Pessoa(rs.getString("Email_Pessoa"));	
 				us.setDesc_Sexo(rs.getString("Desc_Sexo"));
+				us.setIdf_Estado_Civil(rs.getInt("Idf_Estado_Civil"));
+				us.setIdf_Sexo(rs.getInt("Idf_Sexo"));
 				us.setDta_CadastroDate(rs.getDate("Dta_Cadastro"));
 				end.setIdf_Endereco(rs.getInt("Idf_Endereco"));
 				end.setDesc_Logradouro(rs.getString("Des_Logradouro"));
 				end.setNum_Endereco(rs.getString("Num_Endereco"));
 				end.setNum_CEP(rs.getString("Num_CEP"));
 				end.setDes_Bairro(rs.getString("Des_Bairro"));
+				end.setIdf_Cidade(rs.getInt("Idf_Cidade"));
+				end.setNme_Cidade(rs.getString("Nme_Cidade"));
 				end.setDesc_Complemento(rs.getString("Des_Complemento"));			
 				us.setEndereco(end);
 				
@@ -130,6 +139,7 @@ public class UsuarioDAO{
 				stmt.setString(1,us.getNum_CPF());
 				stmt.setString(2,us.getNme_Pessoa());
 				stmt.setInt(3,us.getIdf_Sexo());
+				System.out.println(us.getDta_NascimentoDate());
 				java.sql.Date sqlDate = new java.sql.Date(us.getDta_NascimentoDate().getTime());
 				stmt.setDate(4, sqlDate);	
 				stmt.setInt(5,end.getIdf_Endereco());
@@ -138,7 +148,7 @@ public class UsuarioDAO{
 				stmt.setString(8,us.getEml_Pessoa());
 				stmt.setInt(9,us.getIdf_Estado_Civil());
 				stmt.setString(10, us.getSenha());
-
+								
 				int rowAffected = stmt.executeUpdate();
 					
 				if(rowAffected == 1){
@@ -197,14 +207,14 @@ public class UsuarioDAO{
 										
 				stmt.setString(1,us.getNme_Pessoa());
 				stmt.setInt(2,us.getIdf_Sexo());
-				java.sql.Date sqlDate = new java.sql.Date(us.getDta_NascimentoDate().getTime());
+				java.sql.Date sqlDate = new java.sql.Date(us.getDta_NascimentoDateSq().getTime());
 				stmt.setDate(3, sqlDate);	
 				stmt.setString(4,us.getNum_DDD_Celular());
 				stmt.setString(5,us.getNum_Celular());
 				stmt.setString(6,us.getEml_Pessoa());
 				stmt.setInt(7,us.getIdf_Estado_Civil());
-				stmt.setInt(8,us.getIdf_Usuario());
-				stmt.setString(9, us.getSenha());
+				stmt.setString(8, us.getSenha());
+				stmt.setInt(9,us.getIdf_Usuario());
 
 				//int rowAffected -> Pode ter sido alterado ou não
 				stmt.executeUpdate();
@@ -331,10 +341,12 @@ public class UsuarioDAO{
 				end.setDesc_Complemento(rs.getString("Des_Complemento"));
 				end.setNum_Endereco(rs.getString("Num_Endereco"));
 				end.setIdf_Cidade(rs.getInt("Idf_Cidade"));
+				end.setNme_Cidade(rs.getString("Nme_Cidade"));
 				us.setEndereco(end);
 				
 				us.setIdf_Estado_Civil(rs.getInt("Idf_Estado_Civil"));
-				us.setDta_NascimentoDate(rs.getDate("Dta_Nascimento"));
+				us.setDta_NascimentoDateSq(rs.getDate("Dta_Nascimento"));
+				us.setDta_NascimentoStr(DataUtil.dateToStr(rs.getDate("Dta_Nascimento")));
 				us.setNum_DDD_Celular(rs.getString("Num_DDD_Celular"));
 				us.setNum_Celular(rs.getString("Num_Celular"));
 				us.setEml_Pessoa(rs.getString("Email_Pessoa"));
@@ -365,5 +377,47 @@ public class UsuarioDAO{
 		
 		return null;	
 	}
+	protected boolean existeCPF(String CPF) {
+		Connection conn = null;
+		PreparedStatement stmt = null;
+        boolean status = false;
+				
+		try {
+			conn = conexao.getConnection(false);
+						
+			stmt = conn. prepareStatement("SELECT Num_CPF FROM PI_Usuarios WHERE Num_CPF = ?");
+					
+			stmt.setString(1,CPF);
 
+			ResultSet rs = stmt.executeQuery();
+			status = rs.next();	
+			
+			if(status) {
+				rs.close();
+				stmt.close();
+				conn.close();
+				return true;
+			}
+			else {
+				rs.close();
+				stmt.close();
+				conn.close();
+				return false;
+			}
+					
+		} catch (SQLException e) {
+			System.err.println(e);
+			try {
+				conn.rollback();
+				stmt.close();
+				conn.close();
+			} catch (SQLException e1) {
+				System.err.println(e1);
+				return false;
+			}
+
+		}
+		
+		return false;	
+	}
 }

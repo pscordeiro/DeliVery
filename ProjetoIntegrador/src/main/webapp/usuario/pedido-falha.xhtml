@@ -1,0 +1,23 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:c="http://java.sun.com/jstl/core" 
+      template="../template-usuario.xhtml">  
+      
+	<h:form>
+
+		<div class="container text-center justify-content-center center">						        	        
+			<h3 class="mt-3 display-4">Falha ao fazer pedido</h3>
+			<h3 class="display-4">Tente novamente</h3>
+		    <h:commandButton styleClass="mt-4 btn-enviar" action="#{homeController.redirectToHome()}" value="Voltar para a home"></h:commandButton>	            
+		</div>
+		      
+		<div class="mt-4 text-center">
+			<img src="../resources/images/pedido-falha.svg" width="40%" alt="Pedido falha img" class="mt-0"/>
+		</div>
+	
+	</h:form>
+
+</ui:decorate> 

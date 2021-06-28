@@ -21,6 +21,13 @@ public class HomeController {
 		return mensagem;
 	}	
 	
+	public boolean temMensagem() {
+		if(mensagem.length() > 0)
+			return true;
+		else
+			return false;
+	}
+	
 	public List<Produto> listarProdutos(){
 		Produto prod = new Produto();
 		return prod.listar();	
@@ -110,6 +117,24 @@ public class HomeController {
 			return "/ProjetoIntegrador/usuario/carrinho.xhtml";	
 		}
 		
+	}
+	
+	public String redirectToHome() {
+		try {
+			FacesContext.getCurrentInstance().getExternalContext().redirect("/ProjetoIntegrador/index.xhtml");
+		} catch (IOException e) {
+			System.out.println(e);
+		}
+		return "";
+	}
+	
+	public String redirectToCad() {
+		try {
+			FacesContext.getCurrentInstance().getExternalContext().redirect("/ProjetoIntegrador/usuario/cad-perfil-usuario.xhtml");
+		} catch (IOException e) {
+			System.out.println(e);
+		}
+		return "";
 	}
 	
 }

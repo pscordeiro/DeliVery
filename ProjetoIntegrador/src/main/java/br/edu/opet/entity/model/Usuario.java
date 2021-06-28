@@ -5,6 +5,7 @@ import java.util.Date;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.validation.constraints.Size;
 
 import br.edu.opet.model.entity.dao.UsuarioDAO;
 import br.edu.opet.util.DataUtil;
@@ -15,11 +16,14 @@ public class Usuario extends UsuarioDAO{
 	
 	private int Idf_Usuario;
 	private String Num_CPF;
+	
+	@Size(max=100)
 	private String Nme_Pessoa;
 	private int Idf_Sexo;
 	private String Desc_Sexo;
 	private int Idf_Cidade;
 	private Date Dta_Nascimento = new Date();
+	private String Dta_NascimentoStr;
 	private Endereco Endereco = new Endereco();
 	private int Idf_Endereco;
 	private String Num_DDD_Celular;
@@ -47,7 +51,7 @@ public class Usuario extends UsuarioDAO{
 		this.Eml_Pessoa = Eml_Pessoa;
 		this.Dta_Cadastro = Dta_Cadastro;
 		this.Idf_Estado_Civil = Idf_Estado_Civil;
-
+		this.Idf_Cidade = Idf_Cidade;
 	}
 
 	public int getIdf_Usuario() {
@@ -89,22 +93,27 @@ public class Usuario extends UsuarioDAO{
 	public void setIdf_Cidade(int idf_Cidade) {
 		Idf_Cidade = idf_Cidade;
 	}
-
-	public String getDta_Nascimento() {
-		return DataUtil.dateToStr(Dta_Nascimento);
-	}
-
-	public void setDta_Nascimento(String dta_Nascimento) {
-		Dta_Nascimento = DataUtil.strToDate(dta_Nascimento);
-	}
 	
+	//Não mexer aqui pq está funcionando com o poder da gambiarra + mágica
+	public String getDta_NascimentoStr() {
+		return Dta_NascimentoStr;
+	}
+	public void setDta_NascimentoStr(String dta_NascimentoStr) {
+		Dta_NascimentoStr = dta_NascimentoStr;
+	}
 	public Date getDta_NascimentoDate() {
+		return DataUtil.strToDate2(Dta_NascimentoStr);
+	}
+	public void setDta_NascimentoDate(Date dta_Nascimento) {
+		Dta_Nascimento = DataUtil.strToDate2(Dta_NascimentoStr);
+	}
+	public Date getDta_NascimentoDateSq() {
 		return Dta_Nascimento;
 	}
-
-	public void setDta_NascimentoDate(Date dta_Nascimento) {
+	public void setDta_NascimentoDateSq(Date dta_Nascimento) {
 		Dta_Nascimento = dta_Nascimento;
 	}
+	//
 	
 	public Endereco getEndereco() {
 		return Endereco;
@@ -219,10 +228,12 @@ public class Usuario extends UsuarioDAO{
 	}
 	public boolean deletarUsuario() {
 		return super.deletarUsuario(this);
-	}
-	
+	}	
 	public Usuario buscarUsuario(Usuario user) {
 		return super.buscarUsuario(user);
+	}
+	public boolean existeCPF(String CPF) {
+		return super.existeCPF(CPF);
 	}
 
 }

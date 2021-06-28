@@ -24,7 +24,7 @@ public class ProdutoDAO {
 			 ("SELECT PIP.Idf_Produto ,Desc_Produto, Valor_Produto, Quantidade, Url_Produto "
 	 		+ "FROM PI_Produtos PIP "
 	 		+ "JOIN PI_Estoque PIE on PIE.Idf_Produto = PIP.Idf_Produto "
-	 		+ "WHERE Quantidade > 0");
+	 		+ "WHERE Quantidade > 0 AND Flg_Inativo = 0");
 		
 			ResultSet rs = stmt.executeQuery();
 			

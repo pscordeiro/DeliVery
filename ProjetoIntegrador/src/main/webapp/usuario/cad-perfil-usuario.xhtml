@@ -3,7 +3,9 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:h="http://java.sun.com/jsf/html"
-      template="../template-usuario.xhtml"> 
+	  xmlns:a="http://xmlns.jcp.org/jsf/passthrough"  
+	  xmlns:p="http://primefaces.org/ui"       
+	  template="../template-usuario.xhtml"> 
            
 <h:form rendered="#{!usuarioLogadoController.taLogado()}" id="formVoltarLogin" styleClass="mt-3 mb-3">
 	
@@ -40,23 +42,27 @@
 
                 <div class="half-box spacing">
 		           <h:outputLabel for="NomeCompleto">Nome Completo:</h:outputLabel>          
-		            <h:inputText styleClass="input" id="NomeCompleto" value="#{usuario.nme_Pessoa}">
+		            <h:inputText styleClass="input" id="NomeCompleto" required="true" requiredMessage="Por favor preencha este campo" value="#{usuario.nme_Pessoa}">
 		         		<f:passThroughAttribute name="placeholder" value="Ex: Jose Da Silva" />
 		            </h:inputText>
+		            <h:message for="NomeCompleto" styleClass="ErrorMessage text-danger"/> 
 				</div>
-				
+
                 <div class="half-box spacing">
 				 	<h:outputLabel for="Email">Email:</h:outputLabel>          
-					<h:inputText id="Email" value="#{usuario.eml_Pessoa}">
-						<f:passThroughAttribute name="placeholder" value="Ex: teste@gmail.com" />
-					</h:inputText>									
+					<h:inputText id="Email" styleClass="input" value="#{usuario.eml_Pessoa}"  required="true" requiredMessage="Por favor preencha este campo" >
+						<f:passThroughAttribute name="placeholder" value="Ex: teste@gmail.com"/>
+					</h:inputText>
+		            <h:message for="Email" styleClass="ErrorMessage text-danger"/> 
 				</div>
 				
                 <div class="half-box spacing">
 		           <h:outputLabel for="Cpf">CPF:</h:outputLabel>          
-		           <h:inputText id="Cpf" value="#{usuario.num_CPF}">
+		           <h:inputText id="Cpf" value="#{usuario.num_CPF}" disabled="#{usuarioLogadoController.taLogado()}" required="true" requiredMessage="Por favor preencha este campo">
 		         		<f:passThroughAttribute name="placeholder" value="Ex: 113.941.039.30" />
 		            </h:inputText>
+		            <h:message for="Cpf" styleClass="ErrorMessage text-danger"/> 															            
+		            <h:outputText styleClass="ErrorMessage text-danger" value="#{usuarioController.mensagem}" />
 				</div>
 				
 				<div class="row">
@@ -64,29 +70,51 @@
 					<div class="col-md-3">
                		<div class="half-box spacing">
 		           			<h:outputLabel for="DDD">DDD:</h:outputLabel>          							
-							<h:inputText id="DDD" value="#{usuario.num_DDD_Celular}"/>					
+							<h:inputText id="DDD" value="#{usuario.num_DDD_Celular}" required="true" requiredMessage="Obrigatório !!"/>		
+							<h:message for="DDD" styleClass="ErrorMessage text-danger"/> 			
 						</div>									
 					</div>
 					
 					<div class="col-md-9">
                			<div class="half-box spacing">
 		           			<h:outputLabel for="Celular">Celular:</h:outputLabel>          							
-							<h:inputText id="Celular" value="#{usuario.num_Celular}"/>									
+							<h:inputText id="Celular" value="#{usuario.num_Celular}" required="true" requiredMessage="Por favor preencha este campo"/>		
+							<h:message for="Cpf" styleClass="ErrorMessage text-danger"/> 								
 						</div>										
 					</div>
 				
 				</div>
 				
-            	<div class="half-box spacing">
-					<h:outputLabel for="DtaNasc">Data de nascimento:</h:outputLabel>          							
-					<h:inputText id="DtaNasc" value="#{usuario.dta_Nascimento}">
-		         		<f:passThroughAttribute name="placeholder" value="Ex: 22/08/2001" /> 						
-					</h:inputText>								
-				</div>
+				<h:form rendered="#{!usuarioLogadoController.taLogado()}">
 				
+	            	<div class="half-box spacing">
+						<h:outputLabel for="DtaNasc">Data de nascimento:</h:outputLabel>          							
+						<h:inputText id="DtaNasc" value="#{usuario.dta_NascimentoStr}" required="true" requiredMessage="Por favor preencha este campo" a:type="date" a:pattern="dd/MM/yyyy">		         		 
+			         		<f:passThroughAttribute name="placeholder" value="Ex: 22/08/2001" /> 	
+						</h:inputText>
+						<h:message for="DtaNasc" styleClass="ErrorMessage text-danger"/> 													
+					</div>				
+				
+				</h:form>	
+				
+				<h:form rendered="#{usuarioLogadoController.taLogado()}">
+				
+	            	<div class="half-box spacing">
+						<h:outputLabel for="DtaNasc2">Data de nascimento:</h:outputLabel>          							
+						<h:inputText id="DtaNasc2" value="#{usuario.dta_NascimentoDateSq}"  disabled="#{usuarioLogadoController.taLogado()}" required="true" requiredMessage="Por favor preencha este campo" a:pattern="dd/MM/yyyy">		         		 
+			         		    <f:convertDateTime pattern="dd.MM.yyyy" />
+						</h:inputText>
+						<h:message for="DtaNasc2" styleClass="ErrorMessage text-danger"/> 													
+					</div>				
+				
+				</h:form>								 
+				
+			
+																
             	<div class="half-box spacing">
 					<h:outputLabel for="senha">Senha:</h:outputLabel>          							
-                    <h:inputSecret id="senha" value="#{usuario.senha}"/>	              
+                    <h:inputSecret id="senha" value="#{usuario.senha}" required="true" requiredMessage="Por favor digite sua senha"/>	  
+                    <h:message for="senha" styleClass="ErrorMessage text-danger"/>             
                 </div>				
 										
 			</div><!--  Fecha col-->		
@@ -96,18 +124,19 @@
 			
                 <div class="half-box">
 		            <h:outputLabel for="Idf_Sexo">Gênero:</h:outputLabel>                 
-					<h:selectOneMenu styleClass="input-select"  id="Idf_Sexo" value="#{usuario.idf_Sexo}">
+					<h:selectOneMenu styleClass="input-select"  id="Idf_Sexo" value="#{usuario.idf_Sexo}" required="true" requiredMessage="Por favor preencha este campo">
 						<f:selectItem itemDisabled="true" itemValue="0" itemLabel="Selecione uma opção"/>
 						<f:selectItem itemValue="1" itemLabel="Feminino"/>
 						<f:selectItem itemValue="2" itemLabel="Masculino"/>		
 						<f:selectItem itemValue="3" itemLabel="Não Binario"/>		
 						<f:selectItem itemValue="4" itemLabel="Outros"/>		
-					</h:selectOneMenu>		        		        
+					</h:selectOneMenu>	
+					<h:message for="Idf_Sexo" styleClass="ErrorMessage text-danger"/>     	        		        
 		        </div>	
 		        
                 <div class="half-box">
 		            <h:outputLabel for="Idf_Estado_Civil">Estado Civil:</h:outputLabel>                 		        
-					<h:selectOneMenu styleClass="input-select" id="Idf_Estado_Civil" value="#{usuario.idf_Estado_Civil}">
+					<h:selectOneMenu styleClass="input-select" id="Idf_Estado_Civil" value="#{usuario.idf_Estado_Civil}" required="true" requiredMessage="Por favor preencha este campo">
 						<f:selectItem itemDisabled="true" itemValue="0" itemLabel="Selecione uma opção"/>					
 						<f:selectItem itemValue="1" itemLabel="Solteiro(a)"/>
 						<f:selectItem itemValue="2" itemLabel="Casado(a)"/>		
@@ -115,7 +144,8 @@
 						<f:selectItem itemValue="4" itemLabel="Viúvo(a)"/>	
 						<f:selectItem itemValue="5" itemLabel="Outros"/>
 						<f:selectItem itemValue="6" itemLabel="Amansiado(a)"/>						
-					</h:selectOneMenu>		        	        
+					</h:selectOneMenu>
+					<h:message for="Idf_Estado_Civil" styleClass="ErrorMessage text-danger"/>           	        
 		        </div>
 		        
 		        <div class="row">
@@ -124,7 +154,7 @@
 			        	
                 		<div class="half-box">
 			            	<h:outputLabel for="Idf_Cidade">Cidade:</h:outputLabel>                 
-							<h:selectOneMenu styleClass="input-select" id="Idf_Cidade" value="#{usuario.endereco.idf_Cidade}">
+							<h:selectOneMenu styleClass="input-select" id="Idf_Cidade" value="#{usuario.endereco.idf_Cidade}" required="true" requiredMessage="Por favor preencha este campo">
 								<f:selectItem itemDisabled="true" itemValue="0" itemLabel="Selecione uma opção"/>
 								<f:selectItem itemValue="3196" itemLabel="Almirante Tamandaré"/>
 								<f:selectItem itemValue="3215" itemLabel="Araucária"/>
@@ -136,26 +166,18 @@
 								<f:selectItem itemValue="3459" itemLabel="Pinhais"/>
 								<f:selectItem itemValue="3464" itemLabel="Piraquara"/>
 								<f:selectItem itemValue="3543" itemLabel="São José dos Pinhais"/>		
-							</h:selectOneMenu>									
+							</h:selectOneMenu>
+							<h:message for="Idf_Cidade" styleClass="ErrorMessage text-danger"/>     							
 						</div>				        
 			        
 			        </div>
-			        
-			         <!--Adicionar select de UF`s puxando de uma lista do banco-->		
-			        <!-- 
-				        <div class="col-md-3">							        
-	                		<div class="half-box">
-				            	<h:outputLabel for="Uf">UF:</h:outputLabel>  
-				            	<h:inputText id="Uf" value="#{usuario.endereco.sig_Estado}"/>               								
-							</div>			        			        
-				        </div>					        
-			         -->
-			        
+			        			        
 			        <div class="col-md-9">
 
                 		<div class="half-box">
 				           	<h:outputLabel for="DesLogradouro">Endereço:</h:outputLabel>                 
-							<h:inputText id="DesLogradouro" value="#{usuario.endereco.desc_Logradouro}"/>
+							<h:inputText id="DesLogradouro" value="#{usuario.endereco.desc_Logradouro}" required="true" requiredMessage="Por favor preencha este campo"/>
+							<h:message for="DesLogradouro" styleClass="ErrorMessage text-danger"/>
 						</div>														        			        
 			        
 			        </div>    
@@ -164,7 +186,8 @@
 			        
                 		<div class="half-box">
 			            	<h:outputLabel for="NumEndereco">Nº endereço:</h:outputLabel>  
-			            	<h:inputText id="NumEndereco" value="#{usuario.endereco.num_Endereco}"/>			            	
+			            	<h:inputText id="NumEndereco" value="#{usuario.endereco.num_Endereco}" required="true" requiredMessage="Obrigatório !"/>
+			            	<h:message for="NumEndereco" styleClass="ErrorMessage text-danger"/>			            	
 						</div>		
 		        
 			        </div>			        	            
@@ -177,7 +200,8 @@
 			        
                 		<div class="half-box">
 				           	<h:outputLabel for="NumCEP">CEP:</h:outputLabel>                 						
-							<h:inputText id="NumCEP" value="#{usuario.endereco.num_CEP}"/>					
+							<h:inputText id="NumCEP" value="#{usuario.endereco.num_CEP}" required="true" requiredMessage="Por favor preencha este campo"/>	
+							<h:message for="NumCEP" styleClass="ErrorMessage text-danger"/>				
 						</div>						
 			        
 			        </div>	
@@ -186,7 +210,8 @@
 			        
                 		<div class="half-box">
 			            	<h:outputLabel for="Bairro">Bairro:</h:outputLabel>  
-			            	<h:inputText id="Bairro" value="#{usuario.endereco.des_Bairro}"/>			            	
+			            	<h:inputText id="Bairro" value="#{usuario.endereco.des_Bairro}" required="true" requiredMessage="Por favor preencha este campo"/>	
+			            	<h:message for="Bairro" styleClass="ErrorMessage text-danger"/>		            	
 						</div>					        
 			        
 			        </div>			        
@@ -196,19 +221,35 @@
               	<div class="half-box">
 		           	<h:outputLabel for="Complemento">Complemento:</h:outputLabel>                 								        
 		        	<h:inputText id="Complemento" value="#{usuario.endereco.desc_Complemento}"/>
+		        	<h:message for="Complemento" styleClass="ErrorMessage text-danger"/>
 		        </div>
 		        	     								
 			</div><!--  Fecha col-->				
 			
 		</div><!--  Fecha row-->		
 			
-        <div class="btn-enviar">
-			<h:commandButton styleClass="btn-submit" action="#{usuarioController.salvar(usuario)}" value="Salvar"/>
-		</div>
+        <div class="mb-5 mt-5">
+			<h:commandButton rendered="#{!usuarioLogadoController.taLogado()}" styleClass="btn-enviar" action="#{usuarioController.salvar(usuario)}" value="Salvar"/>
+			<h:commandButton rendered="#{usuarioLogadoController.taLogado()}" styleClass="btn-enviar" action="#{usuarioController.salvar(usuario)}" value="Atualizar"/>
+		</div>	
+		
 					
 	</div>
 	    
 </h:form>
 
+<script type="text/javascript">
+
+	$(document).ready(function($){
+	    $('#formInserirUsuario\\:Cpf').mask("000.000.000-00");
+	    $('#formInserirUsuario\\:Celular').mask("0 0000-0000");
+	    $('#formInserirUsuario\\:DDD').mask("00");
+	    $('#formInserirUsuario\\:NumCEP').mask("00000-000");
+	    $('#formInserirUsuario\\:NumEndereco').mask("00000");
+	    $('#formInserirUsuario\\:DtaNasc2').mask("00/00/0000");
+	        
+	});
+				 
+</script>
 				
 </ui:decorate> 

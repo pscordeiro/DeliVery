@@ -3,31 +3,22 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:p="http://primefaces.org/ui"      
-      xmlns:c="http://java.sun.com/jstl/core"  
-      template="../template-usuario.xhtml"> 
-              
-<div class="container">
-        <br />
-        
-<h1 class="text-center display-3">Produto Cadastrado!</h1>
-        <br />
-        
-<div class="container" style="text-align: center;">
-            <a class="btn btn-outline-secondary btn-lg" href="" role="button">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="[object SVGAnimatedString]" viewbox="null">
-                <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z" />
-              </svg>
-              Voltar para Home
-            </a>
-        </div>
-</div>
-
-<br /><br />
+      xmlns:c="http://java.sun.com/jstl/core" 
+      template="../template-adm.xhtml">  
       
-<div class="text-center">
-        <img src="https://www.isl.be/wp-content/uploads/2021/01/completion-1.png" style="width: 38%;" alt="..." />
-</div>
+	<h:form>
+	
+		#{usuarioLogadoController.checkUserCredential()}	
 
+		<div class="mb-2 container text-center justify-content-center center">						        	        
+			<h1 class="mt-5 mb-3 display-3">Produto cadastrado com sucesso!</h1>
+		    <h:commandButton styleClass="mt-4 mb-5 btn-enviar" action="#{salaAdmController.redirectToSalaAdm()}" value="Voltar para a sala adm"></h:commandButton>	            
+		</div>
+		      
+		<div class="mt-2 text-center">
+			<img src="../resources/images/cadproduto-sucesso.svg" width="40%" alt="Pedido sucesso img" class="mt-0"/>
+		</div>
+	
+	</h:form>
 
 </ui:decorate> 

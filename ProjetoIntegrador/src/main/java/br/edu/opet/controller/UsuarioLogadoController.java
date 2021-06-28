@@ -3,6 +3,7 @@ package br.edu.opet.controller;
 import java.io.IOException;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
@@ -17,6 +18,19 @@ public class UsuarioLogadoController {
     private Boolean usuarioLogado;
     private String redirectUrl;
     private int codRedirect;
+    
+	private String mensagem = "";
+	
+	public String getMensagem() {
+		return mensagem;
+	}
+	
+	public boolean temMensagem() {
+		if(mensagem.length() > 0)
+			return true;
+		else
+			return false;
+	}
     
     private static UsuarioLogadoController instance;
 
@@ -38,7 +52,8 @@ public class UsuarioLogadoController {
         	return "";
         }
         else {
-            FacesContext.getCurrentInstance().getExternalContext().redirect("/ProjetoIntegrador/login.xhtml");
+	        mensagem = "";
+        	FacesContext.getCurrentInstance().getExternalContext().redirect("/ProjetoIntegrador/login.xhtml");
             return "";
         }
     	
@@ -50,7 +65,10 @@ public class UsuarioLogadoController {
 	    if(u == null)
 	    {
 	       //Erro usuario ou senha incorretos
-	    	return null;
+	        FacesContext.getCurrentInstance().addMessage("MessageId", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "Usuário/Senha incorretos ou conta inexistente"));
+	        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "Usuário/Senha incorretos ou conta inexistente"));
+	        mensagem = "Usuário/Senha incorretos ou conta inexistente";
+	        return "";
 	    }
 	    else {
 	        usuarioLogado = Boolean.TRUE;
@@ -121,6 +139,19 @@ public class UsuarioLogadoController {
             return true;
         else
         	return false;    
+    }
+    
+    public String redirectUsuarioLogado() {
+        if(usuarioLogado) {
+			try {
+				FacesContext.getCurrentInstance().getExternalContext().redirect("/ProjetoIntegrador/index.xhtml");
+			} catch (IOException e) {
+				System.out.println(e);
+			}
+			return "";        
+        }
+        else
+        	return "";        
     }
     
     public boolean isAdm() {

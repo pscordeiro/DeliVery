@@ -41,7 +41,6 @@ nav {
     margin: none;
 }
 
-
 .button {
     position: left;
     background-color: #7875ff;
@@ -55,11 +54,17 @@ nav {
     overflow: hidden;
     cursor: pointer;
     text-decoration: none;
+    border: none;
 }
 
 .button:hover {
 	background-color: #6f42c1;
     text-decoration: none;
+    border: none;
+}
+
+.btn-lista{
+	width: 65px !important;
 }
 
 .paymentButton{
@@ -137,7 +142,7 @@ nav {
 
 .empty-cart, .form-login{
 	box-sizing: border-box;
-	padding:32px;
+	padding:18px;
 	min-height: calc(100vh - 299px);
 	flex-direction: column;
 	justify-content: center;
@@ -365,6 +370,13 @@ nav {
 	
 }
 
+.itemPedido {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+
 @media screen and (max-width:599px){
 	
 	.product-list {
@@ -496,7 +508,7 @@ abbr[data-bs-original-title] {
   font-size:15px;
   line-height:24px;
   color:#33353d;
-  margin-top:3%;
+  margin-top:2%;
 }
 .site-footer hr
 {
@@ -811,21 +823,36 @@ th {
 }
 
 .btn-enviar {
-    position: relative;
-    font-weight: 700;
-    font-style: normal;
-    line-height: 21,09px;
     background-color: #7875FF;
-    border: none;
     border-radius: 4px;
     padding: 10px;
     width: 450px;
+    height:60px;
     text-align: center;
     overflow: hidden;
-    cursor: pointer;
     margin-left: auto;
     margin-right: auto;
     top: 30px;
+    border: none;
+    color: #FFFFFF;
+    cursor: pointer;
+}
+
+.btn-enviar:hover {
+	background-color: #6f42c1;
+    text-decoration: none;
+    border: none;
+}
+
+.fa-arrow-left{
+    color: #7875ff;
+    padding: 4px;
+    margin: 0 8px 0 0px !important;
+}
+
+.btn-voltar:hover{ 
+	color: #7975ff;
+   	text-decoration: none;   	
 }
 
 .btn-voltar {
@@ -844,25 +871,6 @@ th {
    	text-decoration: none;   
 }
 
-.fa-arrow-left{
-    color: #7875ff;
-    padding: 4px;
-    margin: 0 8px 0 0px !important;
-}
-
-.btn-voltar:hover{ 
-	color: #7975ff;
-   	text-decoration: none;   	
-}
-
-.btn-submit {
-    border: none;
-    color: #FFFFFF;
-    background-color: #7875FF;
-    font-size: 18px;
-    cursor: pointer;
-}
-
 /* Validações */
 .error-validation {
     color: #FF1A1A;
@@ -876,7 +884,7 @@ th {
 }
 
 .container-full{
-	min-height: calc(100vh - 210px);
+	min-height: calc(100vh - 300px - 2%);
 	justify-content: center;
 }
 
@@ -889,41 +897,56 @@ th {
     width:  70px;
 }
 
-#titulo-login {
-    font-size: 36px;
-    line-height: 36px;
+.titulo-login {
+    font-size: 28px;
+    line-height: 28px;
     font-weight: 500;
     padding-bottom: 2rem;
+    text-decoration: none
+}
+
+.wrapper-login{
+  display: grid;
+  grid-template-columns: 10fr 1fr;
+  padding: 18px;
 }
 
 .pessoas-bebendo-login {
-    position: relative;
-    height: 80%;
+    width:100%;
+    height: 90%;
+    margin-left: 20%;
 }
 
-#btn-entrar-login {
+.logo-delivery{
+	width:100%;
+    height: 90%;
+}
+
+.btn-entrar-login {
     cursor: pointer;
-    position: relative;
     font-weight: 700;
     font-style: normal;
-    line-height: 21,09px;
     background-color: #7875FF;
     border: none;
     border-radius: 4px;
     padding: 10px;
-    width: 450px;
+    width: 314px;
     text-align: center;
-    overflow: hidden;
     cursor: pointer;
     color: #FFFFFF;
 }
 
-#texto-cadastrar {
-    position: relative;
+.texto-cadastrar {
     font-weight: 100;
     font-size: 18px;
     line-height: 36px;
-    left: 160px;
+    color: #7875ff;
+    margin: 4px;
+}
+
+.texto-cadastrar:hover {
+	text-decoration: none;
+	color: #6f42c1;
 }
 
 h:inputText {
@@ -948,6 +971,13 @@ h:inputText {
 	text-decoration: none;
 }
 
+.wrapper-endereco {
+  display: grid;
+  grid-template-columns: 2fr 2fr 1fr 1fr;
+  text-align: center;
+  justify-content: center;
+}
+
 .wrapper {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
@@ -958,3 +988,9 @@ h:inputText {
 .bgTotal {
 	background-color: #343a4085;
 }
+
+.bgEndereco {
+	background-color: #7875ff;
+}
+
+

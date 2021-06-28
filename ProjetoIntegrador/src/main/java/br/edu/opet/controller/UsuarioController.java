@@ -9,6 +9,7 @@ import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
 import br.edu.opet.entity.model.Usuario;
+import br.edu.opet.util.Validators;
 
 @ManagedBean
 @RequestScoped
@@ -31,6 +32,13 @@ public class UsuarioController {
 		return "/usuario/cad-perfil-usuario.xhtml";	
 	}
 	
+	public String cadastrarConta() {
+		HttpSession session = (HttpSession)FacesContext.getCurrentInstance()
+				.getExternalContext().getSession(false);
+		session.setAttribute("usuario", new Usuario());
+		return "/usuario/cad-perfil-usuario.xhtml";	
+	}
+	
 	public List<Usuario> listar(){
 		Usuario us = new Usuario();
 		return us.listarUsuarios();	
@@ -38,9 +46,29 @@ public class UsuarioController {
 	
 	public String salvar(Usuario us) {
 		boolean retorno = false;
+		String cpfFormatado;
+		String celularFormatado;
+		String cepFormatado;
 		
-		if(us.getIdf_Usuario() == 0)
+		cpfFormatado = us.getNum_CPF().replaceAll("[^0-9\\+]", "");
+		celularFormatado = us.getNum_Celular().replaceAll("[^0-9\\+]", "");
+		cepFormatado = us.getEndereco().getNum_CEP().replaceAll("[^0-9\\+]", "");
+		us.setNum_CPF(cpfFormatado);
+		us.setNum_Celular(celularFormatado);
+		us.getEndereco().setNum_CEP(cepFormatado);
+		
+		if(!Validators.validarCpf(cpfFormatado)) {
+			mensagem = "CPF inválido !";	
+			return "";
+		}
+		
+		if(us.getIdf_Usuario() == 0) {
+			if(us.existeCPF(us.getNum_CPF())) {
+				mensagem = "Este CPF já está cadastrado !";	
+				return "";
+			}			
 			retorno = us.inserirUsuarios();
+		}
 		else
 			retorno = us.atualizarUsuario();
 		
@@ -82,7 +110,7 @@ public class UsuarioController {
 	public String excluir(Usuario us) {		
 		if(us.deletarUsuario()) {
 			//mensagem = "Deletado com sucesso !";
-			return "index.xhtml"; 
+			return "/ProjetoIntegrador/sala-adm/listar-usuarios.xhtml"; 
 		}
 		else {
 			mensagem = "Falha ao deletar !";

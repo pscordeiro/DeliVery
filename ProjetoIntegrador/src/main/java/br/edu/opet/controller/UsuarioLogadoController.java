@@ -141,6 +141,19 @@ public class UsuarioLogadoController {
         	return false;    
     }
     
+    public String redirectUsuarioLogado() {
+        if(usuarioLogado) {
+			try {
+				FacesContext.getCurrentInstance().getExternalContext().redirect("/ProjetoIntegrador/index.xhtml");
+			} catch (IOException e) {
+				System.out.println(e);
+			}
+			return "";        
+        }
+        else
+        	return "";        
+    }
+    
     public boolean isAdm() {
         if(user.getIdf_Tipo_Usuario() == 2)
             return true;

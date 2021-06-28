@@ -6,7 +6,7 @@
       xmlns:c="http://java.sun.com/jstl/core" 
       template="../template-usuario.xhtml">  
         
-	<div class="empty-cart container mt-2 center">
+	<div class="empty-cart container mt-3 center">
 	
 		<h:inputHidden value="#{carrinho.idf_Carrinho}" />
 		<h:inputHidden value="#{usuarioLogadoController.user.idf_Usuario};" />	
@@ -36,7 +36,7 @@
 							        </div>							
 							        <div class="">
 							            <h5 class="text-grey">
-							                R$ #{itemCarrinho.prod_Carrinho.desc_Produto}
+							             	#{itemCarrinho.prod_Carrinho.desc_Produto}
 							            </h5>
 							        </div>							
 							        <div class= "text-grey h5">
@@ -75,11 +75,33 @@
 					                 		</div>    		
 				                 		</div>
 				                 	</div>
+				                 	
+								 <h:form rendered="#{usuarioLogadoController.taLogado()}">
+					                 <div class = "mb-4">
+					                 		<div class=" wrapper-endereco mt-3 p-4 bgEndereco rounded">
+					                 			<div>
+					                 				<h6 class="text-white" >Endereço de entrega</h6>
+					                 			</div>
+										        <div class= "text-white h6">
+											    	<h:outputText value="#{usuarioLogadoController.user.endereco.desc_Logradouro}"></h:outputText>
+										        </div>			
+										        <div class= "text-white h6">
+											        Nº<h:outputText value="#{usuarioLogadoController.user.endereco.num_Endereco}" >
+													</h:outputText>
+										        </div>				                 		
+										        <div class= "text-white h6">
+											        <h:outputText value="#{usuarioLogadoController.user.endereco.nme_Cidade}" >
+													</h:outputText>
+										        </div>					                 					                     		
+					                 		</div>
+				                 	</div>	
+								</h:form>			                 	
 		            			<div class="d-flex flex-row align-items-center ">            			         					
 									<h:commandButton styleClass="paymentButton" action="#{pedidoController.inserirPedido(carrinho, usuarioLogadoController)}" rendered="#{usuarioLogadoController.taLogado()}" value="Finalizar Compra"/>	      
 									<h:commandButton styleClass="paymentButton" action="#{usuarioLogadoController.redirectToLogin(1)}" rendered="#{!usuarioLogadoController.taLogado()}" value="Logar para Finalizar Compra"/>	
 		                       </div>                   			
-			            </c:forEach>              	                			
+			            </c:forEach> 
+			                         	                			
                		</div>
            		</div>
       		</div>

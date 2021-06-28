@@ -971,6 +971,13 @@ h:inputText {
 	text-decoration: none;
 }
 
+.wrapper-endereco {
+  display: grid;
+  grid-template-columns: 2fr 2fr 1fr 1fr;
+  text-align: center;
+  justify-content: center;
+}
+
 .wrapper {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
@@ -980,6 +987,10 @@ h:inputText {
 
 .bgTotal {
 	background-color: #343a4085;
+}
+
+.bgEndereco {
+	background-color: #7875ff;
 }
 
 

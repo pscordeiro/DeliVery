@@ -341,6 +341,7 @@ public class UsuarioDAO{
 				end.setDesc_Complemento(rs.getString("Des_Complemento"));
 				end.setNum_Endereco(rs.getString("Num_Endereco"));
 				end.setIdf_Cidade(rs.getInt("Idf_Cidade"));
+				end.setNme_Cidade(rs.getString("Nme_Cidade"));
 				us.setEndereco(end);
 				
 				us.setIdf_Estado_Civil(rs.getInt("Idf_Estado_Civil"));

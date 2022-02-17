@@ -8,10 +8,10 @@
 </h4>
 
 <p align="center">
-<img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/pscordeiro/ProjetoPI?color=lightblue&style=flat-square)">
-<img alt="GitHub madeby" src="https://img.shields.io/badge/made%20by-pcordeir0-%20?color=lightblue&style=flat-square">
-<img alt="GitHub toplanguage" src="https://img.shields.io/github/languages/top/pscordeiro/ProjetoPI?color=lightblue&style=flat-square)">
-<img alt="GitHub license" src="https://img.shields.io/github/license/pscordeiro/ProjetoPI?color=lightblue&style=flat-square)">
+<img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/pscordeiro/DeliVery?color=purple&style=flat-square)">
+<img alt="GitHub madeby" src="https://img.shields.io/badge/made%20by-pcordeir0-%20?color=purple&style=flat-square">
+<img alt="GitHub toplanguage" src="https://img.shields.io/github/languages/top/pscordeiro/DeliVery?color=purple&style=flat-square)">
+<img alt="GitHub license" src="https://img.shields.io/github/license/pscordeiro/DeliVery?color=purple&style=flat-square)">
 
 </p> 
 
